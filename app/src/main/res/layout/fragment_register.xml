@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="@dimen/padding_linear_layout_register"
+    tools:context=".ui.fragments.register.RegisterFragment">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/input_layout_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/ic_email"
+        style="@style/AuthorizationCustomTextInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_text_email"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/hint_email"
+            android:inputType="textEmailAddress"
+            tools:text="vladuslaw512@gmail.com"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/input_layout_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="13dp"
+        app:startIconDrawable="@drawable/ic_lock"
+        style="@style/AuthorizationCustomTextInputLayout">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_text_password"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/hint_password"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/input_layout_password_retype"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:startIconDrawable="@drawable/ic_refresh"
+        style="@style/AuthorizationCustomTextInputLayout">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_text_retype_password"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/hint_retype_password"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_register"
+        android:layout_width="175dp"
+        android:layout_height="50dp"
+        android:fontFamily="@font/hind_siliguri"
+        android:text="@string/create_account_text"
+        android:layout_marginTop="40dp"
+        app:cornerRadius="15dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_size_register_or_continue"
+        android:textColor="@color/color_on_surface_variant"
+        android:text="@string/or_register_form_text"
+        android:layout_marginTop="@dimen/margin_register_or_continue"
+        android:layout_marginBottom="@dimen/margin_register_or_continue" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/button_google"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/description_google_auth"
+            app:srcCompat="@drawable/ic_google"
+            app:tint="@null"
+            app:maxImageSize="20dp"
+            style="?attr/floatingActionButtonSmallPrimaryStyle"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/button_github"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/description_github_auth"
+            app:srcCompat="@drawable/ic_github"
+            app:tint="@null"
+            app:maxImageSize="24dp"
+            style="?attr/floatingActionButtonSmallPrimaryStyle"/>
+    </LinearLayout>
+
+</LinearLayout>

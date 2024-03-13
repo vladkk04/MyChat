@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">MyChat</string>
+
+
+    <string name="hint_register">Register\n</string>
+    <string name="hint_login">Login</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_retype_password">Re-type Password</string>
+    <string name="create_account_text">Create Account</string>
+    <string name="login_text">Login</string>
+    <string name="or_register_form_text">Or continue with</string>
+    <string name="description_google_auth">Google Auth</string>
+    <string name="description_apple_auth">Apple Auth\n</string>
+    <string name="description_github_auth">GitHub Auth\n</string>
+
+</resources>
