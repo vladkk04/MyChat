@@ -1,15 +1,10 @@
-package com.arkul.mychat.data.network.firebase.impl
+package com.arkul.mychat.data.network.firebase.repositories
 
 import com.arkul.mychat.data.network.firebase.services.AccountService
-import com.arkul.mychat.data.network.firebase.services.CredentialService
 import com.arkul.mychat.data.network.firebase.services.EmailService
-import com.google.firebase.auth.AuthCredential
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class EmailRepository @Inject constructor(): AccountService(), EmailService {

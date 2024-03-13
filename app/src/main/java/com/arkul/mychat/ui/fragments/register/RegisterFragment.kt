@@ -8,8 +8,8 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.arkul.mychat.data.models.AuthOnEvent
 import com.arkul.mychat.data.models.RegistrationFormState
-import com.arkul.mychat.data.models.RegistrationFormState.RegistrationOnEvent
 import com.arkul.mychat.databinding.FragmentRegisterBinding
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.textfield.TextInputLayout.END_ICON_NONE
@@ -28,7 +28,6 @@ class RegisterFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //.d("d", "create register")
     }
 
     override fun onCreateView(
@@ -71,19 +70,19 @@ class RegisterFragment : Fragment() {
 
     private fun setupInputTextChangeListeners() {
         binding.inputTextEmail.doOnTextChanged { text, _, _, _ ->
-            viewModel.onEvent(RegistrationOnEvent.EmailChanged(text.toString()))
+            viewModel.onEvent(AuthOnEvent.EmailChanged(text.toString()))
         }
         binding.inputTextPassword.doOnTextChanged { text, _, _, _ ->
-            viewModel.onEvent(RegistrationOnEvent.PasswordChanged(text.toString()))
+            viewModel.onEvent(AuthOnEvent.PasswordChanged(text.toString()))
         }
         binding.inputTextRetypePassword.doOnTextChanged { text, _, _, _ ->
-            viewModel.onEvent(RegistrationOnEvent.PasswordRepeatedChanged(text.toString()))
+            viewModel.onEvent(AuthOnEvent.PasswordRepeatedChanged(text.toString()))
         }
     }
 
     private fun setupButtonsListeners() {
         binding.buttonRegister.setOnClickListener {
-            viewModel.onEvent(RegistrationOnEvent.Submit)
+            viewModel.onEvent(AuthOnEvent.Submit)
         }
     }
 

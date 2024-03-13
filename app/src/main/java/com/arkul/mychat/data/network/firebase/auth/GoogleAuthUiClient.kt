@@ -1,12 +1,9 @@
-package com.arkul.mychat.data.network.firebase.signIn
+package com.arkul.mychat.data.network.firebase.auth
 
 import android.content.Context
-import android.util.Log
 import androidx.credentials.CredentialManager
 import androidx.credentials.GetCredentialRequest
 import androidx.credentials.exceptions.GetCredentialException
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
 import com.arkul.mychat.BuildConfig
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
@@ -27,7 +24,6 @@ class GoogleAuthUiClient(
 
     suspend fun getCredential(): GoogleIdTokenCredential {
         try {
-            Log.d("d", "start cred")
             credentialManager.getCredential(
                 context = context,
                 request = request

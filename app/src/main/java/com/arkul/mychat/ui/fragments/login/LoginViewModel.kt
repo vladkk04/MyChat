@@ -13,6 +13,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 @HiltViewModel
@@ -43,7 +44,7 @@ class LoginViewModel @Inject constructor(
 
     private fun signInWithGitHub(activity: Activity) = viewModelScope.launch {
         credentialService.accountService.apply {
-            this.firebaseAuth.startActivityForSignInWithProvider(activity, this.providerOAuthProviderGitHub)
+            this.firebaseAuth.startActivityForSignInWithProvider(activity, this.providerOAuthProviderGitHub).await()
         }
     }
 

@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.arkul.mychat.data.network.firebase.AuthMethod
-import com.arkul.mychat.data.network.firebase.signIn.GoogleAuthUiClient
+import com.arkul.mychat.data.network.firebase.auth.GoogleAuthUiClient
 import com.arkul.mychat.databinding.FragmentLoginBinding
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint

@@ -1,8 +1,7 @@
 package com.arkul.mychat.data.di.modules
 
-import com.arkul.mychat.data.network.firebase.impl.CredentialRepository
-import com.arkul.mychat.data.network.firebase.impl.EmailRepository
-import com.arkul.mychat.data.network.firebase.services.AccountService
+import com.arkul.mychat.data.network.firebase.repositories.CredentialRepository
+import com.arkul.mychat.data.network.firebase.repositories.EmailRepository
 import com.arkul.mychat.data.network.firebase.services.CredentialService
 import com.arkul.mychat.data.network.firebase.services.EmailService
 import dagger.Binds
