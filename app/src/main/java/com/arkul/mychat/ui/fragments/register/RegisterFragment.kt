@@ -1,16 +1,25 @@
 package com.arkul.mychat.ui.fragments.register
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.arkul.mychat.data.models.AuthOnEvent
-import com.arkul.mychat.data.models.RegistrationFormState
+import com.arkul.mychat.R
+import com.arkul.mychat.data.models.AuthInputLayoutEvents
+import com.arkul.mychat.data.models.RegisterTextLayoutState
+import com.arkul.mychat.data.models.RegisterUiState
+import com.arkul.mychat.data.network.firebase.auth.GitHubAuthUiClient
+import com.arkul.mychat.data.network.firebase.auth.GoogleAuthUiClient
 import com.arkul.mychat.databinding.FragmentRegisterBinding
+import com.arkul.mychat.ui.fragments.waitingVerify.WaitingVerifyEmail
+import com.arkul.mychat.ui.navigation.NavigationObserver
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.textfield.TextInputLayout.END_ICON_NONE
 import com.google.android.material.textfield.TextInputLayout.END_ICON_PASSWORD_TOGGLE
@@ -26,9 +35,8 @@ class RegisterFragment : Fragment() {
 
     private val viewModel: RegisterViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private val googleAuth by lazy { GoogleAuthUiClient(requireContext()) }
+    private val gitHubAuth by lazy { GitHubAuthUiClient(requireActivity()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,19 +51,32 @@ class RegisterFragment : Fragment() {
             observeUIState()
         }
 
+        lifecycleScope.launch {
+            observeUITextLayoutState()
+        }
+
         return binding.root
     }
 
-    private suspend fun observeUIState() = viewModel.stateTextLayout.collectLatest { updateTextLayoutsUI(it) }
+    private suspend fun observeUITextLayoutState() =
+        viewModel.stateTextLayout.collectLatest { updateTextLayoutsUI(it) }
+    private suspend fun observeUIState() =
+        viewModel.uiState.collectLatest { updateUI(it) }
 
-    private fun updateTextLayoutsUI(state: RegistrationFormState) {
-        binding.inputLayoutEmail.error = state.emailError
+    private fun updateUI(state: RegisterUiState) {
+        if (state.errorMessage != null) {
+            Toast.makeText(requireContext(), state.errorMessage, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun updateTextLayoutsUI(state: RegisterTextLayoutState) {
+        binding.inputLayoutEmail.error = state.errorEmail
         binding.inputLayoutPassword.apply {
-            this.error = state.passwordError
+            this.error = state.errorPassword
             showEndIconPasswordInputLayout(state.password, this)
         }
         binding.inputLayoutPasswordRetype.apply {
-            this.error = state.passwordRepeatedError
+            this.error = state.errorPasswordRepeated
             showEndIconPasswordInputLayout(state.passwordRepeated, this)
         }
     }
@@ -70,19 +91,29 @@ class RegisterFragment : Fragment() {
 
     private fun setupInputTextChangeListeners() {
         binding.inputTextEmail.doOnTextChanged { text, _, _, _ ->
-            viewModel.onEvent(AuthOnEvent.EmailChanged(text.toString()))
+            viewModel.onEvent(AuthInputLayoutEvents.EmailChanged(text.toString()))
         }
         binding.inputTextPassword.doOnTextChanged { text, _, _, _ ->
-            viewModel.onEvent(AuthOnEvent.PasswordChanged(text.toString()))
+            viewModel.onEvent(AuthInputLayoutEvents.PasswordChanged(text.toString()))
         }
         binding.inputTextRetypePassword.doOnTextChanged { text, _, _, _ ->
-            viewModel.onEvent(AuthOnEvent.PasswordRepeatedChanged(text.toString()))
+            viewModel.onEvent(AuthInputLayoutEvents.PasswordRepeatedChanged(text.toString()))
         }
     }
 
     private fun setupButtonsListeners() {
         binding.buttonRegister.setOnClickListener {
-            viewModel.onEvent(AuthOnEvent.Submit)
+            viewModel.signUpWithEmail()
+        }
+        binding.buttonGoogle.setOnClickListener {
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewModel.signUpWithCredential(googleAuth.getAuthCredential())
+            }
+        }
+        binding.buttonGithub.setOnClickListener {
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewModel.signUpWithCredential(gitHubAuth.getAuthCredential())
+            }
         }
     }
 

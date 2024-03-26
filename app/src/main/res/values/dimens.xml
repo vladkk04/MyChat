@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="padding_linear_layout_register">15dp</dimen>
-    <dimen name="padding_linear_layout_login">15dp</dimen>
+    <dimen name="padding_relative_layout_register">15dp</dimen>
+
+
+
+    <!--Login Layout -->
+    <dimen name="padding_horizontal_layout_login">15dp</dimen>
+    <dimen name="padding_bottom_layout_login">40dp</dimen>
+
+
 
     <dimen name="text_size_register_or_continue">12sp</dimen>
     <dimen name="margin_register_or_continue">10dp</dimen>
     <dimen name="tab_corner_radius_first">20dp</dimen>
     <dimen name="tab_corner_radius_last">10dp</dimen>
     <dimen name="tab_corner_radius">5dp</dimen>
+    <dimen name="margin_between_input_layouts">13dp</dimen>
+    <dimen name="text_size_forget_password">14sp</dimen>
 </resources>

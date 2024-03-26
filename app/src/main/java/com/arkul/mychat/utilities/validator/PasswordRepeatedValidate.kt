@@ -1,6 +1,5 @@
 package com.arkul.mychat.utilities.validator
 
-import com.arkul.mychat.utilities.validator.base.Validator
 import com.arkul.mychat.utilities.validator.models.ValidationResult
 
 class PasswordRepeatedValidate(

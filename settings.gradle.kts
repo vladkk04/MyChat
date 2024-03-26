@@ -37,15 +37,21 @@ dependencyResolutionManagement {
             val androidxWebkitVersion = "1.8.0"
             val fragmentKtxVersion = "1.6.2"
             val activityKtxVersion = "1.8.2"
-
             val daggerHiltVersion = "2.50"
-
             val firebaseBoomVersion = "32.7.2"
-
             val googleCredentialsVersion = "1.3.0-alpha01"
             val googleIdentityID = "1.1.0"
+            val glideVersion = "4.16.0"
+            val navigationComponentsVersion = "2.7.7"
 
+            //Navigation Components
+            library("androidx.navigation-fragment", "androidx.navigation", "navigation-fragment-ktx").version(navigationComponentsVersion)
+            library("androidx.navigation-ui", "androidx.navigation", "navigation-ui-ktx").version(navigationComponentsVersion)
 
+            //Glide
+            library("glide", "com.github.bumptech.glide", "glide").version(glideVersion)
+
+            //Google Auth Credentials
             library("androidx.credentials", "androidx.credentials", "credentials").version(googleCredentialsVersion)
             library("androidx.credentials.services.auth", "androidx.credentials", "credentials-play-services-auth").version(googleCredentialsVersion)
             library("android.libraries.identity", "com.google.android.libraries.identity.googleid", "googleid").version(googleIdentityID)
@@ -61,12 +67,11 @@ dependencyResolutionManagement {
             //WebView
             library("androidx.webkit", "androidx.webkit", "webkit").version(androidxWebkitVersion)
 
+            //Android Basic
             library("androidx-ktx", "androidx.core", "core-ktx").version(androidxCoreVersion)
             library("androidx-appcompat", "androidx.appcompat", "appcompat").version(androidxAppcompatVersion)
             library("androidx-constraintlayout", "androidx.constraintlayout", "constraintlayout").version(androidxConstraintlayoutVersion)
-
             library("android-material", "com.google.android.material", "material").version(googleAndroidMaterialVersion)
-
             library("androidx-fragment-ktx", "androidx.fragment", "fragment-ktx").version(fragmentKtxVersion)
             library("androidx-activity-ktx", "androidx.activity", "activity-ktx").version(activityKtxVersion)
         }

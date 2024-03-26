@@ -1,7 +1,6 @@
 package com.arkul.mychat.utilities.validator
 
 import android.util.Patterns
-import com.arkul.mychat.utilities.validator.base.Validator
 import com.arkul.mychat.utilities.validator.models.ValidationResult
 
 class EmailValidate(

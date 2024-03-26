@@ -24,6 +24,6 @@ abstract class ServiceModule {
     @Binds
     @Singleton
     abstract fun bindEmailService(
-        credentialRepository: EmailRepository
+        emailRepository: EmailRepository
     ): EmailService
 }

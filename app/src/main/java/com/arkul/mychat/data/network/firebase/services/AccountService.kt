@@ -8,30 +8,20 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 
 abstract class AccountService() {
-
-    protected val providerOAuthProviderGitHubBuilder
-        get() = OAuthProvider.newBuilder("github.com")
-
-    val providerOAuthProviderGitHub
-        get() = OAuthProvider.newBuilder("github.com").build()
-
     val firebaseAuth
         get() = Firebase.auth
 
     val currentUserId: String
-        get() = Firebase.auth.currentUser?.uid.orEmpty()
+        get() = firebaseAuth.currentUser?.uid.orEmpty()
 
     val hasUser: Boolean
-        get() = Firebase.auth.currentUser != null
-
-    val pendingResult: Task<AuthResult>?
-        get() = Firebase.auth.pendingAuthResult
+        get() = firebaseAuth.currentUser != null
 
     fun signOut() {
-        Firebase.auth.signOut()
+        firebaseAuth.signOut()
     }
 
     suspend fun deleteAccount() {
-        Firebase.auth.currentUser!!.delete().await()
+        firebaseAuth.currentUser!!.delete().await()
     }
 }

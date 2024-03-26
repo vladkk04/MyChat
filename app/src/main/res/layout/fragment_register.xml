@@ -7,13 +7,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="@dimen/padding_linear_layout_register"
+    android:paddingHorizontal="15dp"
     tools:context=".ui.fragments.register.RegisterFragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/input_layout_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_between_input_layouts"
         app:endIconMode="clear_text"
         app:startIconDrawable="@drawable/ic_email"
         style="@style/AuthorizationCustomTextInputLayout">
@@ -31,10 +32,10 @@
         android:id="@+id/input_layout_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        android:layout_marginBottom="13dp"
+        android:layout_marginBottom="@dimen/margin_between_input_layouts"
         app:startIconDrawable="@drawable/ic_lock"
         style="@style/AuthorizationCustomTextInputLayout">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/input_text_password"
             android:layout_width="match_parent"
@@ -47,8 +48,10 @@
         android:id="@+id/input_layout_password_retype"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_between_input_layouts"
         app:startIconDrawable="@drawable/ic_refresh"
         style="@style/AuthorizationCustomTextInputLayout">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/input_text_retype_password"
             android:layout_width="match_parent"
@@ -63,7 +66,6 @@
         android:layout_height="50dp"
         android:fontFamily="@font/hind_siliguri"
         android:text="@string/create_account_text"
-        android:layout_marginTop="40dp"
         app:cornerRadius="15dp" />
 
     <TextView
@@ -101,6 +103,7 @@
             app:tint="@null"
             app:maxImageSize="24dp"
             style="?attr/floatingActionButtonSmallPrimaryStyle"/>
+
     </LinearLayout>
 
 </LinearLayout>

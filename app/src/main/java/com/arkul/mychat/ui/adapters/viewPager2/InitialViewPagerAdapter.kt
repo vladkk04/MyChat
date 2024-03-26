@@ -3,16 +3,21 @@ package com.arkul.mychat.ui.adapters.viewPager2
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.arkul.mychat.ui.fragments.login.LoginFragment
+import com.arkul.mychat.ui.fragments.register.RegisterFragment
+
+
 
 class InitialViewPagerAdapter(
-    private val fragments: List<Fragment>,
-    fragmentActivity: FragmentActivity
-): FragmentStateAdapter(fragmentActivity) {
+    private val listOfFragments: ArrayList<Fragment>,
+    fragment: Fragment
+): FragmentStateAdapter(fragment) {
+
     override fun getItemCount(): Int {
-        return fragments.size
+        return listOfFragments.size
     }
 
     override fun createFragment(position: Int): Fragment {
-        return fragments[position]
+        return listOfFragments[position]
     }
 }

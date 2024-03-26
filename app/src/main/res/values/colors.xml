@@ -7,6 +7,9 @@
     <color name="toolbar_background">#4B4B4B</color>
     <color name="background_night">#222831</color>
 
+    <color name="non_clickable_color">#344A4B4B</color>
+    <color name="non_clickable_color_text">#CDD1D1D1</color>
+
     <color name="color_primary_night">#393E46</color>
     <color name="color_on_primary_night">#FFD369</color>
     <color name="color_primary_container_night">@color/color_on_surface_variant</color>

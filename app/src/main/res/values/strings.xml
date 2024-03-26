@@ -9,9 +9,19 @@
     <string name="hint_retype_password">Re-type Password</string>
     <string name="create_account_text">Create Account</string>
     <string name="login_text">Login</string>
-    <string name="or_register_form_text">Or continue with</string>
+    <string name="or_register_form_text">or continue with</string>
     <string name="description_google_auth">Google Auth</string>
     <string name="description_apple_auth">Apple Auth\n</string>
     <string name="description_github_auth">GitHub Auth\n</string>
+    <string name="forget_password">Forget password?</string>
+
+    <string name="resend_confirmation_text">Resend confirmation email</string>
+    <string name="resend_confirmation_text_with_timer">Resend confirmation email: %1$d</string>
+
+
+    <string name="waiting_verify_email_text">We\'ve sent a confirmation to the email address you provided. Please confirm.
+    </string>
+    <string name="send_restore_password_text">Send</string>
+    <string name="restore_password_text">To reset your password, please enter your email address below. We\'ll send you a link to reset your password.</string>
 
 </resources>

@@ -58,27 +58,39 @@ android {
 }
 
 dependencies {
+
+    //Android Basic
     implementation(libs.androidx.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
-
     implementation(libs.android.material)
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.activity.ktx)
 
+    //Navigation Components
+    implementation(libs.androidx.navigation.fragment)
+    implementation(libs.androidx.navigation.ui)
+
+    //WebView
     implementation(libs.androidx.webkit)
 
+    //Firebase
     implementation(platform(libs.firebase.boom))
     implementation(libs.firebase.auth)
 
+    //Google Auth Credentials
     implementation(libs.androidx.credentials)
     implementation(libs.androidx.credentials.services.auth)
     implementation(libs.android.libraries.identity)
 
+    //Hilt
     implementation(libs.dagger.hilt.android)
     ksp(libs.dagger.hilt.compiler)
 
-    implementation(libs.androidx.fragment.ktx)
-    implementation(libs.androidx.activity.ktx)
+    //Glide
+    implementation(libs.glide)
 
+    //Tests
     implementation(testLibs.junit)
     implementation(testLibs.androidx.test.ext)
     implementation(testLibs.androidx.test.espresso)

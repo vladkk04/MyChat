@@ -1,4 +1,4 @@
-package com.arkul.mychat.utilities
+package com.arkul.mychat.ui.adapters.viewPager2
 
 import android.graphics.drawable.GradientDrawable
 import androidx.viewpager2.widget.ViewPager2
@@ -13,8 +13,8 @@ enum class Side {
 
 class TabLayoutCornerRadiusAnimator(
     tabLayout: TabLayout,
-    private val cornerRadius: Int,
-    private val startedSide: Side = Side.LEFT
+    private val cornerRadius: Int = 20,
+    private val cornerStartedSide: Side = Side.LEFT
 ) : ViewPager2.OnPageChangeCallback() {
     private val shapeDrawable = tabLayout.tabSelectedIndicator as GradientDrawable
     private var isInitialize = false
@@ -30,7 +30,7 @@ class TabLayoutCornerRadiusAnimator(
 
             shapeDrawable.cornerRadii = floatArrayOf(0f, 0f, 0f, 0f, leftNumber, leftNumber, rightNumber, rightNumber)
         } else if(!isInitialize) {
-            when (startedSide) {
+            when (cornerStartedSide) {
                 Side.LEFT -> shapeDrawable.cornerRadii = floatArrayOf(0f, 0f, 0f, 0f, cornerRadius, cornerRadius, 0f, 0f)
                 Side.RIGHT -> shapeDrawable.cornerRadii = floatArrayOf(0f, 0f, 0f, 0f, 0f, 0f, cornerRadius, cornerRadius)
             }

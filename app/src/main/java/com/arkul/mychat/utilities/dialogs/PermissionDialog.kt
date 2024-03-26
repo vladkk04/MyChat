@@ -1,8 +1,6 @@
-package com.arkul.mychat.utilities
+package com.arkul.mychat.utilities.dialogs
 
 import android.app.AlertDialog
-import android.view.Gravity
-import android.view.View
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.R.style as style

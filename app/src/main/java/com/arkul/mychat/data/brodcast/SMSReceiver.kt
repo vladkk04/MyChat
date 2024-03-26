@@ -23,7 +23,7 @@ class SMSReceiver: BroadcastReceiver() {
                     if (code?.value != null) {
                         Log.d("d", code.value)
                     } else {
-                        // TODO: handle error
+                        // TODO: handle errorMessage
                     }
                 }
                 CommonStatusCodes.TIMEOUT -> {
