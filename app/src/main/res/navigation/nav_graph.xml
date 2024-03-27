@@ -26,5 +26,18 @@
         android:id="@+id/forgetPasswordFragment"
         android:name="com.arkul.mychat.ui.fragments.forgetPassword.ForgetPasswordFragment"
         android:label="fragment_forget_password"
-        tools:layout="@layout/fragment_forget_password" />
+        tools:layout="@layout/fragment_forget_password" >
+        <action
+            android:id="@+id/action_forgetPasswordFragment_to_successfullySentEmailFragment"
+            app:destination="@id/successfullySentEmailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/successfullySentEmailFragment"
+        android:name="com.arkul.mychat.ui.fragments.SuccessfullySentEmailFragment"
+        android:label="fragment_successfully_sent_email"
+        tools:layout="@layout/fragment_successfully_sent_email" >
+        <action
+            android:id="@+id/action_successfullySentEmailFragment_to_initialFragment"
+            app:destination="@id/initialFragment" />
+    </fragment>
 </navigation>

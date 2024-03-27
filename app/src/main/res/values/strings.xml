@@ -23,5 +23,11 @@
     </string>
     <string name="send_restore_password_text">Send</string>
     <string name="restore_password_text">To reset your password, please enter your email address below. We\'ll send you a link to reset your password.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ok_text">Ok</string>
+    <string name="successfully_sent_reset_password_text">Your password has been reset successfully. Please check your email for the new password.</string>
+    <string name="next_slide_text">Next</string>
+    <string name="customize_avatar_text">Customize your avatar</string>
 
 </resources>
