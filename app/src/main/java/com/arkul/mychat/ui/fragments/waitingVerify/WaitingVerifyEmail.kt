@@ -39,8 +39,8 @@ class WaitingVerifyEmail : Fragment() {
                 if (!it.isResendConfirmation) {
                     createTimer.start()
                     binding.buttonResendConfirmationEmail.isClickable = false
-                    binding.buttonResendConfirmationEmail.setBackgroundColor(getColor(R.color.non_clickable_color))
-                    binding.buttonResendConfirmationEmail.setTextColor(getColor(R.color.non_clickable_color_text))
+                    binding.buttonResendConfirmationEmail.setBackgroundColor(getColor(R.color.non_clickable_color_night))
+                    binding.buttonResendConfirmationEmail.setTextColor(getColor(R.color.non_clickable_color_night))
                 } else {
                     binding.buttonResendConfirmationEmail.isClickable = true
                     binding.buttonResendConfirmationEmail.setBackgroundColor(getColor(R.color.color_primary_night))

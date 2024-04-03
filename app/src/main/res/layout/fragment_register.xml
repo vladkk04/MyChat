@@ -73,7 +73,6 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textSize="@dimen/text_size_register_or_continue"
-        android:textColor="@color/color_on_surface_variant"
         android:text="@string/or_register_form_text"
         android:layout_marginTop="@dimen/margin_register_or_continue"
         android:layout_marginBottom="@dimen/margin_register_or_continue" />

@@ -2,28 +2,28 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="ff">#34D421</color>
 
-    <color name="toolbar_background">#4B4B4B</color>
+    <color name="toolbar_background_night">#4B4B4B</color>
     <color name="background_night">#222831</color>
 
-    <color name="non_clickable_color">#344A4B4B</color>
-    <color name="non_clickable_color_text">#CDD1D1D1</color>
+    <color name="non_clickable_color_night">#344A4B4B</color>
+    <color name="non_clickable_color_text_night">#CDD1D1D1</color>
 
     <color name="color_primary_night">#393E46</color>
+    <color name="color_primary_container_night">@color/color_on_surface_variant_night</color>
+
     <color name="color_on_primary_night">#FFD369</color>
-    <color name="color_primary_container_night">@color/color_on_surface_variant</color>
     <color name="color_on_primary_container_night">@color/color_primary_night</color>
-    <color name="color_error">#DB7C7C</color>
 
-    <color name="color_on_surface_variant">#EEEEEE</color>
-    <color name="color_surface">@color/color_primary_night</color>
+    <color name="color_error_night">#DB7C7C</color>
 
+    <color name="color_on_surface_variant_night">#EEEEEE</color>
+    <color name="color_surface_night">@color/color_primary_night</color>
     <color name="color_outline_night">@color/color_on_primary_night</color>
 
     //Custom Input Text Edit Colors
-    <color name="custom_outlined_text_field_disabled_outline_color">@color/color_on_surface_variant</color>
-    <color name="custom_outlined_text_field_focus_outline_color">@color/color_on_surface_variant</color>
-    <color name="custom_outlined_text_field_hover_outline_color">@color/color_on_surface_variant</color>
+    <color name="custom_outlined_text_field_disabled_outline_color">@color/color_on_surface_variant_night</color>
+    <color name="custom_outlined_text_field_focus_outline_color">@color/color_on_surface_variant_night</color>
+    <color name="custom_outlined_text_field_hover_outline_color">@color/color_on_surface_variant_night</color>
     <color name="custom_outlined_text_field_outline_color">@color/color_outline_night</color>
 </resources>

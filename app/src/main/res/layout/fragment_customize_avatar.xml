@@ -1,32 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingVertical="40dp"
-    android:paddingHorizontal="@dimen/padding_horizontal_layout_login">
+    app:layout_anchorGravity="bottom|end"
+    tools:context=".ui.fragments.CustomizeAvatarFragment">
 
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center"
-        android:textSize="22sp"
-        android:textColor="@color/color_on_surface_variant"
+        android:textSize="20sp"
         android:text="@string/customize_avatar_text"
+        android:fadeScrollbars="false"
         android:layout_marginTop="40dp"/>
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="384dp"
-        android:layout_height="384dp"
-        android:layout_gravity="center"
-        android:scaleType="fitCenter"
-        android:tint="@color/color_on_primary_container_night"
-        android:src="@drawable/ic_insert_photo" />
-
-    <com.google.android.material.button.MaterialButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:text="@string/next_slide_text" />
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:paddingStart="80dp"
+        android:paddingEnd="80dp"
+        android:layout_gravity="center" />
 
 </FrameLayout>

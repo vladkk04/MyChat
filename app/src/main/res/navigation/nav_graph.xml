@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/initialFragment">
+    app:startDestination="@id/customizeAvatarFragment">
 
     <fragment
         android:id="@+id/initialFragment"
@@ -21,7 +21,11 @@
         android:id="@+id/waitingVerifyEmail"
         android:name="com.arkul.mychat.ui.fragments.waitingVerify.WaitingVerifyEmail"
         android:label="fragment_waiting_verify_email"
-        tools:layout="@layout/fragment_waiting_verify_email"/>
+        tools:layout="@layout/fragment_waiting_verify_email">
+        <action
+            android:id="@+id/action_waitingVerifyEmail_to_createProfileFragment"
+            app:destination="@id/createProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/forgetPasswordFragment"
         android:name="com.arkul.mychat.ui.fragments.forgetPassword.ForgetPasswordFragment"
@@ -40,4 +44,14 @@
             android:id="@+id/action_successfullySentEmailFragment_to_initialFragment"
             app:destination="@id/initialFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/createProfileFragment"
+        android:name="com.arkul.mychat.ui.fragments.CreateProfileFragment"
+        android:label="fragment_create_profile"
+        tools:layout="@layout/fragment_create_profile" />
+    <fragment
+        android:id="@+id/customizeAvatarFragment"
+        android:name="com.arkul.mychat.ui.fragments.CustomizeAvatarFragment"
+        android:label="fragment_customize_avatar"
+        tools:layout="@layout/fragment_customize_avatar" />
 </navigation>

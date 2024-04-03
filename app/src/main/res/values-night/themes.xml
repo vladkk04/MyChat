@@ -5,16 +5,24 @@
         <item name="colorPrimaryContainer">@color/color_primary_container_night</item>
         <item name="colorOnPrimaryContainer">@color/color_on_primary_container_night</item>
 
+        <item name="colorSecondaryContainer">@color/color_on_primary_container_night</item>
+        <item name="colorOnSecondaryContainer">@color/color_primary_container_night</item>
+
        <!-- <item name="android:fontFamily">@font/hind_siliguri</item>-->
-        <item name="colorOnSurfaceVariant">@color/color_on_surface_variant</item>
-        <item name="colorSurface">@color/color_surface</item>
-        <item name="colorOnSurface">@color/color_on_surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/color_on_surface_variant_night</item>
+        <item name="colorSurface">@color/color_surface_night</item>
+        <item name="colorOnSurface">@color/color_on_surface_variant_night</item>
 
         <item name="colorOutline">@color/color_outline_night</item>
 
         <item name="android:colorBackground">@color/background_night</item>
         <item name="android:statusBarColor">@color/background_night</item>
-        <item name="colorError">@color/color_error</item>
+
+        <item name="colorError">@color/color_error_night</item>
+
+        <item name="android:fontFamily">@font/hind_siliguri</item>
+
+        <item name="android:textColor">@color/color_on_surface_variant_night</item>
 
         <!--
                 <item name="colorPrimaryInverse">@color/color_primary_night</item>
@@ -24,10 +32,7 @@
                 <item name="colorOnPrimarySurface">@color/color_on_primary_night</item>
                 <item name="colorAccent">@color/color_on_primary_night</item>
                 <item name="colorPrimaryDark">@color/color_on_primary_night</item>
-                <item name="colorSecondary">@color/color_on_primary_night</item>
-                <item name="colorSecondaryVariant">@color/color_on_primary_night</item>
-                <item name="colorSecondaryContainer">@color/color_on_primary_night</item>
-                <item name="colorOnSecondaryContainer">@color/color_on_primary_night</item>
+
 
                 <item name="colorSurfaceDim">@color/color_on_primary_night</item>
                 <item name="colorSurface">@color/color_on_primary_night</item>
@@ -41,7 +46,21 @@
                 <item name="colorOnSurfaceInverse">@color/color_on_primary_night</item>
                 <item name="colorSurfaceInverse">@color/color_on_primary_night</item>
         -->
+    </style>
 
+    <style name="CircleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+
+    <style name="CustomRadioButton" parent="Widget.Material3.CompoundButton.RadioButton">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.RadioButton</item>
+    </style>
+
+    <style name="ThemeOverlay.App.RadioButton" parent="">
+        <item name="colorOnSurfaceVariant">@color/color_primary_container_night</item>
+        <item name="colorPrimary">@color/color_on_primary_night</item>
     </style>
     
     <style name="CustomInitialTabLayout" parent="Widget.Material3.TabLayout">
@@ -52,15 +71,15 @@
         <item name="colorPrimary">@color/color_primary_night</item>
         <item name="colorSurface">@android:color/transparent</item>
         <item name="colorSurfaceVariant">@android:color/transparent</item>
-        <item name="colorOnSurfaceVariant">@color/color_on_surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/color_on_surface_variant_night</item>
         <item name="android:textAllCaps">true</item>
     </style>
 
 
     <style name="AuthorizationCustomTextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
-        <item name="colorOnPrimaryContainer">@color/color_on_surface_variant</item>
+        <item name="colorOnPrimaryContainer">@color/color_on_surface_variant_night</item>
         <item name="boxStrokeColor">@drawable/custom_box_stroke_text_color</item>
-        <item name="hintTextColor">@color/color_on_surface_variant</item>
+        <item name="hintTextColor">@color/color_on_surface_variant_night</item>
         <item name="android:theme">@style/ThemeOverlay.Material3.TextInputEditText.Cursor.Color</item>
         <item name="errorEnabled">true</item>
         <item name="endIconMode">custom</item>
@@ -69,7 +88,7 @@
 
 
     <style name="ThemeOverlay.Material3.TextInputEditText.Cursor.Color" parent="">
-        <item name="colorControlActivated">@color/color_on_surface_variant</item>
+        <item name="colorControlActivated">@color/color_on_surface_variant_night</item>
     </style>
 
 </resources>

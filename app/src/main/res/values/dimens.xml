@@ -2,7 +2,8 @@
 <resources>
     <dimen name="padding_relative_layout_register">15dp</dimen>
 
-
+    <dimen name="viewpager_next_item_visible">5dp</dimen>
+    <dimen name="viewpager_current_item_horizontal_margin">10dp</dimen>
 
     <!--Login Layout -->
     <dimen name="padding_horizontal_layout_login">15dp</dimen>
