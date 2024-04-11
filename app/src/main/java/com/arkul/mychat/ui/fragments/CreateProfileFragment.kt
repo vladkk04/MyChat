@@ -16,4 +16,5 @@ class CreateProfileFragment: Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_create_profile, container, false)
     }
+
 }
