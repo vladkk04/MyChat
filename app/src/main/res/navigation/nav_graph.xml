@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/customizeAvatarFragment">
+    app:startDestination="@id/createProfileFragment">
 
     <fragment
         android:id="@+id/initialFragment"
@@ -46,12 +46,7 @@
     </fragment>
     <fragment
         android:id="@+id/createProfileFragment"
-        android:name="com.arkul.mychat.ui.fragments.CreateProfileFragment"
+        android:name="com.arkul.mychat.ui.fragments.createProfile.CreateProfileFragment"
         android:label="fragment_create_profile"
         tools:layout="@layout/fragment_create_profile" />
-    <fragment
-        android:id="@+id/customizeAvatarFragment"
-        android:name="com.arkul.mychat.ui.fragments.CustomizeAvatarFragment"
-        android:label="fragment_customize_avatar"
-        tools:layout="@layout/fragment_customize_avatar" />
 </navigation>

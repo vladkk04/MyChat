@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.fragments.CreateProfileFragment">
+    tools:context=".ui.fragments.createProfile.CreateProfileFragment">
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
@@ -19,31 +19,31 @@
         android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toStartOf="@id/button_next"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@+id/button_next"
+        android:layout_alignBottom="@+id/button_next"
         android:orientation="horizontal">
+
         <RadioButton
-            android:id="@+id/radio_button_1"
+            style="@style/CustomRadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleX="0.7"
-            android:scaleY="0.7"
-            style="@style/CustomRadioButton" />
+            android:scaleY="0.7" />
+
         <RadioButton
-            android:id="@+id/radio_button_2"
+            style="@style/CustomRadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleX="0.7"
-            android:scaleY="0.7"
-            style="@style/CustomRadioButton"/>
+            android:scaleY="0.7" />
+
         <RadioButton
-            android:id="@+id/radio_button_3"
+            style="@style/CustomRadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleX="0.7"
-            android:scaleY="0.7"
-            style="@style/CustomRadioButton"/>
+            android:scaleY="0.7" />
     </RadioGroup>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -53,10 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="40dp"
+        android:layout_margin="40dp"
         android:contentDescription="@string/next_slide_text"
         android:src="@drawable/ic_navigate_next"
         app:elevation="0dp"

@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.arkul.mychat.databinding.FragmentInitialBinding
-import com.arkul.mychat.ui.adapters.viewPager2.InitialViewPagerAdapter
+import com.arkul.mychat.ui.adapters.viewPager2.BaseFragmentStateAdapter
 import com.arkul.mychat.ui.adapters.viewPager2.TabLayoutCornerRadiusAnimator
 import com.arkul.mychat.ui.fragments.login.LoginFragment
 import com.arkul.mychat.ui.fragments.register.RegisterFragment
@@ -25,7 +25,7 @@ class InitialFragment : Fragment() {
 
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager2
-    private lateinit var viewPagerAdapter: InitialViewPagerAdapter
+    private lateinit var viewPagerAdapter: BaseFragmentStateAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +35,7 @@ class InitialFragment : Fragment() {
 
         tabLayout = binding.tabLayout
         viewPager = binding.viewPager
-        viewPagerAdapter = InitialViewPagerAdapter(fragmentCreatorList,this)
+        viewPagerAdapter = BaseFragmentStateAdapter(fragmentCreatorList, this)
 
         with(viewPager) {
             adapter = viewPagerAdapter
@@ -53,6 +53,7 @@ class InitialFragment : Fragment() {
                 is LoginFragment -> {
                     tab.text = "Login"
                 }
+
                 is RegisterFragment -> {
                     tab.text = "Register"
                 }

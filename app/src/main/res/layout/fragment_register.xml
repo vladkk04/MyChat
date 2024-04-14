@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:paddingHorizontal="15dp"
+    android:paddingHorizontal="@dimen/padding_horizontal_layout_login"
     tools:context=".ui.fragments.register.RegisterFragment">
 
     <com.google.android.material.textfield.TextInputLayout

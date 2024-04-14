@@ -87,8 +87,12 @@ dependencies {
     implementation(libs.dagger.hilt.android)
     ksp(libs.dagger.hilt.compiler)
 
+    //Color Picker
+    implementation(libs.color.picker)
+
     //Glide
     implementation(libs.glide)
+
 
     //Tests
     implementation(testLibs.junit)

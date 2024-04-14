@@ -1,28 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_anchorGravity="bottom|end"
-    tools:context=".ui.fragments.CustomizeAvatarFragment">
+    tools:context=".ui.fragments.customizeAvatar.CustomizeAvatarFragment">
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text_view_title_customize_avatar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="top|center"
-        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:textSize="26sp"
         android:text="@string/customize_avatar_text"
-        android:fadeScrollbars="false"
-        android:layout_marginTop="40dp"/>
+        android:layout_marginVertical="40dp"/>
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view_background_avatar"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_below="@id/text_view_title_customize_avatar"
+        android:layout_centerHorizontal="true"
+        app:cardCornerRadius="250dp"
+        app:cardBackgroundColor="@color/color_primary_night"
+        app:cardElevation="0dp"
+        android:layout_marginTop="50dp"
+        style="?attr/materialCardViewFilledStyle">
+
+        <com.arkul.mychat.ui.adapters.viewPager2.integration.NestedScrollableHost
+            android:id="@+id/nested_scrollable_host"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignStart="@+id/card_view_background_avatar"
+            android:layout_alignTop="@+id/card_view_background_avatar"
+            android:layout_alignBottom="@id/card_view_background_avatar"
+            android:layout_alignEnd="@id/card_view_background_avatar">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center" />
+        </com.arkul.mychat.ui.adapters.viewPager2.integration.NestedScrollableHost>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.madrapps.pikolo.HSLColorPicker
+        android:id="@+id/color_picker"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:arc_width="10dp"
+        app:lightness_arc_length="100"
+        app:lightness_start_angle="280"
+        app:lightness_radius_offset="0dp"
+        app:saturation_arc_length="100"
+        app:saturation_start_angle="160"
+        app:saturation_radius_offset="0dp"
+        app:hue_arc_length="100"
+        app:hue_start_angle="40"
+        app:hue_radius_offset="0dp"
+        android:elevation="2dp"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/text_view_title_customize_avatar"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text_select_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/color_picker"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:textSize="16sp"
+        android:layout_marginBottom="4dp"
+        android:text="Mode"/>
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/toggleMode"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:paddingStart="80dp"
-        android:paddingEnd="80dp"
-        android:layout_gravity="center" />
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:layout_below="@id/text_select_mode">
+        <Button
+            style="?attr/materialButtonOutlinedStyle"
+            android:id="@+id/button1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Custom" />
+        <Button
+            style="?attr/materialButtonOutlinedStyle"
+            android:id="@+id/button2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Default" />
+    </com.google.android.material.button.MaterialButtonToggleGroup>
 
-</FrameLayout>
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text_select_backgroundColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toggleMode"
+        android:textSize="16sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="4dp"
+        android:text="Background color"/>
+
+
+    <HorizontalScrollView
+        android:id="@+id/scroll_view_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_select_backgroundColor"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/layout_background_colors"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:foregroundGravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+
+</RelativeLayout>

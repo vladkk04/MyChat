@@ -43,6 +43,9 @@ dependencyResolutionManagement {
             val googleIdentityID = "1.1.0"
             val glideVersion = "4.16.0"
             val navigationComponentsVersion = "2.7.7"
+            val colorPicker = "2.0.2"
+
+
 
             //Navigation Components
             library("androidx.navigation-fragment", "androidx.navigation", "navigation-fragment-ktx").version(navigationComponentsVersion)
@@ -50,6 +53,9 @@ dependencyResolutionManagement {
 
             //Glide
             library("glide", "com.github.bumptech.glide", "glide").version(glideVersion)
+
+            //Color Picker
+            library("color-picker", "com.github.madrapps", "pikolo").version(colorPicker)
 
             //Google Auth Credentials
             library("androidx.credentials", "androidx.credentials", "credentials").version(googleCredentialsVersion)

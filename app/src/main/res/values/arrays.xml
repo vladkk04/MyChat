@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string-array name="options_avatars">
+        <item>@string/custom_text</item>
+        <item>@string/default_avatar_text</item>
+    </string-array>
+
+    <array name="default_background_colors_avatar">
+        <item>#6688A66A</item>
+        <item>@color/orange</item>
+        <item>@color/yellow</item>
+        <item>@color/chartreuse</item>
+        <item>@color/green</item>
+        <item>@color/spring_green</item>
+        <item>@color/cyan</item>
+        <item>@color/azure</item>
+        <item>@color/blue</item>
+        <item>@color/violet</item>
+        <item>@color/magenta</item>
+    </array>
+    
+    <integer-array name="default_avatars">
+        <item>@drawable/ic_add_photo</item>
+        <item>@drawable/ic_add_photo_alternate</item>
+        <item>@drawable/avatar_default_1</item>
+        <item>@drawable/avatar_default_2</item>
+        <item>@drawable/avatar_default_3</item>
+        <item>@drawable/avatar_default_4</item>
+        <item>@drawable/avatar_default_5</item>
+    </integer-array>
+</resources>

@@ -1,19 +1,37 @@
 <resources>
     <string name="app_name">MyChat</string>
 
-
-    <string name="hint_register">Register\n</string>
+    <!-- Hints Login and Register Input Fields -->
+    <string name="hint_register">Register</string>
     <string name="hint_login">Login</string>
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="hint_retype_password">Re-type Password</string>
+
+    <!-- Text Login and Register Buttons -->
     <string name="create_account_text">Create Account</string>
     <string name="login_text">Login</string>
     <string name="or_register_form_text">or continue with</string>
+    <string name="forget_password">Forget password?</string>
+
+    <!-- Hints Initialization Form Profile Input Fields-->
+    <string name="hint_first_name">First name</string>
+    <string name="hint_last_name">Last name</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_birthday">Birthday</string>
+    <string name="hint_type_date">DD/MM/YYYY</string>
+
+
+    <!-- Description -->
+    <string name="description_github_auth">GitHub Auth\n</string>
     <string name="description_google_auth">Google Auth</string>
     <string name="description_apple_auth">Apple Auth\n</string>
-    <string name="description_github_auth">GitHub Auth\n</string>
-    <string name="forget_password">Forget password?</string>
+
+
+    <string name="custom_text">Custom</string>
+    <string name="default_avatar_text">Default</string>
+
+
 
     <string name="resend_confirmation_text">Resend confirmation email</string>
     <string name="resend_confirmation_text_with_timer">Resend confirmation email: %1$d</string>
@@ -23,11 +41,11 @@
     </string>
     <string name="send_restore_password_text">Send</string>
     <string name="restore_password_text">To reset your password, please enter your email address below. We\'ll send you a link to reset your password.</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="ok_text">OK</string>
+
     <string name="successfully_sent_reset_password_text">Your password has been reset successfully. Please check your email for the new password.</string>
     <string name="next_slide_text">Next</string>
+
     <string name="customize_avatar_text">CUSTOMIZE YOUR AVATAR</string>
+    <string name="fill_your_profile_text">FILL YOUR PROFILE</string>
 
 </resources>
