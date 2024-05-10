@@ -83,14 +83,13 @@ dependencies {
     implementation("androidx.palette:palette-ktx:1.0.0")
     //Hilt
     implementation(libs.dagger.hilt.android)
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
     ksp(libs.dagger.hilt.compiler)
 
     //Color Picker
     implementation(libs.color.picker)
 
-    //Crop Image
-    implementation("com.github.yalantis:ucrop:2.2.8")
+    //uCrop
+    implementation(libs.yalantis.ucrop)
 
     //Glide
     implementation(libs.glide)

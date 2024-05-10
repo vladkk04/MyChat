@@ -45,7 +45,7 @@ dependencyResolutionManagement {
             val navigationComponentsVersion = "2.7.7"
             val colorPicker = "2.0.2"
             val cropImageVersion = "2.2.8"
-
+            val uCropVersion = "2.2.8"
 
             val cameraXVersion = "1.4.0-alpha05"
 
@@ -56,7 +56,8 @@ dependencyResolutionManagement {
             library("androidx.camera.mlkit", "androidx.camera", "camera-mlkit-vision").version(cameraXVersion)
             library("androidx.camera.extensions", "androidx.camera", "camera-extensions").version(cameraXVersion)
 
-
+            //uCrop
+            library("yalantis.ucrop", "com.github.yalantis", "ucrop").version(uCropVersion)
 
             //Navigation Components
             library("androidx.navigation-fragment", "androidx.navigation", "navigation-fragment-ktx").version(navigationComponentsVersion)
