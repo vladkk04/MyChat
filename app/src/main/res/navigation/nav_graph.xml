@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/initialFragment"
-        android:name="com.arkul.mychat.ui.fragments.initial.InitialFragment"
+        android:name="com.arkul.mychat.ui.screens.initial.InitialFragment"
         android:label="fragment_initial"
         tools:layout="@layout/fragment_initial" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/waitingVerifyEmail"
-        android:name="com.arkul.mychat.ui.fragments.waitingVerify.WaitingVerifyEmail"
+        android:name="com.arkul.mychat.ui.screens.waitingVerify.WaitingVerifyEmail"
         android:label="fragment_waiting_verify_email"
         tools:layout="@layout/fragment_waiting_verify_email">
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/forgetPasswordFragment"
-        android:name="com.arkul.mychat.ui.fragments.forgetPassword.ForgetPasswordFragment"
+        android:name="com.arkul.mychat.ui.screens.forgetPassword.ForgetPasswordFragment"
         android:label="fragment_forget_password"
         tools:layout="@layout/fragment_forget_password" >
         <action
@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/successfullySentEmailFragment"
-        android:name="com.arkul.mychat.ui.fragments.SuccessfullySentEmailFragment"
+        android:name="com.arkul.mychat.ui.screens.sentEmail.SuccessfullySentEmailFragment"
         android:label="fragment_successfully_sent_email"
         tools:layout="@layout/fragment_successfully_sent_email" >
         <action
@@ -46,7 +46,7 @@
     </fragment>
     <fragment
         android:id="@+id/createProfileFragment"
-        android:name="com.arkul.mychat.ui.fragments.createProfile.CreateProfileFragment"
+        android:name="com.arkul.mychat.ui.screens.createProfile.CreateProfileFragment"
         android:label="fragment_create_profile"
         tools:layout="@layout/fragment_create_profile" />
 </navigation>

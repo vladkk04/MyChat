@@ -71,9 +71,6 @@ dependencies {
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.navigation.ui)
 
-    //WebView
-    implementation(libs.androidx.webkit)
-
     //Firebase
     implementation(platform(libs.firebase.boom))
     implementation(libs.firebase.auth)
@@ -83,16 +80,28 @@ dependencies {
     implementation(libs.androidx.credentials.services.auth)
     implementation(libs.android.libraries.identity)
 
+    implementation("androidx.palette:palette-ktx:1.0.0")
     //Hilt
     implementation(libs.dagger.hilt.android)
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
     ksp(libs.dagger.hilt.compiler)
 
     //Color Picker
     implementation(libs.color.picker)
 
+    //Crop Image
+    implementation("com.github.yalantis:ucrop:2.2.8")
+
     //Glide
     implementation(libs.glide)
 
+    //Camera X
+    implementation(libs.androidx.camera.core)
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.view)
+    implementation(libs.androidx.camera.mlkit)
+    implementation(libs.androidx.camera.extensions)
 
     //Tests
     implementation(testLibs.junit)

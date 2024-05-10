@@ -27,4 +27,5 @@ class SelectAvatarAdapter(
         holder.imageView.setImageResource(listOfImages.getResourceId(position, -1))
     }
 
+
 }

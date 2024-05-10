@@ -10,6 +10,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url = uri("https://jitpack.io") }
     }
 
     versionCatalogs {
@@ -32,9 +33,8 @@ dependencyResolutionManagement {
         create("libs") {
             val androidxCoreVersion = "1.12.0"
             val androidxAppcompatVersion = "1.6.1"
-            val googleAndroidMaterialVersion = "1.10.0"
+            val googleAndroidMaterialVersion = "1.12.0-rc01"
             val androidxConstraintlayoutVersion = "2.1.4"
-            val androidxWebkitVersion = "1.8.0"
             val fragmentKtxVersion = "1.6.2"
             val activityKtxVersion = "1.8.2"
             val daggerHiltVersion = "2.50"
@@ -44,6 +44,17 @@ dependencyResolutionManagement {
             val glideVersion = "4.16.0"
             val navigationComponentsVersion = "2.7.7"
             val colorPicker = "2.0.2"
+            val cropImageVersion = "2.2.8"
+
+
+            val cameraXVersion = "1.4.0-alpha05"
+
+            library("androidx.camera.core", "androidx.camera", "camera-core").version(cameraXVersion)
+            library("androidx.camera.camera2", "androidx.camera", "camera-camera2").version(cameraXVersion)
+            library("androidx.camera.lifecycle", "androidx.camera", "camera-lifecycle").version(cameraXVersion)
+            library("androidx.camera.view", "androidx.camera", "camera-view").version(cameraXVersion)
+            library("androidx.camera.mlkit", "androidx.camera", "camera-mlkit-vision").version(cameraXVersion)
+            library("androidx.camera.extensions", "androidx.camera", "camera-extensions").version(cameraXVersion)
 
 
 
@@ -53,6 +64,9 @@ dependencyResolutionManagement {
 
             //Glide
             library("glide", "com.github.bumptech.glide", "glide").version(glideVersion)
+
+            //Crop Image
+            library("crop-image", "com.github.yalantis", "ucrop").version(cropImageVersion)
 
             //Color Picker
             library("color-picker", "com.github.madrapps", "pikolo").version(colorPicker)
@@ -69,9 +83,6 @@ dependencyResolutionManagement {
             //Hilt
             library("dagger-hilt-android", "com.google.dagger", "hilt-android").version(daggerHiltVersion)
             library("dagger-hilt-compiler", "com.google.dagger", "hilt-compiler").version(daggerHiltVersion)
-
-            //WebView
-            library("androidx.webkit", "androidx.webkit", "webkit").version(androidxWebkitVersion)
 
             //Android Basic
             library("androidx-ktx", "androidx.core", "core-ktx").version(androidxCoreVersion)

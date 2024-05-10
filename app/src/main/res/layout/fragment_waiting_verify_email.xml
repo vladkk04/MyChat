@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:paddingHorizontal="30dp"
     android:paddingVertical="80dp"
-    tools:context=".ui.fragments.waitingVerify.WaitingVerifyEmail">
+    tools:context=".ui.screens.waitingVerify.WaitingVerifyEmail">
 
     <ImageView
         android:id="@+id/smile"

@@ -8,16 +8,16 @@
     android:orientation="vertical"
     android:gravity="center"
     android:paddingHorizontal="@dimen/padding_horizontal_layout_login"
-    tools:context=".ui.fragments.register.RegisterFragment">
+    tools:context=".ui.screens.register.RegisterFragment">
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/DefaultCustomTextInputLayout"
         android:id="@+id/input_layout_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_between_input_layouts"
         app:endIconMode="clear_text"
-        app:startIconDrawable="@drawable/ic_email"
-        style="@style/AuthorizationCustomTextInputLayout">
+        app:startIconDrawable="@drawable/ic_email">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/input_text_email"
@@ -29,12 +29,12 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/DefaultCustomTextInputLayout"
         android:id="@+id/input_layout_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_between_input_layouts"
-        app:startIconDrawable="@drawable/ic_lock"
-        style="@style/AuthorizationCustomTextInputLayout">
+        app:startIconDrawable="@drawable/ic_lock">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/input_text_password"
@@ -45,12 +45,12 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/DefaultCustomTextInputLayout"
         android:id="@+id/input_layout_password_retype"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_between_input_layouts"
-        app:startIconDrawable="@drawable/ic_refresh"
-        style="@style/AuthorizationCustomTextInputLayout">
+        app:startIconDrawable="@drawable/ic_refresh">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/input_text_retype_password"

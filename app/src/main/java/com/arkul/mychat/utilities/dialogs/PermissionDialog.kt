@@ -1,66 +1,48 @@
 package com.arkul.mychat.utilities.dialogs
 
 import android.app.AlertDialog
+import android.view.Gravity
 import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.arkul.mychat.R
+import com.arkul.mychat.utilities.permission.AppPermissionDialogs
 import com.google.android.material.R.style as style
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-enum class TypeOfPermission {
-    SMS,
-    CAMERA
-}
-
-private fun getDescription(
-    permission: TypeOfPermission,
-    isPermanentlyDeclined: Boolean)
-: String {
-    return if (isPermanentlyDeclined) {
-        when (permission) {
-            TypeOfPermission.SMS -> "This app needs permission to send SMS. Please grant the permission manually through the app settings."
-            TypeOfPermission.CAMERA -> "This app needs permission to access the camera. Please grant the permission manually through the app settings."
-        }
-    } else {
-        when (permission) {
-            TypeOfPermission.SMS -> "nigga"
-            TypeOfPermission.CAMERA -> ""
-        }
+private fun getDescription(permission: AppPermissionDialogs, isPermanentlyDeclined: Boolean): String? {
+    return when (isPermanentlyDeclined) {
+        true -> permission.permanentlyDeclinedText
+        false -> permission.declinedText
     }
 }
 
 fun Fragment.permissionDialog(
-    permission: TypeOfPermission,
+    permission: AppPermissionDialogs,
     isPermanentlyDeclined: Boolean,
+    onDismissClick: () -> Unit,
     onOkClick: () -> Unit,
     onGoToAppSettingsClick: () -> Unit
 ) {
-    MaterialAlertDialogBuilder(this.requireContext(), style.MaterialAlertDialog_Material3_Body_Text_CenterStacked)
+    MaterialAlertDialogBuilder(requireContext())
         .setTitle("Permission required")
+        .setIcon(ContextCompat.getDrawable(requireContext(), R.drawable.ic_camera))
         .setMessage(getDescription(permission, isPermanentlyDeclined))
+        .setOnDismissListener {
+            onDismissClick()
+        }
         .setNegativeButton(if(isPermanentlyDeclined) "Not now" else null) { dialog, _ ->
             dialog.dismiss()
         }
-        .setPositiveButton(if(isPermanentlyDeclined) "Grant Permission" else "OK") { _, _ ->
+        .setPositiveButton(if(isPermanentlyDeclined) "Grant permission" else "OK") { _, _ ->
             if (isPermanentlyDeclined) {
                 onGoToAppSettingsClick()
             } else {
                 onOkClick()
+                onDismissClick()
             }
-        }.show().apply {
-            val positiveButton = this.getButton(AlertDialog.BUTTON_POSITIVE)
-            val negativeButton = this.getButton(AlertDialog.BUTTON_NEGATIVE)
 
-            val layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-
-            layoutParams.weight = 1f;
-            //layoutParams.gravity = Gravity.CENTER
-
-            positiveButton.layoutParams = layoutParams
-            negativeButton.layoutParams = layoutParams
-        }
+        }.show()
 }
 
 

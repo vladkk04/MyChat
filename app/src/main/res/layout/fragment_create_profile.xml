@@ -6,22 +6,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.fragments.createProfile.CreateProfileFragment">
+    tools:context=".ui.screens.createProfile.CreateProfileFragment">
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/radioGroup"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:fitsSystemWindows="true"/>
 
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_alignTop="@+id/button_next"
         android:layout_alignBottom="@+id/button_next"
+        android:layout_toStartOf="@id/button_next"
+        android:layout_toEndOf="@id/button_back"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <RadioButton
@@ -47,13 +52,27 @@
     </RadioGroup>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button_back"
+        style="?attr/floatingActionButtonSmallSecondaryStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="15dp"
+        android:contentDescription="@string/next_slide_text"
+        android:src="@drawable/ic_navigate_back"
+        app:elevation="0dp"
+        app:elevationOverlayEnabled="false"
+        app:pressedTranslationZ="2dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button_next"
         style="?attr/floatingActionButtonSmallSecondaryStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="40dp"
+        android:layout_margin="15dp"
         android:contentDescription="@string/next_slide_text"
         android:src="@drawable/ic_navigate_next"
         app:elevation="0dp"

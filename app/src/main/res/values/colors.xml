@@ -15,7 +15,6 @@
     <color name="violet">#7F00FF</color>
     <color name="magenta">#FF00FF</color>
 
-
     <color name="toolbar_background_night">#4B4B4B</color>
     <color name="background_night">#222831</color>
 
@@ -26,11 +25,13 @@
     <color name="color_primary_container_night">@color/color_on_surface_variant_night</color>
 
     <color name="color_on_primary_night">#FFD369</color>
-    <color name="color_on_primary_container_night">@color/color_primary_night</color>
+    <color name="color_on_primary_container_night">#323539</color>
 
     <color name="color_error_night">#DB7C7C</color>
 
     <color name="color_on_surface_variant_night">#EEEEEE</color>
+    <color name="color_on_surface_container_high_night">#2B2C2D</color>
+
     <color name="color_surface_night">@color/color_primary_night</color>
     <color name="color_outline_night">@color/color_on_primary_night</color>
 

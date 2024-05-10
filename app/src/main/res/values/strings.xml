@@ -19,6 +19,7 @@
     <string name="hint_last_name">Last name</string>
     <string name="hint_username">Username</string>
     <string name="hint_birthday">Birthday</string>
+    <string name="hint_about_me">About me</string>
     <string name="hint_type_date">DD/MM/YYYY</string>
 
 
@@ -46,6 +47,7 @@
     <string name="next_slide_text">Next</string>
 
     <string name="customize_avatar_text">CUSTOMIZE YOUR AVATAR</string>
+    <string name="customize_wallpaper_text">YOUR PROFILE WILL LOOKS LIKE</string>
     <string name="fill_your_profile_text">FILL YOUR PROFILE</string>
 
 </resources>

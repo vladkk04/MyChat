@@ -11,6 +11,7 @@
 
        <!-- <item name="android:fontFamily">@font/hind_siliguri</item>-->
         <item name="colorOnSurfaceVariant">@color/color_on_surface_variant_night</item>
+        <item name="colorSurfaceContainerHigh">@color/color_on_surface_container_high_night</item>
         <item name="colorSurface">@color/color_surface_night</item>
         <item name="colorOnSurface">@color/color_on_surface_variant_night</item>
 
@@ -25,32 +26,20 @@
 
         <item name="android:textColor">@color/color_on_surface_variant_night</item>
 
-        <!--
-                <item name="colorPrimaryInverse">@color/color_primary_night</item>
-                <item name="colorOnPrimaryContainer">@color/color_on_primary_night</item>
-                <item name="colorOutlineVariant">@color/color_on_primary_night</item>
-                <item name="colorPrimarySurface">@color/color_on_primary_night</item>
-                <item name="colorOnPrimarySurface">@color/color_on_primary_night</item>
-                <item name="colorAccent">@color/color_on_primary_night</item>
-                <item name="colorPrimaryDark">@color/color_on_primary_night</item>
-
-
-                <item name="colorSurfaceDim">@color/color_on_primary_night</item>
-                <item name="colorSurface">@color/color_on_primary_night</item>
-                <item name="colorSurfaceBright">@color/color_on_primary_night</item>
-                <item name="colorSurfaceContainerLowest">@color/color_on_primary_night</item>
-                <item name="colorSurfaceContainerLow">@color/color_on_primary_night</item>
-                <item name="colorSurfaceContainer">@color/color_on_primary_night</item>
-                <item name="colorSurfaceContainerHigh">@color/color_on_primary_night</item>
-                <item name="colorSurfaceContainerHighest">@color/color_on_primary_night</item>
-                <item name="colorSurfaceVariant">@color/color_on_primary_night</item>
-                <item name="colorOnSurfaceInverse">@color/color_on_primary_night</item>
-                <item name="colorSurfaceInverse">@color/color_on_primary_night</item>
-        -->
     </style>
 
-    <style name="ShapeAppearance.ImageView" parent="Theme.MaterialComponents.Light.DarkActionBar">
-        <item name="cornerSize">30%</item>
+    <style name="Widget.App.Button.OutlinedButton.IconOnly" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="iconPadding">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:paddingLeft">44dp</item>
+        <item name="android:paddingRight">44dp</item>
+        <item name="android:minWidth">96dp</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+
+    <style name="ShapeAppearance.ImageView.Rounded" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="cornerSize">50%</item>
         <item name="cornerFamily">rounded</item>
     </style>
 
@@ -71,21 +60,17 @@
     <style name="ThemeOverlay.App.TabLayout" parent="">
         <item name="colorPrimary">@color/color_primary_night</item>
         <item name="colorSurface">@android:color/transparent</item>
-        <item name="colorSurfaceVariant">@android:color/transparent</item>
+        <item name="colorSurfaceVariant">@color/azure</item>
         <item name="colorOnSurfaceVariant">@color/color_on_surface_variant_night</item>
         <item name="android:textAllCaps">true</item>
     </style>
 
-
-    <style name="AuthorizationCustomTextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+    <style name="DefaultCustomTextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
         <item name="colorOnPrimaryContainer">@color/color_on_surface_variant_night</item>
         <item name="boxStrokeColor">@drawable/custom_box_stroke_text_color</item>
         <item name="hintTextColor">@color/color_on_surface_variant_night</item>
         <item name="android:background">@null</item>
         <item name="android:theme">@style/ThemeOverlay.Material3.TextInputEditText.Cursor.Color</item>
-        <item name="errorEnabled">true</item>
-        <item name="endIconMode">custom</item>
-        <item name="errorIconDrawable">@null</item>
     </style>
 
 
