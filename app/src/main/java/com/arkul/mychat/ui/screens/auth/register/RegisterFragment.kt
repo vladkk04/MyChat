@@ -105,7 +105,7 @@ class RegisterFragment : BaseFragment<RegisterViewModel>() {
     private fun setupButtonsListeners() {
         binding.buttonRegister.setOnClickListener {
             showToast(viewModel.uiState.value.errorMessage)
-            //viewModel.signUpWithEmail()
+            viewModel.signUpWithEmail()
         }
         binding.buttonGoogle.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
@@ -114,7 +114,7 @@ class RegisterFragment : BaseFragment<RegisterViewModel>() {
         }
         binding.buttonGithub.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
-                //viewModel.signInWithCredential(gitHubAuth.getAuthCredential())
+                viewModel.signUpWithProvider(gitHubAuth.getAuthCredential())
             }
         }
     }

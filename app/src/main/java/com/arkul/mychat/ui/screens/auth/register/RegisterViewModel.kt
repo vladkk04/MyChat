@@ -34,30 +34,37 @@ class RegisterViewModel @Inject constructor(
     private val _stateTextLayout = MutableStateFlow(RegisterTextLayoutState())
     val stateTextLayout get() = _stateTextLayout.asStateFlow()
 
+    private fun updateIsLoading(isLoading: Boolean) {
+        _uiState.update {
+            it.copy(
+                isLoading = isLoading
+            )
+        }
+    }
+
+    private fun updateErrorMessage(errorMessage: String?) {
+        _uiState.update {
+            it.copy(
+                errorMessage = errorMessage
+            )
+        }
+    }
+
 
     fun signUpWithEmail() = viewModelScope.launch {
         if (!isValidatedInputs()) return@launch
 
-        _uiState.update {
-            it.copy(
-                isLoading = true
-            )
-        }
+        updateIsLoading(true)
 
-        val result = emailService.createUserWithEmailAndPassword(
+        emailService.createUserWithEmailAndPassword(
             _stateTextLayout.value.email,
             _stateTextLayout.value.password
-        )
-
-        if (result.isSuccess) {
-            navigateToVerifyEmail()
-        }
-
-        _uiState.update {
-            it.copy(
-                isLoading = false,
-                errorMessage = result.errorMessage.takeIf { !result.isSuccess }
-            )
+        ).let { result ->
+            if (result.isSuccess) {
+                navigateToVerifyEmail()
+            }
+            updateIsLoading(false)
+            updateErrorMessage(result.errorMessage.takeIf { !result.isSuccess })
         }
     }
 
@@ -65,16 +72,14 @@ class RegisterViewModel @Inject constructor(
 
     fun signUpWithCredential(credentialResult: AuthCredentialNotProviderResult) {
         signInWithCredential(credentialResult, onFailure = { errorMessage ->
-            _uiState.update {
-                it.copy(
-                    errorMessage = errorMessage
-                )
-            }
+            updateErrorMessage(errorMessage)
         })
     }
 
     fun signUpWithProvider(credentialResult: AuthCredentialProviderResult) {
-        signInWithProvider(authCredential = credentialResult)
+        signInWithProvider(authCredential = credentialResult, onFailure = { errorMessage ->
+            updateErrorMessage(errorMessage)
+        })
     }
 
     fun onEvent(event: AuthInputLayoutEvents) {

@@ -32,45 +32,48 @@ class LoginViewModel @Inject constructor(
     private val _stateTextLayout = MutableStateFlow(LoginTextLayoutState())
     val stateTextLayout get() = _stateTextLayout.asStateFlow()
 
+    private fun updateIsLoading(isLoading: Boolean) {
+        _uiState.update {
+            it.copy(
+                isLoading = isLoading
+            )
+        }
+    }
+
+    private fun updateErrorMessage(errorMessage: String?) {
+        _uiState.update {
+            it.copy(
+                errorMessage = errorMessage
+            )
+        }
+    }
+
     fun signUpWithProvider(credentialResult: AuthCredentialProviderResult) {
         signInWithProvider(authCredential = credentialResult, onFailure = { errorMessage ->
-            _uiState.update {
-                it.copy(
-                    errorMessage = errorMessage
-                )
-            }
+            updateErrorMessage(errorMessage)
         })
     }
 
     fun signUpWithCredential(credentialResult: AuthCredentialNotProviderResult) {
         signInWithCredential(credentialResult, onFailure = { errorMessage ->
-            _uiState.update {
-                it.copy(
-                    errorMessage = errorMessage
-                )
-            }
+            updateErrorMessage(errorMessage)
         })
     }
 
 
     fun signInWithEmail() = viewModelScope.launch {
-        if (isValidatedInputs()) {
-            _uiState.update {
-                it.copy(isLoading = true)
-            }
-            val emailCredential = EmailAuthProvider.getCredential(
-                _stateTextLayout.value.email, _stateTextLayout.value.password
-            )
+        if (!isValidatedInputs()) return@launch
 
-            credentialService.signInWithCredential(emailCredential).let { result ->
-                _uiState.update {
-                    it.copy(
-                        isLoading = false,
-                        errorMessage = result.errorMessage,
-                    )
-                }
-            }
-        }
+        updateIsLoading(true)
+        val emailCredential = EmailAuthProvider.getCredential(
+            _stateTextLayout.value.email, _stateTextLayout.value.password
+        )
+        signInWithCredential(
+            AuthCredentialNotProviderResult(emailCredential),
+            onFailure = { errorMessage ->
+                updateIsLoading(false)
+                updateErrorMessage(errorMessage)
+            })
     }
 
     fun onEvent(event: AuthInputLayoutEvents) {
