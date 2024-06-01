@@ -9,4 +9,5 @@ class BaseFragmentStateAdapter(
 ) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int = listOfFragments.size
     override fun createFragment(position: Int): Fragment = listOfFragments[position]
+
 }

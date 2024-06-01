@@ -1,20 +1,24 @@
-package com.arkul.mychat.ui.screens.register
+package com.arkul.mychat.ui.screens.auth.register
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.arkul.mychat.data.models.AuthInputLayoutEvents
 import com.arkul.mychat.data.models.RegisterTextLayoutState
 import com.arkul.mychat.data.models.RegisterUiState
 import com.arkul.mychat.data.network.firebase.auth.GitHubAuthUiClient
 import com.arkul.mychat.data.network.firebase.auth.GoogleAuthUiClient
 import com.arkul.mychat.databinding.FragmentRegisterBinding
+import com.arkul.mychat.ui.navigation.BaseFragment
+import com.arkul.mychat.utilities.extensions.showToast
+import com.arkul.mychat.utilities.progressBar.showProgressBar
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.textfield.TextInputLayout.END_ICON_NONE
 import com.google.android.material.textfield.TextInputLayout.END_ICON_PASSWORD_TOGGLE
@@ -24,11 +28,11 @@ import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
-class RegisterFragment : Fragment() {
+class RegisterFragment : BaseFragment<RegisterViewModel>() {
     private var _binding : FragmentRegisterBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: RegisterViewModel by viewModels()
+    override val viewModel: RegisterViewModel by viewModels()
 
     private val googleAuth by lazy { GoogleAuthUiClient(requireContext()) }
     private val gitHubAuth by lazy { GitHubAuthUiClient(requireActivity()) }
@@ -42,26 +46,28 @@ class RegisterFragment : Fragment() {
         setupInputTextChangeListeners()
         setupButtonsListeners()
 
-        lifecycleScope.launch {
-            observeUIState()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                observeUIState()
+            }
+            launch {
+                observeUITextLayoutState()
+            }
         }
 
-        lifecycleScope.launch {
-            observeUITextLayoutState()
-        }
 
         return binding.root
     }
 
     private suspend fun observeUITextLayoutState() =
         viewModel.stateTextLayout.collectLatest { updateTextLayoutsUI(it) }
+
     private suspend fun observeUIState() =
         viewModel.uiState.collectLatest { updateUI(it) }
 
     private fun updateUI(state: RegisterUiState) {
-        if (state.errorMessage != null) {
-            Toast.makeText(requireContext(), state.errorMessage, Toast.LENGTH_LONG).show()
-        }
+        showProgressBar(isShowing = state.isLoading)
+        showToast(state.errorMessage)
     }
 
     private fun updateTextLayoutsUI(state: RegisterTextLayoutState) {
@@ -98,7 +104,8 @@ class RegisterFragment : Fragment() {
 
     private fun setupButtonsListeners() {
         binding.buttonRegister.setOnClickListener {
-            viewModel.signUpWithEmail()
+            showToast(viewModel.uiState.value.errorMessage)
+            //viewModel.signUpWithEmail()
         }
         binding.buttonGoogle.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
@@ -107,7 +114,7 @@ class RegisterFragment : Fragment() {
         }
         binding.buttonGithub.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
-                viewModel.signUpWithCredential(gitHubAuth.getAuthCredential())
+                //viewModel.signInWithCredential(gitHubAuth.getAuthCredential())
             }
         }
     }

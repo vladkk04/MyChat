@@ -5,14 +5,15 @@
     <dimen name="viewpager_next_item_visible">5dp</dimen>
     <dimen name="viewpager_current_item_horizontal_margin">10dp</dimen>
 
-    <!--Login Layout -->
-    <dimen name="padding_horizontal_layout_login">15dp</dimen>
-    <dimen name="padding_bottom_layout_login">40dp</dimen>
-
+    <!--Auth Dimens -->
+    <dimen name="margin_top_layout">20dp</dimen>
+    <dimen name="margin_bottom_layout">60dp</dimen>
+    <dimen name="margin_horizontal_layout">20dp</dimen>
 
 
     <dimen name="text_size_register_or_continue">12sp</dimen>
     <dimen name="margin_register_or_continue">10dp</dimen>
+
     <dimen name="tab_corner_radius_first">20dp</dimen>
     <dimen name="tab_corner_radius_last">10dp</dimen>
     <dimen name="tab_corner_radius">5dp</dimen>

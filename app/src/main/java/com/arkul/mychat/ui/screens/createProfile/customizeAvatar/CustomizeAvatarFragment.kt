@@ -1,20 +1,28 @@
 package com.arkul.mychat.ui.screens.createProfile.customizeAvatar
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.arkul.mychat.R
+import com.arkul.mychat.data.models.SelectAvatarModeEvents
 import com.arkul.mychat.databinding.FragmentCustomizeAvatarBinding
 import com.arkul.mychat.ui.adapters.viewPager2.SelectAvatarAdapter
 import com.arkul.mychat.ui.screens.createProfile.SharedProfileViewModel
@@ -27,7 +35,6 @@ import com.arkul.mychat.utilities.permission.AndroidPermissions
 import com.arkul.mychat.utilities.permission.AppPermissionDialogs
 import com.arkul.mychat.utilities.permission.PermissionViewModel
 import com.arkul.mychat.utilities.permission.permissionViewModel
-import com.madrapps.pikolo.HSLColorPicker
 import com.madrapps.pikolo.listeners.SimpleColorSelectionListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -36,19 +43,14 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CustomizeAvatarFragment : Fragment() {
-
-    companion object {
-        const val TOGGLE_MODE_SAVED_STATE = "toggle_mode_saved_state"
-    }
-
     private var _binding: FragmentCustomizeAvatarBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: CustomizeAvatarViewModel by viewModels()
-
-    private val permissionViewModel: PermissionViewModel by permissionViewModel()
+    private val viewModel: CustomizeAvatarViewModel by viewModels(ownerProducer = { requireParentFragment() })
 
     private val sharedViewModel: SharedProfileViewModel by viewModels(ownerProducer = { requireParentFragment() })
+
+    private val permissionViewModel: PermissionViewModel by permissionViewModel()
 
     private val cameraPreview: CameraPreview by lazy { CameraPreview(this) }
 
@@ -57,9 +59,9 @@ class CustomizeAvatarFragment : Fragment() {
     private val singlePhotoPickerLauncher =
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
             uri?.let {
-                sharedViewModel.saveOriginalAvatarGalleryUri(it)
                 imageCropActivity.startCropActivity(uri, "image_gallery") { output ->
-                    sharedViewModel.setCurrentAvatarGalleryBitmap(output)
+                    viewModel.saveOriginalAvatarGalleryUri(it)
+                    viewModel.setCurrentAvatarGalleryBitmap(output)
                 }
             }
         }
@@ -82,25 +84,18 @@ class CustomizeAvatarFragment : Fragment() {
         setupCameraPreviewCallBacks()
 
         binding.imageViewAvatar.setOnClickListener {
-            showEditButtons()
+            shouldShowEditButtons()
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
             launch {
-                observeAvatarGalleryUri().collectLatest {
-                    setAvatarImage(it)
-                }
+                observeAvatarMode()
             }
             launch {
-                observeAvatarCameraUri().collectLatest {
-                    setAvatarImage(it)
-                }
+                observeCurrentAvatarBitmap().collectLatest { setAvatarImage(it) }
             }
             launch {
-                observeBackgroundColor().collectLatest {
-                    sharedViewModel.setBackgroundColor(it)
-                    setBackgroundColorAvatar(it)
-                }
+                observeBackgroundColor().collectLatest { setBackgroundColorAvatar(it) }
             }
             launch {
                 observePermissionDialog().collectLatest {
@@ -124,52 +119,65 @@ class CustomizeAvatarFragment : Fragment() {
         return binding.root
     }
 
-    private fun observeAvatarGalleryUri() = sharedViewModel.currentAvatarGalleryBitmap
-
-    private fun observeAvatarCameraUri() = sharedViewModel.currentAvatarCameraBitmap
+    private fun observeCurrentAvatarBitmap() = viewModel.currentAvatarBitmap
 
     private fun observeBackgroundColor() = viewModel.backgroundColor
 
     private fun observePermissionDialog() = permissionViewModel.dialogQueue
 
+    private suspend fun observeAvatarMode() = viewModel.selectAvatarMode.collectLatest { mode ->
+        hideEditButtons()
+
+        when (mode) {
+            SelectAvatarModeEvents.Camera -> {
+                binding.nestedScrollableHost.visibility = View.INVISIBLE
+                binding.scrollViewBackground.visibility = View.INVISIBLE
+                binding.colorPicker.visibility = View.INVISIBLE
+                binding.imageViewAvatar.visibility = View.VISIBLE
+                binding.layoutCameraButtons.visibility = View.VISIBLE
+            }
+
+            SelectAvatarModeEvents.Default -> {
+                binding.layoutCameraButtons.visibility = View.INVISIBLE
+                binding.imageViewAvatar.visibility = View.INVISIBLE
+                binding.nestedScrollableHost.visibility = View.VISIBLE
+                binding.scrollViewBackground.visibility = View.VISIBLE
+                binding.colorPicker.visibility = View.VISIBLE
+            }
+
+            SelectAvatarModeEvents.Gallery -> {
+                binding.imageViewAvatar.setBackgroundColor(-13025722)
+                binding.imageViewAvatar.visibility = View.VISIBLE
+                binding.layoutCameraButtons.visibility = View.INVISIBLE
+                binding.nestedScrollableHost.visibility = View.INVISIBLE
+                binding.scrollViewBackground.visibility = View.INVISIBLE
+                binding.colorPicker.visibility = View.INVISIBLE
+            }
+
+            null -> {
+                return@collectLatest
+            }
+        }
+    }
+
     private fun setAvatarImage(bitmap: Bitmap?) {
-        binding.imageViewAvatar.setImageBitmap(bitmap)
+        bitmap?.let {
+            binding.imageViewAvatar.setImageBitmap(it)
+        }
     }
 
     private fun setBackgroundColorAvatar(color: Int) =
         binding.cardViewBackgroundAvatar.setCardBackgroundColor(color)
 
-    @SuppressLint("ClickableViewAccessibility")
     private fun setupBackgroundColorPicker() {
-        val hslColorPicker = object : HSLColorPicker(requireContext()) {
-            override fun onTouchEvent(event: MotionEvent): Boolean {
-                when (event.action) {
-                    MotionEvent.ACTION_DOWN -> {
-                        sharedViewModel.changeUserInputEnabledViewPagerState(true)
-                    }
-
-                    MotionEvent.ACTION_MOVE -> {
-                        sharedViewModel.changeUserInputEnabledViewPagerState(false)
-                    }
-
-                    MotionEvent.ACTION_UP -> {
-                        sharedViewModel.changeUserInputEnabledViewPagerState(true)
-                    }
-                }
-                return super.onTouchEvent(event)
-            }
-        }
         binding.colorPicker.setColorSelectionListener(object : SimpleColorSelectionListener() {
             override fun onColorSelected(color: Int) {
                 viewModel.changeBackground(color)
             }
         })
-        binding.colorPicker.setOnTouchListener { v, event ->
-            hslColorPicker.onTouchEvent(event)
-        }
     }
 
-    private fun showEditButtons() {
+    private fun shouldShowEditButtons() {
         if (binding.imageViewAvatar.drawable == null) return
         if (binding.toggleMode.checkedButtonId == -1) return
 
@@ -182,108 +190,86 @@ class CustomizeAvatarFragment : Fragment() {
             AnimationUtils.loadAnimation(requireContext(), androidx.appcompat.R.anim.abc_fade_out)
 
         when (binding.toggleMode.checkedButtonId) {
-            R.id.button_default_mode -> {
-                hideEditButtonsVisibility()
-                return
+            R.id.button_camera_mode -> {
+                if (viewModel.originalAvatarCameraUri.value == null) {
+                    hideEditButtons()
+                    return
+                }
             }
 
             R.id.button_gallery_mode -> {
-                if (sharedViewModel.originalAvatarGalleryUri.value == null) {
-                    hideEditButtonsVisibility()
+                if (viewModel.originalAvatarGalleryUri.value == null) {
+                    hideEditButtons()
                     return
                 }
             }
 
-            R.id.button_camera_mode -> {
-                if (sharedViewModel.originalAvatarCameraUri.value == null) {
-                    hideEditButtonsVisibility()
-                    return
-                }
+            R.id.button_default_mode -> {
+                hideEditButtons()
+                return
             }
         }
 
-
         when {
             isLayoutVisible -> {
-                hideEditButtonsVisibility()
+                hideEditButtons()
                 binding.buttonChangeImageAvatar.startAnimation(animationFadeOut)
                 binding.buttonTransformImageAvatar.startAnimation(animationFadeOut)
             }
 
             else -> {
-                showEditButtonsVisibility()
+                showEditButtons()
                 binding.buttonChangeImageAvatar.startAnimation(animationFadeIn)
                 binding.buttonTransformImageAvatar.startAnimation(animationFadeIn)
             }
         }
     }
 
-    private fun showEditButtonsVisibility() {
+    private fun showEditButtons() {
         binding.buttonChangeImageAvatar.visibility = View.VISIBLE
         binding.buttonTransformImageAvatar.visibility = View.VISIBLE
     }
 
-    private fun hideEditButtonsVisibility() {
+    private fun hideEditButtons() {
         binding.buttonChangeImageAvatar.visibility = View.INVISIBLE
         binding.buttonTransformImageAvatar.visibility = View.INVISIBLE
     }
 
     private fun setupButtonsToggleModeListener() {
-        //binding.toggleMode.clearChecked()
-
         binding.toggleMode.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (!isChecked) return@addOnButtonCheckedListener
 
-            hideEditButtonsVisibility()
-            binding.imageViewAvatar.setImageDrawable(null)
-
             when (checkedId) {
                 R.id.button_camera_mode -> {
-                    binding.imageViewAvatar.visibility = View.VISIBLE
-                    binding.layoutCameraButtons.visibility = View.VISIBLE
-                    binding.nestedScrollableHost.visibility = View.INVISIBLE
-                    binding.scrollViewBackground.visibility = View.INVISIBLE
-                    binding.colorPicker.visibility = View.INVISIBLE
-
                     permissionViewModel.launchSinglePermission(AndroidPermissions.CAMERA)
 
-                    if (sharedViewModel.originalAvatarCameraUri.value == null) {
+                    if (viewModel.originalAvatarCameraUri.value == null) {
                         launchCameraPreview()
                     } else {
-                        binding.layoutCameraButtons.visibility = View.INVISIBLE
-                        setAvatarImage(sharedViewModel.currentAvatarCameraBitmap.value)
+                        setAvatarImage(viewModel.currentAvatarCameraBitmap.value)
                     }
+
+                    viewModel.selectAvatarMode(SelectAvatarModeEvents.Camera)
                 }
 
                 R.id.button_gallery_mode -> {
-
-                    binding.imageViewAvatar.visibility = View.VISIBLE
-                    binding.layoutCameraButtons.visibility = View.INVISIBLE
-                    binding.nestedScrollableHost.visibility = View.INVISIBLE
-                    binding.scrollViewBackground.visibility = View.INVISIBLE
-                    binding.colorPicker.visibility = View.INVISIBLE
-
                     closeCameraPreview()
+                    viewModel.selectAvatarMode(SelectAvatarModeEvents.Gallery)
 
-                    if (sharedViewModel.originalAvatarGalleryUri.value == null) {
+                    if (viewModel.originalAvatarGalleryUri.value == null) {
                         singlePhotoPickerLauncher.launch(
                             PickVisualMediaRequest(
                                 ActivityResultContracts.PickVisualMedia.ImageOnly
                             )
                         )
                     } else {
-                        setAvatarImage(sharedViewModel.currentAvatarGalleryBitmap.value)
+                        setAvatarImage(viewModel.currentAvatarGalleryBitmap.value)
                     }
                 }
 
                 R.id.button_default_mode -> {
-                    binding.layoutCameraButtons.visibility = View.INVISIBLE
-                    binding.imageViewAvatar.visibility = View.INVISIBLE
-                    binding.nestedScrollableHost.visibility = View.VISIBLE
-                    binding.scrollViewBackground.visibility = View.VISIBLE
-                    binding.colorPicker.visibility = View.VISIBLE
-
                     closeCameraPreview()
+                    viewModel.selectAvatarMode(SelectAvatarModeEvents.Default)
                 }
             }
         }
@@ -292,16 +278,16 @@ class CustomizeAvatarFragment : Fragment() {
     private fun setupCameraPreviewCallBacks() {
         cameraPreview.addOnFlipCameraCallback(binding.buttonCameraSwitch)
         cameraPreview.addOnTakePictureCallback(binding.buttonTakePhoto) { output ->
-            sharedViewModel.saveOriginalAvatarCameraUri(output)
+            viewModel.saveOriginalAvatarCameraUri(output)
             imageCropActivity.startCropActivity(output, "image_camera") { cropOutput ->
-                sharedViewModel.setCurrentAvatarCameraBitmap(cropOutput)
+                viewModel.setCurrentAvatarCameraBitmap(cropOutput)
                 closeCameraPreview()
             }
         }
     }
 
     private fun launchCameraPreview() {
-        hideEditButtonsVisibility()
+        hideEditButtons()
         cameraPreview.launchCameraPreview(binding.cameraPreviewView.surfaceProvider)
         binding.cameraPreviewView.visibility = View.VISIBLE
     }
@@ -316,6 +302,7 @@ class CustomizeAvatarFragment : Fragment() {
         binding.buttonChangeImageAvatar.setOnClickListener {
             when (binding.toggleMode.checkedButtonId) {
                 R.id.button_camera_mode -> {
+                    binding.imageViewAvatar.visibility = View.INVISIBLE
                     binding.layoutCameraButtons.visibility = View.VISIBLE
                     launchCameraPreview()
                 }
@@ -332,17 +319,17 @@ class CustomizeAvatarFragment : Fragment() {
         binding.buttonTransformImageAvatar.setOnClickListener {
             when (binding.toggleMode.checkedButtonId) {
                 R.id.button_camera_mode -> {
-                    sharedViewModel.originalAvatarCameraUri.value?.let { input ->
+                    viewModel.originalAvatarCameraUri.value?.let { input ->
                         imageCropActivity.startCropActivity(input, "image_camera") { output ->
-                            sharedViewModel.setCurrentAvatarCameraBitmap(output)
+                            viewModel.setCurrentAvatarCameraBitmap(output)
                         }
                     }
                 }
 
                 R.id.button_gallery_mode -> {
-                    sharedViewModel.originalAvatarGalleryUri.value?.let { input ->
+                    viewModel.originalAvatarGalleryUri.value?.let { input ->
                         imageCropActivity.startCropActivity(input, "image_gallery") { output ->
-                            sharedViewModel.setCurrentAvatarGalleryBitmap(output)
+                            viewModel.setCurrentAvatarGalleryBitmap(output)
                         }
                     }
                 }
@@ -375,10 +362,29 @@ class CustomizeAvatarFragment : Fragment() {
         with(binding.viewPager) {
             adapter = SelectAvatarAdapter(listOfDefaultAvatars)
             getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    listOfDefaultAvatars.getDrawable(position)
+                        ?.let { viewModel.setCurrentAvatarDefaultDrawable(it) }
+                }
+            })
             offscreenPageLimit = 3
             clipChildren = false
             clipToPadding = false
         }
+    }
+
+    private fun hideKeyboard() {
+        val imm =
+            requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(binding.viewPager.windowToken, 0)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        sharedViewModel.setValidator { binding.toggleMode.checkedButtonId == R.id.button_default_mode || binding.imageViewAvatar.drawable != null }
+        hideKeyboard()
     }
 
     override fun onDestroy() {

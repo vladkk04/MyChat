@@ -1,14 +1,12 @@
 package com.arkul.mychat.data.network.firebase.repositories
 
 import com.arkul.mychat.data.models.AuthEmailResult
-import com.arkul.mychat.data.models.auth.AuthCredentialResult
-import com.arkul.mychat.data.models.auth.UserData
 import com.arkul.mychat.data.network.firebase.services.AccountService
 import com.arkul.mychat.data.network.firebase.services.EmailService
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
-class EmailRepository @Inject constructor(): AccountService(), EmailService {
+class EmailRepository @Inject constructor() : AccountService(), EmailService {
     override val accountService: AccountService
         get() = this
 
@@ -16,13 +14,12 @@ class EmailRepository @Inject constructor(): AccountService(), EmailService {
         email: String, password: String
     ): AuthEmailResult {
         return try {
-            val user =
-                firebaseAuth.createUserWithEmailAndPassword(email, password).await().user?.let {
-                    UserData(
-                        it.uid, it.displayName, it.phoneNumber
-                    )
-                }
-            AuthEmailResult(isSuccess = true)
+            firebaseAuth.createUserWithEmailAndPassword(email, password).await().let {
+                AuthEmailResult(
+                    isSuccess = true,
+                    isVerifyEmail = it.user?.isEmailVerified
+                )
+            }
         } catch (e: Exception) {
             AuthEmailResult(errorMessage = e.message)
         }

@@ -1,115 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fillViewport="true"
+    android:scrollbars="none"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="@dimen/padding_horizontal_layout_login"
-    tools:context=".ui.screens.login.LoginFragment">
+    tools:context=".ui.screens.auth.login.LoginFragment">
 
-    <LinearLayout
-        android:id="@+id/inputs_layout"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical"
-        android:paddingBottom="10dp"
-        android:gravity="center">
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/DefaultCustomTextInputLayout"
-            android:id="@+id/input_layout_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_between_input_layouts"
-            app:endIconMode="clear_text"
-            app:errorEnabled="true"
-            app:startIconDrawable="@drawable/ic_email">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/input_text_email"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:autofillHints="emailAddress"
-                android:hint="@string/hint_email"
-                android:inputType="textEmailAddress"
-                tools:text="vladuslaw512@gmail.com"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/DefaultCustomTextInputLayout"
-            android:id="@+id/input_layout_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:errorEnabled="true"
-            app:startIconDrawable="@drawable/ic_lock">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/input_text_password"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="@string/hint_password"
-                android:inputType="textPassword" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_login"
-            android:layout_width="175dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:fontFamily="@font/hind_siliguri"
-            android:text="@string/login_text"
-            app:cornerRadius="15dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textSize="@dimen/text_size_register_or_continue"
-            android:text="@string/or_register_form_text"
-            android:layout_marginTop="@dimen/margin_register_or_continue"
-            android:layout_marginBottom="@dimen/margin_register_or_continue" />
+        android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/layout_login"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="@dimen/margin_horizontal_layout"
+            android:layout_marginBottom="20dp">
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/button_google"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_email"
+                style="@style/DefaultCustomTextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:startIconDrawable="@drawable/ic_email">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_text_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="emailAddress"
+                    android:hint="@string/hint_email"
+                    android:inputType="textEmailAddress"
+                    tools:text="vladuslaw512@gmail.com" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_password"
+                style="@style/DefaultCustomTextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                app:errorEnabled="true"
+                app:startIconDrawable="@drawable/ic_lock">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_text_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_password"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_login"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/hind_siliguri"
+                android:text="@string/login_text"
+                app:cornerRadius="15dp" />
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/description_google_auth"
-                app:maxImageSize="20dp"
-                app:srcCompat="@drawable/ic_google"
-                app:tint="@null"
-                style="?attr/floatingActionButtonSmallPrimaryStyle"/>
+                android:layout_marginTop="@dimen/margin_register_or_continue"
+                android:layout_marginBottom="@dimen/margin_register_or_continue"
+                android:text="@string/or_register_form_text"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_size_register_or_continue" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/button_github"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/description_github_auth"
-                app:maxImageSize="24dp"
-                app:srcCompat="@drawable/ic_github"
-                app:tint="@null"
-                style="?attr/floatingActionButtonSmallPrimaryStyle"/>
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/button_google"
+                    style="?attr/floatingActionButtonSmallPrimaryStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/description_google_auth"
+                    app:maxImageSize="20dp"
+                    app:srcCompat="@drawable/ic_google"
+                    app:tint="@null" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    style="?attr/floatingActionButtonSmallPrimaryStyle"
+                    android:id="@+id/button_github"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/description_github_auth"
+                    app:maxImageSize="24dp"
+                    app:srcCompat="@drawable/ic_github"
+                    app:tint="@null" />
+            </LinearLayout>
+
         </LinearLayout>
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/text_forget_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_login"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="40dp"
+            android:gravity="bottom|center"
+            android:text="@string/forget_password"
+            android:textColor="#B1AEAE"
+            android:textSize="@dimen/text_size_forget_password" />
 
-    <TextView
-        android:id="@+id/text_forget_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp"
-        android:text="@string/forget_password"
-        android:textColor="#B1AEAE"
-        android:textSize="@dimen/text_size_forget_password" />
+    </RelativeLayout>
 
-</RelativeLayout>
+</ScrollView>

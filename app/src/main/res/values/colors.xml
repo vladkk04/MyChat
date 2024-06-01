@@ -18,8 +18,8 @@
     <color name="toolbar_background_night">#4B4B4B</color>
     <color name="background_night">#222831</color>
 
-    <color name="non_clickable_color_night">#344A4B4B</color>
-    <color name="non_clickable_color_text_night">#CDD1D1D1</color>
+    <color name="non_clickable_color_night">#36383B</color>
+    <color name="non_clickable_color_text_night">#646464</color>
 
     <color name="color_primary_night">#393E46</color>
     <color name="color_primary_container_night">@color/color_on_surface_variant_night</color>

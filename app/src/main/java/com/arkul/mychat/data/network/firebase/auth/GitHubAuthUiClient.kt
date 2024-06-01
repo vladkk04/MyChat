@@ -1,10 +1,8 @@
 package com.arkul.mychat.data.network.firebase.auth
 
 import android.app.Activity
-import android.util.Log
-import com.arkul.mychat.data.models.auth.CredentialResult
-import com.google.firebase.auth.GithubAuthCredential
-import com.google.firebase.auth.GithubAuthProvider
+import com.arkul.mychat.data.models.auth.AuthCredentialProviderResult
+import com.arkul.mychat.data.models.auth.UserData
 import com.google.firebase.auth.OAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -17,18 +15,23 @@ class GitHubAuthUiClient(
     private val providerOAuthProviderGitHub
         get() = OAuthProvider.newBuilder("github.com").build()
 
-    suspend fun getAuthCredential(): CredentialResult {
+    suspend fun getAuthCredential(): AuthCredentialProviderResult {
         return try {
-            val authResult = Firebase.auth.startActivityForSignInWithProvider(
+            val result = Firebase.auth.startActivityForSignInWithProvider(
                 activity,
                 this.providerOAuthProviderGitHub
             ).await()
 
-            CredentialResult(credential = authResult.credential)
-        } catch (e: Exception) {
-            CredentialResult(
-                errorMessage = e.message
+            AuthCredentialProviderResult(
+                UserData(
+                    result.additionalUserInfo?.username,
+                    result.user?.displayName,
+                    result.additionalUserInfo?.isNewUser
+                )
             )
+
+        } catch (e: Exception) {
+            AuthCredentialProviderResult(errorMessage = e.message)
         }
     }
 }

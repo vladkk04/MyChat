@@ -1,6 +1,6 @@
 package com.arkul.mychat.data.models
 
 data class WaitingVerifyUiState(
-    val isResendConfirmation: Boolean = true,
+    val shouldResendConfirmation: Boolean = false,
     val errorMessage: String? = null
 )

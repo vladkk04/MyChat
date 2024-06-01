@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class WaitingVerifyViewModel @Inject constructor(): BaseViewModel() {
+class WaitingVerifyViewModel @Inject constructor() : BaseViewModel() {
     private val _uiState = MutableStateFlow(WaitingVerifyUiState())
     val uiState get() = _uiState.asStateFlow()
 
@@ -21,24 +21,25 @@ class WaitingVerifyViewModel @Inject constructor(): BaseViewModel() {
     }
 
     private fun startUpdateEmailVerify() = viewModelScope.launch(Dispatchers.Default) {
-       /* while (!Firebase.auth.currentUser?.isEmailVerified!!) {
-            Log.d("d", "hello")
-            Firebase.auth.currentUser!!.reload().addOnFailureListener { e ->
-                _uiState.update {
-                    it.copy(
-                        errorMessage = e.message
-                    )
-                }
-            }
-            delay(3000)
-        }
-        this.cancel()*/
+        /* while (!Firebase.auth.currentUser?.isEmailVerified!!) {
+             Log.d("d", "hello")
+             Firebase.auth.currentUser!!.reload().addOnFailureListener { e ->
+                 _uiState.update {
+                     it.copy(
+                         errorMessage = e.message
+                     )
+                 }
+             }
+             delay(3000)
+         }
+         this.cancel()*/
     }
 
-    fun setResendConfirmation(value: Boolean) {
+    fun shouldResendConfirmation(value: Boolean = false) {
+        if(!uiState.value.shouldResendConfirmation) return
         _uiState.update {
             it.copy(
-                isResendConfirmation = value
+                shouldResendConfirmation = value
             )
         }
     }

@@ -1,113 +1,62 @@
 package com.arkul.mychat.ui.screens.createProfile
 
 import android.graphics.Bitmap
-import android.icu.text.SimpleDateFormat
+import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.arkul.mychat.data.models.ViewPagerNavigationEvent
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.merge
+import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
 class SharedProfileViewModel : ViewModel() {
 
-    private val _isUserInputEnabledViewPager = MutableStateFlow(true)
-    val isUserInputEnabledViewPager get() = _isUserInputEnabledViewPager.asStateFlow()
+    private var isResumedFragment = false
 
-    private val _originalAvatarGalleryUri = MutableStateFlow<Uri?>(null)
-    val originalAvatarGalleryUri get() = _originalAvatarGalleryUri.asStateFlow()
+    private var isValidation: (() -> Boolean)? = null
 
-    private val _originalAvatarCameraUri = MutableStateFlow<Uri?>(null)
-    val originalAvatarCameraUri get() = _originalAvatarCameraUri.asStateFlow()
+    private val _viewPagerNavigationEvent = MutableSharedFlow<ViewPagerNavigationEvent>()
 
-    private val _currentAvatarCameraBitmap = MutableStateFlow<Bitmap?>(null)
-    val currentAvatarCameraBitmap get() = _currentAvatarCameraBitmap.asStateFlow()
+    private val _args = MutableStateFlow<CreateProfileFragmentArgs?>(null)
+    val args = _args.asStateFlow()
+    fun setValidator(block: (() -> Boolean)? = null) {
+        isResumedFragment = true
+        isValidation = block
+    }
 
-    private val _currentAvatarGalleryBitmap = MutableStateFlow<Bitmap?>(null)
-    val currentAvatarGalleryBitmap get() = _currentAvatarGalleryBitmap.asStateFlow()
+    fun setArguments(args: CreateProfileFragmentArgs) {
+        _args.value = args
+    }
 
-    val currentAvatarUri = merge(_currentAvatarCameraBitmap, _currentAvatarGalleryBitmap)
+    val viewPagerNavigationEvent
+        get() = _viewPagerNavigationEvent.shareIn(viewModelScope, SharingStarted.WhileSubscribed())
 
-    private val _backgroundColor = MutableStateFlow(0)
-    val backgroundColor get() = _backgroundColor.asStateFlow()
-
-    private val _firstName = MutableStateFlow("")
-    private val _lastName = MutableStateFlow("")
-
-    val fullName =
-        combine(_firstName.asStateFlow(), _lastName.asStateFlow()) { firstName, lastname ->
-            "$firstName $lastname"
+    fun onNavigatePage(
+        event: ViewPagerNavigationEvent,
+    ) = viewModelScope.launch {
+        when (event) {
+            ViewPagerNavigationEvent.OnBackPage -> _viewPagerNavigationEvent.emit(event)
+            ViewPagerNavigationEvent.OnNextPage -> {
+                if (isResumedFragment) {
+                    isValidation?.invoke()?.let {
+                        if (it) {
+                            isResumedFragment = false
+                            _viewPagerNavigationEvent.emit(event)
+                        }
+                    }
+                }
+            }
         }
-
-    private val _userName = MutableStateFlow("")
-    val userName get() = _userName.asStateFlow()
-
-    private val _birthdayFormatted = MutableStateFlow("")
-    val birthdayFormatted get() = _birthdayFormatted.asStateFlow()
-
-    private val _aboutMe = MutableStateFlow("")
-    val aboutMe get() = _aboutMe.asStateFlow()
-
-    fun setBackgroundColor(value: Int) {
-        _backgroundColor.update { value }
-    }
-
-    fun setFirstName(value: String) {
-        _firstName.update { value.trim() }
-    }
-
-    fun setLastName(value: String) {
-        _lastName.update { value.trim() }
-    }
-
-    fun setUserName(value: String) {
-        _userName.update { value.trim() }
-    }
-
-    fun setAboutMe(value: String) {
-        _aboutMe.update { value.trim() }
-    }
-
-    fun changeUserInputEnabledViewPagerState(value: Boolean) {
-        _isUserInputEnabledViewPager.update { value }
-    }
-
-    fun saveOriginalAvatarGalleryUri(
-        value: Uri?,
-    ) {
-        _originalAvatarGalleryUri.update { value }
-    }
-
-    fun saveOriginalAvatarCameraUri(
-        value: Uri?,
-    ) {
-        _originalAvatarCameraUri.update { value }
-    }
-
-    fun setCurrentAvatarGalleryBitmap(
-        value: Bitmap?,
-    ) {
-        _currentAvatarGalleryBitmap.update { value }
-    }
-
-    fun setCurrentAvatarCameraBitmap(
-        value: Bitmap?,
-    ) {
-        _currentAvatarCameraBitmap.update { value }
-    }
-
-    fun setBirthday(
-        value: Long,
-        pattern: String,
-        locale: Locale = Locale.getDefault()
-    ) {
-        val formatter = SimpleDateFormat(pattern, locale)
-        val newDate = Date(value)
-        val formattedDate = formatter.format(newDate)
-
-        _birthdayFormatted.value = formattedDate
     }
 }

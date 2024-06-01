@@ -33,6 +33,7 @@
             style="@style/CustomRadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:clickable="false"
             android:scaleX="0.7"
             android:scaleY="0.7" />
 
@@ -40,6 +41,7 @@
             style="@style/CustomRadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:clickable="false"
             android:scaleX="0.7"
             android:scaleY="0.7" />
 
@@ -47,6 +49,7 @@
             style="@style/CustomRadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:clickable="false"
             android:scaleX="0.7"
             android:scaleY="0.7" />
     </RadioGroup>

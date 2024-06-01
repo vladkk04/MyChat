@@ -49,5 +49,6 @@
     <string name="customize_avatar_text">CUSTOMIZE YOUR AVATAR</string>
     <string name="customize_wallpaper_text">YOUR PROFILE WILL LOOKS LIKE</string>
     <string name="fill_your_profile_text">FILL YOUR PROFILE</string>
+    <string name="ok">OK</string>
 
 </resources>

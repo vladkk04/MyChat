@@ -1,4 +1,4 @@
-package com.arkul.mychat.utilities
+package com.arkul.mychat.utilities.extensions
 
 import android.content.Context
 import android.content.res.Resources

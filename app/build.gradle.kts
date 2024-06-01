@@ -6,6 +6,7 @@ plugins {
     alias(pluginLibs.plugins.google.services)
     alias(pluginLibs.plugins.google.ksp)
     alias(pluginLibs.plugins.dagger.hilt)
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 val properties = Properties()

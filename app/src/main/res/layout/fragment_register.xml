@@ -1,108 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fillViewport="true"
+    android:scrollbars="none"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:paddingHorizontal="@dimen/padding_horizontal_layout_login"
-    tools:context=".ui.screens.register.RegisterFragment">
-
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/DefaultCustomTextInputLayout"
-        android:id="@+id/input_layout_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_between_input_layouts"
-        app:endIconMode="clear_text"
-        app:startIconDrawable="@drawable/ic_email">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/input_text_email"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/hint_email"
-            android:inputType="textEmailAddress"
-            tools:text="vladuslaw512@gmail.com"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/DefaultCustomTextInputLayout"
-        android:id="@+id/input_layout_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_between_input_layouts"
-        app:startIconDrawable="@drawable/ic_lock">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/input_text_password"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/hint_password"
-            android:inputType="textPassword" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/DefaultCustomTextInputLayout"
-        android:id="@+id/input_layout_password_retype"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_between_input_layouts"
-        app:startIconDrawable="@drawable/ic_refresh">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/input_text_retype_password"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/hint_retype_password"
-            android:inputType="textPassword"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_register"
-        android:layout_width="175dp"
-        android:layout_height="50dp"
-        android:fontFamily="@font/hind_siliguri"
-        android:text="@string/create_account_text"
-        app:cornerRadius="15dp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="@dimen/text_size_register_or_continue"
-        android:text="@string/or_register_form_text"
-        android:layout_marginTop="@dimen/margin_register_or_continue"
-        android:layout_marginBottom="@dimen/margin_register_or_continue" />
+    tools:context=".ui.screens.auth.register.RegisterFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="@dimen/margin_horizontal_layout"
+        android:layout_marginTop="@dimen/margin_top_layout">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/button_google"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/description_google_auth"
-            app:srcCompat="@drawable/ic_google"
-            app:tint="@null"
-            app:maxImageSize="20dp"
-            style="?attr/floatingActionButtonSmallPrimaryStyle"/>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/DefaultCustomTextInputLayout"
+            android:id="@+id/input_layout_email"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/ic_email">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/button_github"
-            android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_text_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_email"
+                android:inputType="textEmailAddress"
+                tools:text="vladuslaw512@gmail.com" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/DefaultCustomTextInputLayout"
+            android:id="@+id/input_layout_password"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            app:startIconDrawable="@drawable/ic_lock">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_text_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_password"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/DefaultCustomTextInputLayout"
+            android:id="@+id/input_layout_password_retype"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_marginBottom="@dimen/margin_between_input_layouts"
+            app:startIconDrawable="@drawable/ic_refresh">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_text_retype_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_retype_password"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_register"
+            android:layout_width="175dp"
+            android:layout_height="50dp"
+            android:fontFamily="@font/hind_siliguri"
+            android:text="@string/create_account_text"
+            app:cornerRadius="15dp" />
+
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/description_github_auth"
-            app:srcCompat="@drawable/ic_github"
-            app:tint="@null"
-            app:maxImageSize="24dp"
-            style="?attr/floatingActionButtonSmallPrimaryStyle"/>
+            android:layout_marginTop="@dimen/margin_register_or_continue"
+            android:layout_marginBottom="@dimen/margin_register_or_continue"
+            android:text="@string/or_register_form_text"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_size_register_or_continue" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/button_google"
+                style="?attr/floatingActionButtonSmallPrimaryStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/description_google_auth"
+                app:maxImageSize="20dp"
+                app:srcCompat="@drawable/ic_google"
+                app:tint="@null" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/button_github"
+                style="?attr/floatingActionButtonSmallPrimaryStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/description_github_auth"
+                app:maxImageSize="24dp"
+                app:srcCompat="@drawable/ic_github"
+                app:tint="@null" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

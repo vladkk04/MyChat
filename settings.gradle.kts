@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.internal.sharedruntime.support.classFilePathCandidatesFor
+
 pluginManagement {
     repositories {
         google()
@@ -15,7 +17,7 @@ dependencyResolutionManagement {
 
     versionCatalogs {
         create("pluginLibs") {
-            val androidGradlePluginVersion = "8.1.1"
+            val androidGradlePluginVersion = "8.2.2"
             val androidKotlinPluginVersion = "1.9.22"
             val googleKspPluginVersion = "1.9.22-1.0.17"
             val googleServiceVersion = "4.4.1"
@@ -24,16 +26,22 @@ dependencyResolutionManagement {
             plugin("android-application", "com.android.application").version(androidGradlePluginVersion)
             plugin("android-kotlin", "org.jetbrains.kotlin.android").version(androidKotlinPluginVersion)
             plugin("google-services", "com.google.gms.google-services").version(googleServiceVersion)
-
             plugin("dagger-hilt", "com.google.dagger.hilt.android").version(daggerHiltVersion)
-            
             plugin("google-ksp", "com.google.devtools.ksp").version(googleKspPluginVersion)
         }
+
+        create("classPathsLibs") {
+            val navigationVersion = "2.7.7"
+            val googleServicesVersion = "4.4.1"
+            library("google.gms", "com.google.gms", "google-services").version(googleServicesVersion)
+            library("androidx-navigation", "androidx.navigation", "navigation-safe-args-gradle-plugin").version(navigationVersion)
+        }
+
 
         create("libs") {
             val androidxCoreVersion = "1.12.0"
             val androidxAppcompatVersion = "1.6.1"
-            val googleAndroidMaterialVersion = "1.12.0-rc01"
+            val googleAndroidMaterialVersion = "1.10.0"
             val androidxConstraintlayoutVersion = "2.1.4"
             val fragmentKtxVersion = "1.6.2"
             val activityKtxVersion = "1.8.2"

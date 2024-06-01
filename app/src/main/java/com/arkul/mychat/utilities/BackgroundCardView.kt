@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
+import com.arkul.mychat.utilities.extensions.toDp
 import com.google.android.material.card.MaterialCardView
 
 class BackgroundCardView(val context: Context) {

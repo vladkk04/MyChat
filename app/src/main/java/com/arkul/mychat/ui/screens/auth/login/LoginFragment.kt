@@ -1,29 +1,30 @@
-package com.arkul.mychat.ui.screens.login
+package com.arkul.mychat.ui.screens.auth.login
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
-import com.arkul.mychat.R
 import com.arkul.mychat.data.models.AuthInputLayoutEvents
 import com.arkul.mychat.data.models.LoginTextLayoutState
 import com.arkul.mychat.data.models.LoginUiState
+
 import com.arkul.mychat.data.network.firebase.auth.GitHubAuthUiClient
 import com.arkul.mychat.data.network.firebase.auth.GoogleAuthUiClient
 import com.arkul.mychat.databinding.FragmentLoginBinding
+import com.arkul.mychat.ui.navigation.BaseFragment
+import com.arkul.mychat.utilities.extensions.showToast
+import com.arkul.mychat.utilities.progressBar.showProgressBar
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+
 @AndroidEntryPoint
-class LoginFragment : Fragment() {
+class LoginFragment : BaseFragment<LoginViewModel>() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
@@ -31,7 +32,7 @@ class LoginFragment : Fragment() {
     private val googleAuth by lazy { GoogleAuthUiClient(requireContext()) }
     private val gitHubAuth by lazy { GitHubAuthUiClient(requireActivity()) }
 
-    private val viewModel: LoginViewModel by viewModels()
+    override val viewModel: LoginViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,16 +43,15 @@ class LoginFragment : Fragment() {
         setupButtonsListeners()
         setupInputTextChangeListeners()
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             observeUITextLayoutState()
         }
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             observeUIState()
         }
 
         binding.textForgetPassword.setOnClickListener {
-            viewModel.onForgetPassword()
-            findNavController().navigate(R.id.action_initialFragment_to_forgetPasswordFragment2)
+            viewModel.navigateToForgetPassword()
         }
 
         return binding.root
@@ -64,9 +64,8 @@ class LoginFragment : Fragment() {
         viewModel.uiState.collectLatest { updateUI(it) }
 
     private fun updateUI(state: LoginUiState) {
-        if (state.errorMessage != null) {
-            Toast.makeText(requireContext(), state.errorMessage, Toast.LENGTH_LONG).show()
-        }
+        showProgressBar(isShowing = state.isLoading)
+        showToast(state.errorMessage)
     }
 
     private fun updateTextLayoutsUI(state: LoginTextLayoutState) {
@@ -89,14 +88,12 @@ class LoginFragment : Fragment() {
     private fun setupButtonsListeners() {
         binding.buttonGoogle.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
-                val credentialResult = googleAuth.getAuthCredential()
-                viewModel.signInWithCredential(credentialResult)
+                viewModel.signUpWithCredential(googleAuth.getAuthCredential())
             }
         }
         binding.buttonGithub.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
-                val credentialResult = gitHubAuth.getAuthCredential()
-                viewModel.signInWithCredential(credentialResult)
+                viewModel.signUpWithProvider(gitHubAuth.getAuthCredential())
             }
         }
         binding.buttonLogin.setOnClickListener {

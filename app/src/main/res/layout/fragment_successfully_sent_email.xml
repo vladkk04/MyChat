@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:viewBindingIgnore="true"
-    android:paddingHorizontal="@dimen/padding_horizontal_layout_login"
     tools:context=".ui.screens.sentEmail.SuccessfullySentEmailFragment">
 
     <TextView
@@ -13,13 +12,15 @@
         android:gravity="center"
         android:layout_gravity="center"
         android:textSize="20sp"
+        android:layout_marginBottom="50dp"
         android:text="@string/successfully_sent_reset_password_text" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/sent_email_button_ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
-        android:text="ok"
+        android:text="@string/ok"
         android:layout_marginBottom="40dp"/>
 
 </FrameLayout>

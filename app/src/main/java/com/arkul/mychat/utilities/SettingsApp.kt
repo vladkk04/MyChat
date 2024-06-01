@@ -10,3 +10,4 @@ fun Fragment.openAppSettings() {
         Uri.fromParts("package", requireActivity().packageName, null)
     ).also { startActivity(it) }
 }
+
