@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">MyChat</string>
 
+    <!-- Alert Dialog Describe at Login and Register  -->
+    <string name="title_alert_dialog_auth">Cancel create account</string>
+    <string name="message_alert_dialog_auth">Are you sure you want to cancel creating your account?</string>
+    ">
+    <string name="positive_alert_dialog_auth">Yes</string>
+    <string name="negative_alert_dialog_auth">No</string>
+
     <!-- Hints Login and Register Input Fields -->
     <string name="hint_register">Register</string>
     <string name="hint_login">Login</string>
@@ -33,7 +40,6 @@
     <string name="default_avatar_text">Default</string>
 
 
-
     <string name="resend_confirmation_text">Resend confirmation email</string>
     <string name="resend_confirmation_text_with_timer">Resend confirmation email: %1$d</string>
 
@@ -50,5 +56,7 @@
     <string name="customize_wallpaper_text">YOUR PROFILE WILL LOOKS LIKE</string>
     <string name="fill_your_profile_text">FILL YOUR PROFILE</string>
     <string name="ok">OK</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

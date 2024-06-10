@@ -1,12 +1,15 @@
 package com.arkul.mychat.ui.screens.auth.login
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.arkul.mychat.data.models.AuthInputLayoutEvents
 import com.arkul.mychat.data.models.LoginTextLayoutState
 import com.arkul.mychat.data.models.LoginUiState
@@ -16,6 +19,7 @@ import com.arkul.mychat.data.network.firebase.auth.GoogleAuthUiClient
 import com.arkul.mychat.databinding.FragmentLoginBinding
 import com.arkul.mychat.ui.navigation.BaseFragment
 import com.arkul.mychat.utilities.extensions.showToast
+import com.arkul.mychat.utilities.keyboard.hideKeyboardFrom
 import com.arkul.mychat.utilities.progressBar.showProgressBar
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,7 +51,9 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
             observeUITextLayoutState()
         }
         viewLifecycleOwner.lifecycleScope.launch {
-            observeUIState()
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                observeUIState()
+            }
         }
 
         binding.textForgetPassword.setOnClickListener {
@@ -97,7 +103,9 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
             }
         }
         binding.buttonLogin.setOnClickListener {
+            if(viewModel.uiState.value.isLoading) return@setOnClickListener
             viewModel.signInWithEmail()
+            hideKeyboardFrom(binding.inputTextPassword.rootView)
         }
     }
 

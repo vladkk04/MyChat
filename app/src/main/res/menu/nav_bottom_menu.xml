@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/chatsFragment"
+        android:icon="@drawable/ic_chat"
+        android:enabled="true"
+        android:title="Chats" />
+
+    <item
+        android:id="@+id/suggestionsFragment"
+        android:icon="@drawable/ic_awesome"
+        android:enabled="true"
+        android:title="Suggestion" />
+
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/ic_identity"
+        android:enabled="true"
+        android:title="Profile" />
+</menu>

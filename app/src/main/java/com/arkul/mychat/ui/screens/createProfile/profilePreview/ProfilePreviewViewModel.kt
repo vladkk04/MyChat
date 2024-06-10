@@ -22,6 +22,10 @@ class ProfilePreviewViewModel: ViewModel() {
     private val _croppedWallpaperBitmap = MutableStateFlow<Bitmap?>(null)
     val croppedWallpaperBitmap = _croppedWallpaperBitmap.asStateFlow()
 
+    fun createProfile() {
+
+    }
+
     fun setCroppedWallpaperBitmap(bitmap: Bitmap?) {
         _croppedWallpaperBitmap.value = bitmap
     }

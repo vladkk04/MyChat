@@ -23,6 +23,7 @@ class EmailRepository @Inject constructor() : AccountService(), EmailService {
         } catch (e: Exception) {
             AuthEmailResult(errorMessage = e.message)
         }
+
     }
 
     override suspend fun updateEmail(email: String): AuthEmailResult {

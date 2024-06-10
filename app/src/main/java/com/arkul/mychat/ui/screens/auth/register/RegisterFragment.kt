@@ -18,6 +18,7 @@ import com.arkul.mychat.data.network.firebase.auth.GoogleAuthUiClient
 import com.arkul.mychat.databinding.FragmentRegisterBinding
 import com.arkul.mychat.ui.navigation.BaseFragment
 import com.arkul.mychat.utilities.extensions.showToast
+import com.arkul.mychat.utilities.keyboard.hideKeyboardFrom
 import com.arkul.mychat.utilities.progressBar.showProgressBar
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.textfield.TextInputLayout.END_ICON_NONE
@@ -50,11 +51,13 @@ class RegisterFragment : BaseFragment<RegisterViewModel>() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 observeUIState()
             }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
             launch {
                 observeUITextLayoutState()
             }
         }
-
 
         return binding.root
     }
@@ -104,8 +107,9 @@ class RegisterFragment : BaseFragment<RegisterViewModel>() {
 
     private fun setupButtonsListeners() {
         binding.buttonRegister.setOnClickListener {
-            showToast(viewModel.uiState.value.errorMessage)
+            if(viewModel.uiState.value.isLoading) return@setOnClickListener
             viewModel.signUpWithEmail()
+            hideKeyboardFrom(binding.inputTextPassword.rootView)
         }
         binding.buttonGoogle.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {

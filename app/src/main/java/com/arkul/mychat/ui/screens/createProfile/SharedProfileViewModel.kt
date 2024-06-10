@@ -30,13 +30,10 @@ class SharedProfileViewModel : ViewModel() {
 
     private val _args = MutableStateFlow<CreateProfileFragmentArgs?>(null)
     val args = _args.asStateFlow()
+
     fun setValidator(block: (() -> Boolean)? = null) {
         isResumedFragment = true
         isValidation = block
-    }
-
-    fun setArguments(args: CreateProfileFragmentArgs) {
-        _args.value = args
     }
 
     val viewPagerNavigationEvent

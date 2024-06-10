@@ -375,16 +375,9 @@ class CustomizeAvatarFragment : Fragment() {
         }
     }
 
-    private fun hideKeyboard() {
-        val imm =
-            requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(binding.viewPager.windowToken, 0)
-    }
-
     override fun onResume() {
         super.onResume()
         sharedViewModel.setValidator { binding.toggleMode.checkedButtonId == R.id.button_default_mode || binding.imageViewAvatar.drawable != null }
-        hideKeyboard()
     }
 
     override fun onDestroy() {

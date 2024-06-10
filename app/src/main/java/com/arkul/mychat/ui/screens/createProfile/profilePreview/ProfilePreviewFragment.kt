@@ -3,6 +3,7 @@ package com.arkul.mychat.ui.screens.createProfile.profilePreview
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.arkul.mychat.data.models.SelectAvatarModeEvents
 import com.arkul.mychat.databinding.FragmentProfilePreviewBinding
+import com.arkul.mychat.ui.screens.createProfile.CreateProfileViewModel
+import com.arkul.mychat.ui.screens.createProfile.SharedProfileViewModel
 import com.arkul.mychat.ui.screens.createProfile.customizeAvatar.CustomizeAvatarViewModel
 import com.arkul.mychat.ui.screens.createProfile.initBasicInfoProfile.BasicInfoProfileViewModel
 import com.arkul.mychat.utilities.constants.Constants
@@ -25,11 +28,15 @@ class ProfilePreviewFragment : Fragment() {
     private var _binding: FragmentProfilePreviewBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: ProfilePreviewViewModel by viewModels()
-
     private val basicInfoProfileViewModel: BasicInfoProfileViewModel by viewModels(ownerProducer = { requireParentFragment() })
 
     private val customizeAvatarViewModel: CustomizeAvatarViewModel by viewModels(ownerProducer = { requireParentFragment() })
+
+    private val createProfileViewModel: CreateProfileViewModel by viewModels(ownerProducer = { requireParentFragment() })
+
+    private val sharedViewModel: SharedProfileViewModel by viewModels(ownerProducer = { requireParentFragment() })
+
+    private val viewModel: ProfilePreviewViewModel by viewModels()
 
     private lateinit var imageCropActivity: ImageCropActivityResultContract
 
@@ -144,5 +151,13 @@ class ProfilePreviewFragment : Fragment() {
     private suspend fun observeAvatarDefault() = customizeAvatarViewModel.currentAvatarDefault.collectLatest { setAvatarDrawable(it) }
 
     private suspend fun observeCurrentAvatarBitmap() = customizeAvatarViewModel.currentAvatarBitmap.collectLatest { setAvatarBitmap(it) }
+
+    override fun onResume() {
+        super.onResume()
+        sharedViewModel.setValidator {
+            createProfileViewModel.createProfile()
+            true
+        }
+    }
 
 }

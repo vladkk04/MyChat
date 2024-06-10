@@ -2,16 +2,6 @@
 <resources>
     <array name="default_background_colors_avatar">
         <item>#6688A66A</item>
-        <item>@color/orange</item>
-        <item>@color/yellow</item>
-        <item>@color/chartreuse</item>
-        <item>@color/green</item>
-        <item>@color/spring_green</item>
-        <item>@color/cyan</item>
-        <item>@color/azure</item>
-        <item>@color/blue</item>
-        <item>@color/violet</item>
-        <item>@color/magenta</item>
     </array>
 
     <integer-array name="default_avatar_mode">

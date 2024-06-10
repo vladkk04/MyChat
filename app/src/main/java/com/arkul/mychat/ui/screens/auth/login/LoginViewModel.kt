@@ -1,5 +1,6 @@
 package com.arkul.mychat.ui.screens.auth.login
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.arkul.mychat.data.models.AuthInputLayoutEvents
 import com.arkul.mychat.data.models.LoginTextLayoutState
@@ -23,7 +24,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val credentialService: CredentialService,
+    credentialService: CredentialService,
 ) : SharedAuthViewModel(credentialService) {
 
     private val _uiState = MutableStateFlow(LoginUiState())
@@ -55,11 +56,13 @@ class LoginViewModel @Inject constructor(
     }
 
     fun signUpWithCredential(credentialResult: AuthCredentialNotProviderResult) {
-        signInWithCredential(credentialResult, onFailure = { errorMessage ->
-            updateErrorMessage(errorMessage)
-        })
+        signInWithCredential(
+            credentialResult,
+            onSuccess = { updateIsLoading(false) },
+            onFailure = { errorMessage ->
+                updateErrorMessage(errorMessage)
+            })
     }
-
 
     fun signInWithEmail() = viewModelScope.launch {
         if (!isValidatedInputs()) return@launch
@@ -70,6 +73,7 @@ class LoginViewModel @Inject constructor(
         )
         signInWithCredential(
             AuthCredentialNotProviderResult(emailCredential),
+            onSuccess = { updateIsLoading(false) },
             onFailure = { errorMessage ->
                 updateIsLoading(false)
                 updateErrorMessage(errorMessage)

@@ -89,12 +89,10 @@
                         style="?attr/materialIconButtonStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:backgroundTintMode="@color/white"
-                        android:textColor="@color/white"
-                        android:visibility="invisible"
+                        android:visibility="visible"
                         app:icon="@drawable/ic_edit"
                         app:iconSize="22dp"
-                        app:iconTint="@color/white" />
+                        app:iconTint="@color/color_edit_image_button_icon_tint_night" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/button_transform_image_avatar"
@@ -102,12 +100,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:backgroundTintMode="@color/white"
-                        android:textColor="@color/white"
-                        android:visibility="invisible"
+                        android:visibility="visible"
                         app:icon="@drawable/ic_crop"
                         app:iconSize="22dp"
-                        app:iconTint="@color/white" />
+                        app:iconTint="@color/color_edit_image_button_icon_tint_night" />
 
                 </LinearLayout>
 
@@ -209,7 +205,7 @@
                     android:layout_gravity="bottom|start"
                     app:icon="@drawable/ic_insert_photo"
                     app:iconSize="24dp"
-                    app:iconTint="@color/white" />
+                    app:iconTint="@color/color_take_photo_button_icon_tint_night" />
 
                 <Button
                     android:id="@+id/button_take_photo"
@@ -220,7 +216,7 @@
                     android:layout_marginHorizontal="10dp"
                     app:icon="@drawable/ic_camera"
                     app:iconSize="36dp"
-                    app:iconTint="@color/white" />
+                    app:iconTint="@color/color_take_photo_button_icon_tint_night" />
 
                 <Button
                     android:id="@+id/button_camera_switch"
@@ -230,7 +226,7 @@
                     android:layout_gravity="bottom|end"
                     app:icon="@drawable/ic_camera_switch"
                     app:iconSize="24dp"
-                    app:iconTint="@color/white" />
+                    app:iconTint="@color/color_take_photo_button_icon_tint_night" />
             </LinearLayout>
 
         </RelativeLayout>

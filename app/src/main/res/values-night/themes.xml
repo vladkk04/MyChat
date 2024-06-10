@@ -1,32 +1,55 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Base.Theme.WebViewProgram" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.MyChat" parent="Theme.Material3.DayNight.NoActionBar">
+        <!--- Primary Colors -->
         <item name="colorPrimary">@color/color_primary_night</item>
-        <item name="colorOnPrimary">@color/color_on_primary_night</item>
         <item name="colorPrimaryContainer">@color/color_primary_container_night</item>
+        <item name="colorOnPrimary">@color/color_on_primary_night</item>
         <item name="colorOnPrimaryContainer">@color/color_on_primary_container_night</item>
-
-        <item name="colorSecondaryContainer">@color/color_on_primary_container_night</item>
-        <item name="colorOnSecondaryContainer">@color/color_primary_container_night</item>
-
-
-       <!-- <item name="android:fontFamily">@font/hind_siliguri</item>-->
+        <!--- Secondary Colors -->
+        <item name="colorSecondaryContainer">@color/color_secondary_container_night</item>
+        <item name="colorOnSecondaryContainer">@color/color_on_secondary_container_night</item>
+        <!--- Surface Colors -->
         <item name="colorOnSurfaceVariant">@color/color_on_surface_variant_night</item>
-        <item name="colorSurfaceContainerHigh">@color/color_on_surface_container_high_night</item>
+        <item name="colorSurfaceContainerHigh">@color/color_surface_container_high_night</item>
         <item name="colorSurface">@color/color_surface_night</item>
         <item name="colorOnSurface">@color/color_on_surface_variant_night</item>
-
-        <item name="colorOutline">@color/color_outline_night</item>
-
-        <item name="android:colorBackground">@color/background_night</item>
-        <item name="android:statusBarColor">@color/background_night</item>
-
+        <!--- Error Colors -->
         <item name="colorError">@color/color_error_night</item>
-
+        <!-- Background Color -->
+        <item name="android:colorBackground">@color/color_background_night</item>
+        <!-- Status Bar Color -->
+        <item name="android:statusBarColor">@color/color_status_bar_night</item>
+        <!--- Text Colors -->
+        <item name="android:textColor">@color/color_text_night</item>
+        <!-- Text Settings -->
         <item name="android:fontFamily">@font/hind_siliguri</item>
-
-        <item name="android:textColor">@color/color_on_surface_variant_night</item>
-
+        <!-- Input Field Colors -->
+        <item name="colorOutline">@color/color_outline_night</item>
+        <!-- Bottom Navigation Bar -->
+        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
     </style>
+
+    <style name="Theme.MyChat" parent="Base.Theme.MyChat" />
+
+    <style name="checkBox" parent="Widget.Material3.CompoundButton.CheckBox">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.CheckBox</item>
+    </style>
+
+    <style name="ThemeOverlay.App.CheckBox" parent="">
+        <item name="colorPrimary">@color/color_primary_container_night</item>
+        <item name="colorOnSurfaceVariant">@color/color_primary_container_night</item>
+    </style>
+
+    <style name="Widget.App.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
+    </style>
+
+    <style name="ThemeOverlay.App.BottomNavigationView" parent="">
+        <item name="colorSecondaryContainer">@color/non_clickable_color_text_night</item>
+        <item name="colorOnSurfaceVariant">@color/color_on_surface_variant_night</item>
+        <item name="colorSurfaceContainer">@color/color_surface_container_night</item>
+    </style>
+
 
     <style name="Widget.App.Button.OutlinedButton.IconOnly" parent="Widget.Material3.Button.OutlinedButton">
         <item name="iconPadding">0dp</item>
@@ -38,11 +61,22 @@
         <item name="android:minHeight">48dp</item>
     </style>
 
+    <style name="Widget.App.Button.OutlinedButton.Suggestion.IconOnly" parent="Widget.Material3.Button.IconButton.Outlined">
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="cornerRadius">5dp</item>
+        <item name="strokeWidth">0dp</item>
+    </style>
+
     <style name="ShapeAppearance.ImageView.Rounded" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="cornerSize">50%</item>
         <item name="cornerFamily">rounded</item>
     </style>
 
+    <style name="ShapeAppearance.ImageView.Suggestion.Rounded" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="cornerSize">20%</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
 
     <style name="CustomRadioButton" parent="Widget.Material3.CompoundButton.RadioButton">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.RadioButton</item>
@@ -72,7 +106,6 @@
         <item name="android:background">@null</item>
         <item name="android:theme">@style/ThemeOverlay.Material3.TextInputEditText.Cursor.Color</item>
     </style>
-
 
     <style name="ThemeOverlay.Material3.TextInputEditText.Cursor.Color" parent="">
         <item name="colorControlActivated">@color/color_on_surface_variant_night</item>

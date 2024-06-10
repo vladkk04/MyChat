@@ -1,43 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-
-    <color name="red">#FF0000</color>
-    <color name="orange">#FF7F00</color>
-    <color name="yellow">#FFFF00</color>
-    <color name="chartreuse">#7FFF00</color>
-    <color name="green">#00FF00</color>
-    <color name="spring_green">#00FF7F</color>
-    <color name="cyan">#00FFFF</color>
-    <color name="azure">#007FFF</color>
-    <color name="blue">#0000FF</color>
-    <color name="violet">#7F00FF</color>
-    <color name="magenta">#FF00FF</color>
-
-    <color name="toolbar_background_night">#4B4B4B</color>
-    <color name="background_night">#222831</color>
-
-    <color name="non_clickable_color_night">#36383B</color>
-    <color name="non_clickable_color_text_night">#646464</color>
-
+    <!--- Primary Colors Night -->
     <color name="color_primary_night">#393E46</color>
-    <color name="color_primary_container_night">@color/color_on_surface_variant_night</color>
-
     <color name="color_on_primary_night">#FFD369</color>
     <color name="color_on_primary_container_night">#323539</color>
-
-    <color name="color_error_night">#DB7C7C</color>
-
+    <color name="color_primary_container_night">#EEEEEE</color>
+    <!--- Secondary Colors Night -->
+    <color name="color_secondary_container_night">#323539</color>
+    <color name="color_on_secondary_container_night">#EEEEEE</color>
+    <!--- Surface Colors Night -->
+    <color name="color_surface_container_high_night">#2B2C2D</color>
+    <color name="color_surface_container_night">#393E46</color>
+    <color name="color_surface_night">#393E46</color>
     <color name="color_on_surface_variant_night">#EEEEEE</color>
-    <color name="color_on_surface_container_high_night">#2B2C2D</color>
-
-    <color name="color_surface_night">@color/color_primary_night</color>
+    <!--- Error Colors Night -->
+    <color name="color_error_night">#DB7C7C</color>
+    <!--- Background Color Night -->
+    <color name="color_background_night">#222831</color>
+    <!-- Status Bar Color Night -->
+    <color name="color_status_bar_night">#393E46</color>
+    <!-- Text Color Night -->
+    <color name="color_text_night">#EEEEEE</color>
+    <!-- Input Field Color Night -->
+    <color name="non_clickable_color_night">#36383B</color>
+    <color name="non_clickable_color_text_night">#646464</color>
     <color name="color_outline_night">@color/color_on_primary_night</color>
-
-    //Custom Input Text Edit Colors
+    <!-- Input Field States Colors Night -->
     <color name="custom_outlined_text_field_disabled_outline_color">@color/color_on_surface_variant_night</color>
     <color name="custom_outlined_text_field_focus_outline_color">@color/color_on_surface_variant_night</color>
     <color name="custom_outlined_text_field_hover_outline_color">@color/color_on_surface_variant_night</color>
     <color name="custom_outlined_text_field_outline_color">@color/color_outline_night</color>
+    <!-- Image Edit Icon Buttons Color Night -->
+    <color name="color_edit_image_button_icon_tint_night">#EEEEEE</color>
+    <!-- Take Photo Icon Button Color Night -->
+    <color name="color_take_photo_button_icon_tint_night">#EEEEEE</color>"
+    <!-- Avatar Color Night -->
+    <color name="color_avatar_stroke_night">#EEEEEE</color>
+    <!--- Thumb Suggestion Color Night -->
+    <color name="color_thumb_suggestion_night">#EEEEEE</color>"
+
 </resources>

@@ -28,7 +28,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:networkSecurityConfig="@xml/network_security_config"
-        android:theme="@style/Theme.WebViewProgram"
+        android:theme="@style/Theme.MyChat"
         tools:targetApi="31">
         <activity
             android:name=".MainActivity"
@@ -42,7 +42,7 @@
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.WebViewProgram"/>
+            android:theme="@style/Theme.MyChat"/>
     </application>
 
 </manifest>

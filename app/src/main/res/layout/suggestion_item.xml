@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/Widget.Material3.CardView.Elevated"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:cardBackgroundColor="@color/color_primary_night"
+        app:contentPaddingLeft="10dp"
+        app:contentPaddingRight="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_view_topic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="5dp"
+                android:layout_toStartOf="@+id/button_share"
+                android:text="Add that cat's and dog's name will been good for enought time"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:id="@+id/button_share"
+                style="@style/checkBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:button="@drawable/ic_share" />
+
+            <CheckBox
+                android:id="@+id/button_report"
+                style="@style/checkBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/button_share"
+                android:layout_alignParentEnd="true"
+                android:button="@drawable/ic_error" />
+
+            <LinearLayout
+                android:id="@+id/linear_layout_thumb_up_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true">
+
+                <CheckBox
+                    android:id="@+id/button_thumb_up"
+                    style="@style/checkBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableTop="@drawable/sl_thumb_up"
+                    android:minHeight="0dp"
+                    android:button="@null"
+                    android:paddingTop="8dp"
+                    android:text="2"
+                    android:textAlignment="center"
+                    android:textSize="8sp" />
+
+                <CheckBox
+                    android:id="@+id/button_thumb_down"
+                    style="@style/checkBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawableBottom="@drawable/sl_thumb_down"
+                    android:button="@null"
+                    android:paddingBottom="8dp"
+                    android:text="4"
+                    android:minHeight="0dp"
+                    android:textAlignment="center"
+                    android:textSize="8sp" />
+
+                <CheckBox
+                    android:id="@+id/button_forward"
+                    style="@style/checkBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:button="@drawable/ic_arrow_forward" />
+
+            </LinearLayout>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/image_view_avatar"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/color_background_night"
+                android:scaleType="centerCrop"
+                android:src="@drawable/us"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.ImageView.Suggestion.Rounded" />
+
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</FrameLayout>

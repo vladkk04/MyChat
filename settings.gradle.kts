@@ -41,7 +41,7 @@ dependencyResolutionManagement {
         create("libs") {
             val androidxCoreVersion = "1.12.0"
             val androidxAppcompatVersion = "1.6.1"
-            val googleAndroidMaterialVersion = "1.10.0"
+            val googleAndroidMaterialVersion = "1.12.0"
             val androidxConstraintlayoutVersion = "2.1.4"
             val fragmentKtxVersion = "1.6.2"
             val activityKtxVersion = "1.8.2"
@@ -54,6 +54,8 @@ dependencyResolutionManagement {
             val colorPicker = "2.0.2"
             val cropImageVersion = "2.2.8"
             val uCropVersion = "2.2.8"
+            val dataStoreVersion = "1.0.0"
+            val dataStorePreferencesVersion = "1.0.0"
 
             val cameraXVersion = "1.4.0-alpha05"
 
@@ -63,6 +65,10 @@ dependencyResolutionManagement {
             library("androidx.camera.view", "androidx.camera", "camera-view").version(cameraXVersion)
             library("androidx.camera.mlkit", "androidx.camera", "camera-mlkit-vision").version(cameraXVersion)
             library("androidx.camera.extensions", "androidx.camera", "camera-extensions").version(cameraXVersion)
+
+            //DataStore
+            library("androidx.datastore", "androidx.datastore", "datastore").version(dataStoreVersion)
+            library("androidx.datastore.preferences", "androidx.datastore", "datastore-preferences").version(dataStorePreferencesVersion)
 
             //uCrop
             library("yalantis.ucrop", "com.github.yalantis", "ucrop").version(uCropVersion)
@@ -88,6 +94,7 @@ dependencyResolutionManagement {
             //Firebase
             library("firebase-boom", "com.google.firebase", "firebase-bom").version(firebaseBoomVersion)
             library("firebase-auth", "com.google.firebase", "firebase-auth").withoutVersion()
+            library("firebase-firestore", "com.google.firebase", "firebase-firestore").withoutVersion()
 
             //Hilt
             library("dagger-hilt-android", "com.google.dagger", "hilt-android").version(daggerHiltVersion)

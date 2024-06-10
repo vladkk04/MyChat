@@ -11,6 +11,9 @@ abstract class AccountService() {
     val firebaseAuth
         get() = Firebase.auth
 
+    val currentUser
+        get() = firebaseAuth.currentUser
+
     val currentUserId: String
         get() = firebaseAuth.currentUser?.uid.orEmpty()
 
@@ -18,7 +21,7 @@ abstract class AccountService() {
         get() = firebaseAuth.currentUser != null
 
     fun signOut() {
-        firebaseAuth.signOut()
+        if(hasUser) firebaseAuth.signOut()
     }
 
     suspend fun deleteAccount() {

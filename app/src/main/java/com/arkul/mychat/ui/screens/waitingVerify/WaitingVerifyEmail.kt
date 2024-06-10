@@ -38,8 +38,6 @@ class WaitingVerifyEmail : BaseFragment<WaitingVerifyViewModel>() {
             observeUIState()
         }
 
-
-
         return binding.root
     }
 
@@ -57,7 +55,9 @@ class WaitingVerifyEmail : BaseFragment<WaitingVerifyViewModel>() {
 
     private suspend fun observeUIState() {
         viewModel.uiState.collectLatest {
-            getTimer.start()
+            if (!it.userHasConfirmed) { viewModel.sendEmailVerification() }
+            if (!it.shouldResendConfirmation) { getTimer.start() }
+
             with(it.shouldResendConfirmation) {
                 binding.buttonResendConfirmationEmail.isClickable = this
                 binding.buttonResendConfirmationEmail.setBackgroundColor(
@@ -99,4 +99,9 @@ class WaitingVerifyEmail : BaseFragment<WaitingVerifyViewModel>() {
     }
 
     private fun getColor(color: Int): Int = ContextCompat.getColor(requireContext(), color)
+
+    override fun onDestroy() {
+        super.onDestroy()
+        //viewModel.singOut()
+    }
 }

@@ -44,7 +44,7 @@ class ImageCropActivityResultContract(
                 )
                 this.setRootViewBackgroundColor(
                     contextFragment.resources.getColor(
-                        R.color.background_night, null
+                        R.color.color_background_night, null
                     )
                 )
                 this.setActiveControlsWidgetColor(
