@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/viewFlipper"
+    android:layout_width="match_parent"
+    android:layout_height="200dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <RadioGroup
+            android:id="@+id/report_category_radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp">
+
+        </RadioGroup>
+    </ScrollView>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/input_layout_email"
+        style="@style/DefaultCustomTextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        app:endIconMode="clear_text">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_text_email"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:hint="Message" />
+    </com.google.android.material.textfield.TextInputLayout>\
+
+
+
+</ViewFlipper>

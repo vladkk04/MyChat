@@ -40,8 +40,8 @@
                 android:button="@drawable/ic_share" />
 
             <CheckBox
-                android:id="@+id/button_report"
                 style="@style/checkBox"
+                android:id="@+id/button_report"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/button_share"

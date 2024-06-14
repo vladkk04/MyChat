@@ -27,9 +27,25 @@
         <item name="colorOutline">@color/color_outline_night</item>
         <!-- Bottom Navigation Bar -->
         <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
+
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>
     </style>
 
     <style name="Theme.MyChat" parent="Base.Theme.MyChat" />
+
+    <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="buttonBarStyle">@style/myButtonBar</item>
+    </style>
+
+
+    <style name="myButtonBar" parent="Widget.AppCompat.ButtonBar">
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:fillViewport">false</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:dialogPreferredPadding">10dp</item>
+    </style>
 
     <style name="checkBox" parent="Widget.Material3.CompoundButton.CheckBox">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.CheckBox</item>

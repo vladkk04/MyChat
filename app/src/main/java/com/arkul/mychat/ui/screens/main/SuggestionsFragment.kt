@@ -11,6 +11,7 @@ import com.arkul.mychat.R
 import com.arkul.mychat.data.models.Suggestion
 import com.arkul.mychat.databinding.FragmentSuggestionsBinding
 import com.arkul.mychat.ui.adapters.recyclerViews.SuggestionListAdapter
+import com.arkul.mychat.utilities.dialogs.createSuggestionReportDialog
 
 /**
  * A simple [Fragment] subclass.
@@ -22,7 +23,6 @@ class SuggestionsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var adapter: SuggestionListAdapter
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +37,10 @@ class SuggestionsFragment : Fragment() {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = linearLayoutManager
 
+        adapter.setOnReportClickListener {
+            createSuggestionReportDialog()?.show()
+        }
+
         adapter.saveData(
             listOf(
                 Suggestion("Add to nigga shit you tu pidor ya duze koxai yulia deze silno yomayo"),
@@ -48,7 +52,6 @@ class SuggestionsFragment : Fragment() {
                 Suggestion("SILNO")
             )
         )
-
 
 
 

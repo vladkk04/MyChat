@@ -29,6 +29,7 @@ class ChatsFragment : Fragment() {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
+
         adapter.saveData(listOf(Message("hello"), Message("hello"), Message("hello"), Message("hello"), Message("hello"), Message("hello"),Message("hello"), Message("hello"), Message("hello"), Message("hello"), Message("hello"), Message("hello")))
 
         return binding.root

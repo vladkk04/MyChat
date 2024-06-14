@@ -46,7 +46,6 @@ class InitialFragment : BaseFragment<InitialViewModel>() {
 
     override val viewModel: InitialViewModel by viewModels()
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
