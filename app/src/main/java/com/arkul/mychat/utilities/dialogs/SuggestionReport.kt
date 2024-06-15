@@ -80,7 +80,8 @@ fun Fragment.createSuggestionReportDialog(): AlertDialog? {
         )
     }
 
-    return MaterialAlertDialogBuilder(requireContext(), R.style.ThemeOverlay_App_MaterialAlertDialog)
+    return MaterialAlertDialogBuilder(requButtonBarLayout
+            ireContext(), R.style.ThemeOverlay_App_MaterialAlertDialog)
         .setPositiveButtonIcon(
             ContextCompat.getDrawable(
                 requireContext(),
