@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <dimen name="padding_relative_layout_register">15dp</dimen>
 
     <dimen name="viewpager_next_item_visible">5dp</dimen>
@@ -9,6 +9,7 @@
     <dimen name="margin_top_layout">20dp</dimen>
     <dimen name="margin_bottom_layout">60dp</dimen>
     <dimen name="margin_horizontal_layout">20dp</dimen>
+
 
 
     <dimen name="text_size_register_or_continue">12sp</dimen>

@@ -11,7 +11,9 @@ import com.arkul.mychat.R
 import com.arkul.mychat.data.models.Suggestion
 import com.arkul.mychat.databinding.FragmentSuggestionsBinding
 import com.arkul.mychat.ui.adapters.recyclerViews.SuggestionListAdapter
+import com.arkul.mychat.ui.screens.bottomSheets.SuggestionBottomSheet
 import com.arkul.mychat.utilities.dialogs.createSuggestionReportDialog
+import com.arkul.mychat.utilities.extensions.showToast
 
 /**
  * A simple [Fragment] subclass.
@@ -40,6 +42,17 @@ class SuggestionsFragment : Fragment() {
         adapter.setOnReportClickListener {
             createSuggestionReportDialog()?.show()
         }
+
+        binding.toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.create_suggestion -> {
+                    val suggestionBottomSheet = SuggestionBottomSheet()
+                    suggestionBottomSheet.show(requireActivity().supportFragmentManager, SuggestionBottomSheet.TAG)
+                }
+            }
+            true
+        }
+
 
         adapter.saveData(
             listOf(

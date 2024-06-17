@@ -4,19 +4,21 @@ import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.StateListDrawable
-import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
-import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.RadioButton
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import com.arkul.mychat.R
 import com.arkul.mychat.databinding.SuggestionReportAlertDialogBinding
+import com.arkul.mychat.utilities.extensions.getStateListDrawable
+import com.arkul.mychat.utilities.extensions.showToast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+
 
 private var isShowingDialog = false
 
@@ -31,20 +33,6 @@ enum class ReportCategory(val drawableFill: Int, val drawableOutline: Int) {
     YULIIA(R.drawable.ic_pending_fill, R.drawable.ic_pending_outline),
 }
 
-fun getStateListDrawable(isSelectable: Drawable?, isNotSelectable: Drawable?): StateListDrawable {
-    val stateListDrawable = StateListDrawable()
-
-    val stateChecked = intArrayOf(android.R.attr.state_checked)
-    val stateUnchecked = intArrayOf(-android.R.attr.state_checked)
-
-    stateListDrawable.addState(stateChecked, isSelectable)
-    stateListDrawable.addState(stateUnchecked, isNotSelectable)
-
-    stateListDrawable.addState(intArrayOf(), isSelectable)
-
-    return stateListDrawable
-}
-
 private fun createRadioButton(reportCategory: ReportCategory, context: Context): RadioButton {
     val getFillDrawable = ContextCompat.getDrawable(context, reportCategory.drawableFill)
     val getOutlineDrawable = ContextCompat.getDrawable(context, reportCategory.drawableOutline)
@@ -56,7 +44,7 @@ private fun createRadioButton(reportCategory: ReportCategory, context: Context):
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
         ).apply {
-            setMargins(0, 90, 0, 0)
+            setMargins(0, 50, 0, 40)
             setPadding(50, 0, 0, 0)
         }
         setOnCheckedChangeListener { _, isChecked ->
@@ -65,12 +53,24 @@ private fun createRadioButton(reportCategory: ReportCategory, context: Context):
     }
 }
 
-fun Fragment.createSuggestionReportDialog(): AlertDialog? {
-    if (isShowingDialog) { return null }
-    isShowingDialog = true
+fun Fragment.createSuggestionReportDialog(
+    onSendReportListener: (() -> Unit)? = null
+): AlertDialog? {
+    if (isShowingDialog) {
+        return null
+    }
+
     val binding = SuggestionReportAlertDialogBinding.inflate(layoutInflater)
     val viewFlipper = binding.viewFlipper
     val reportCategoryRadioGroup = binding.reportCategoryRadioGroup
+
+    val getNavigateNext = ContextCompat.getDrawable(requireContext(), R.drawable.ic_navigate_next)
+    val getNavigateBack = ContextCompat.getDrawable(requireContext(), R.drawable.ic_navigate_back)
+    val getNavigateClose = ContextCompat.getDrawable(requireContext(), R.drawable.ic_close)
+    val getDone = ContextCompat.getDrawable(requireContext(), R.drawable.ic_done)
+        ?.apply { setBounds(0, 0, 84, 84) }
+
+    isShowingDialog = true
 
     ReportCategory.entries.forEach { reportCategory ->
         reportCategoryRadioGroup.addView(
@@ -80,48 +80,56 @@ fun Fragment.createSuggestionReportDialog(): AlertDialog? {
         )
     }
 
-    return MaterialAlertDialogBuilder(requireContext())
-        .setPositiveButtonIcon(
-            ContextCompat.getDrawable(
-                requireContext(),
-                R.drawable.ic_navigate_next
-            )
-        )
-        .setNegativeButtonIcon(
-            ContextCompat.getDrawable(
-                requireContext(),
-                R.drawable.ic_navigate_back
-            )
-        )
-        .setNeutralButtonIcon(
-            ContextCompat.getDrawable(
-                requireContext(),
-                R.drawable.ic_close
-            )
-        )
+    val dialog = MaterialAlertDialogBuilder(requireContext())
+        .setPositiveButtonIcon(getNavigateNext)
+        .setNegativeButtonIcon(getNavigateBack)
+        .setNeutralButtonIcon(getNavigateClose)
         .setCancelable(false)
         .setView(binding.root)
         .setTitle("Suggestion Report")
-        .create().apply {
-            this.setOnShowListener {
-                getButton(AlertDialog.BUTTON_POSITIVE).apply {
-                    setOnClickListener {
-                        if (viewFlipper.displayedChild < viewFlipper.size - 1) {
-                            viewFlipper.showNext()
-                        }
-                    }
-                }
-                getButton(AlertDialog.BUTTON_NEGATIVE).apply {
-                    setOnClickListener {
-                        viewFlipper.showPrevious()
-                    }
-                }
-                getButton(AlertDialog.BUTTON_NEUTRAL).apply {
-                    setOnClickListener { _ ->
+        .create()
+
+    return dialog.apply {
+        this.setOnShowListener {
+            val positiveButton = getButton(AlertDialog.BUTTON_POSITIVE)
+
+            positiveButton.apply {
+                setOnClickListener {
+                    if (reportCategoryRadioGroup.checkedRadioButtonId == -1) {
+                        showToast("Please select a category")
+                        return@setOnClickListener
+                    } else if (viewFlipper.displayedChild < viewFlipper.size - 1) {
+                        viewFlipper.showNext()
+                        setCompoundDrawables(getDone, null, null, null)
+                    } else {
+                        onSendReportListener?.invoke()
                         isShowingDialog = false
                         dismiss()
                     }
                 }
             }
+            getButton(AlertDialog.BUTTON_NEGATIVE).apply {
+                setOnClickListener {
+                    getNavigateNext?.apply { setBounds(0, 0, 96, 96) }
+
+                    positiveButton.setCompoundDrawables(
+                        getNavigateNext,
+                        null,
+                        null,
+                        null
+                    )
+
+                    if (viewFlipper.displayedChild != 0) {
+                        viewFlipper.showPrevious()
+                    }
+                }
+            }
+            getButton(AlertDialog.BUTTON_NEUTRAL).apply {
+                setOnClickListener { _ ->
+                    isShowingDialog = false
+                    dismiss()
+                }
+            }
         }
+    }
 }
