@@ -46,7 +46,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="text"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -60,15 +61,18 @@
             app:endIconMode="clear_text"
             app:errorEnabled="true"
             app:counterEnabled="true"
-            app:counterMaxLength="150"
+            app:counterMaxLength="200"
             app:helperTextEnabled="true"
             app:helperText="*required"
             android:hint="Description">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEditTextDesctiptionSuggestion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxHeight="150dp" />
+                android:maxHeight="150dp"
+                android:maxLines="5"
+                android:inputType="textMultiLine" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -82,55 +86,85 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginHorizontal="10dp"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_crop_free"/>
+                    android:scaleType="fitXY"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="@drawable/square_dashed"
+                    app:srcCompat="@drawable/ic_add_photo_alternate"
+                    app:tint="@color/color_primary_night" />
 
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:layout_marginHorizontal="10dp"
-                    android:tintMode="@color/color_avatar_stroke_night"
-                    android:src="@drawable/ic_add_photo_alternate"/>
+                    android:background="@drawable/square_dashed"
+                    app:srcCompat="@drawable/us" />
 
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitXY"
                     android:layout_marginHorizontal="10dp"
-                    android:src="@drawable/us"/>
+                    android:background="@drawable/square_dashed"
+                    app:srcCompat="@drawable/ic_add_photo_alternate"
+                    app:tint="@color/color_primary_night" />
 
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitXY"
                     android:layout_marginHorizontal="10dp"
-                    android:src="@drawable/us"/>
+                    android:background="@drawable/square_dashed"
+                    app:srcCompat="@drawable/ic_add_photo_alternate"
+                    app:tint="@color/color_primary_night" />
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:layout_marginHorizontal="10dp"
-                    android:src="@drawable/us"/>
             </LinearLayout>
 
         </HorizontalScrollView>
 
-        <com.google.android.material.button.MaterialButton
-            style="?attr/materialButtonOutlinedStyle"
-            android:id="@+id/button_login"
-            android:layout_width="175dp"
+        <CheckBox
+            android:id="@+id/checkbox_anonymous"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:textSize="20sp"
-            android:text="Create" />
+            android:layout_below="@id/scroll_view_suggestions_images"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="50dp"
+            android:text="Anonymous"/>
+
+        <Button
+            android:id="@+id/button_tooltip_anonymous"
+            style="?attr/materialIconButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/checkbox_anonymous"
+            android:layout_alignBottom="@+id/checkbox_anonymous"
+            android:layout_toEndOf="@+id/checkbox_anonymous"
+            android:tooltipText="You will be able to see this suggestion to everyone"
+            app:iconTint="@color/color_primary_container_night"
+            app:icon="@drawable/ic_info" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/checkbox_anonymous"
+            android:layout_alignParentBottom="true">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_login"
+                android:layout_gravity="bottom|center"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:textSize="20sp"
+                android:text="Create" />
+
+        </FrameLayout>
 
     </RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

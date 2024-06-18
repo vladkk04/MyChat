@@ -18,6 +18,8 @@ import com.arkul.mychat.databinding.FragmentBasicInfoProfileBinding
 import com.arkul.mychat.ui.screens.createProfile.SharedProfileViewModel
 import com.arkul.mychat.utilities.date.createDatePicker
 import com.arkul.mychat.utilities.date.getLocalDatePattern
+import com.arkul.mychat.utilities.extensions.InputFilterType
+import com.arkul.mychat.utilities.extensions.getFilter
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -84,18 +86,9 @@ class BasicInfoProfileFragment : Fragment() {
     }
 
     private fun setupInputsEditTextChanges() {
-        val filter = arrayOf(InputFilter { source, start, end, _, _, _ ->
-            for (i in start until end) {
-                if (Character.isWhitespace(source[i])) {
-                    return@InputFilter ""
-                }
-            }
-            null
-        })
-
-        binding.inputEditTextFirstname.filters = filter
-        binding.inputEditTextLastname.filters = filter
-        binding.inputEditTextUsername.filters = filter
+        binding.inputEditTextFirstname.filters = getFilter(InputFilterType.IS_WHITE_SPACE)
+        binding.inputEditTextLastname.filters = getFilter(InputFilterType.IS_WHITE_SPACE)
+        binding.inputEditTextUsername.filters = getFilter(InputFilterType.IS_WHITE_SPACE)
 
         textChange(binding.inputEditTextFirstname) {
             viewModel.onEvent(BasicInfoProfileInputLayoutEvents.FirstName(it))
