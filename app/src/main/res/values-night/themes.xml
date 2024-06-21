@@ -34,6 +34,10 @@
 
     <style name="Theme.MyChat" parent="Base.Theme.MyChat" />
 
+    <style name="ThemeOverlay.MyChat.BottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="checkboxStyle">@style/checkBox</item>
+    </style>
+
     <style name="AlertDialogTheme" parent="ThemeOverlay.Material3.MaterialAlertDialog">
         <item name="alertDialogStyle">@style/MyAlertDialogStyle</item>
         <item name="buttonBarPositiveButtonStyle">@style/MyBarButtonStyle</item>

@@ -4,14 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.appcompat.app.ActionBar.LayoutParams
-import androidx.core.view.marginLeft
+import androidx.core.content.ContextCompat
+import com.arkul.mychat.R
 import com.arkul.mychat.databinding.BottomSheetSuggestionCreateBinding
+import com.arkul.mychat.databinding.SelectedGalleryPhotoItemBinding
 import com.arkul.mychat.utilities.constants.Constants
 import com.arkul.mychat.utilities.dialogs.createSuggestionGalleryDialog
 import com.arkul.mychat.utilities.extensions.InputFilterType
 import com.arkul.mychat.utilities.extensions.getFilter
+import com.arkul.mychat.utilities.extensions.getStateListDrawable
+import com.arkul.mychat.utilities.extensions.toDp
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -23,25 +28,45 @@ class SuggestionBottomSheet : BottomSheetDialogFragment() {
         const val TAG = "SuggestionBottomSheet"
     }
 
+    override fun getTheme(): Int {
+        return R.style.ThemeOverlay_MyChat_BottomSheetDialog
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = BottomSheetSuggestionCreateBinding.inflate(inflater, container, false)
+        _binding =  BottomSheetSuggestionCreateBinding.inflate(inflater, container, false)
 
         binding.buttonTooltipAnonymous.setOnClickListener { it.performLongClick() }
 
         binding.imageViewButtonSelectPhotoFromGallery.setOnClickListener {
             createSuggestionGalleryDialog { list ->
-                binding.scrollViewSuggestionsPhotos.visibility = View.VISIBLE
+                val widthPhoto = 100
+                val widthPhotoToDp = widthPhoto.toDp(requireContext())
+
+                val getFillDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.ic_delete_fill)
+                val getOutlineDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.ic_delete_outline)
+
+                binding.imageViewButtonSelectPhotoFromGallery.requestLayout()
+                binding.imageViewButtonSelectPhotoFromGallery.layoutParams.width = widthPhotoToDp
+
                 list.forEach { item ->
-                    val image = ImageView(requireContext())
-                    image.layoutParams = ViewGroup.LayoutParams(100, 100)
-                    image.setPadding(10,0,10,0)
-                    image.setImageURI(item.uri)
-                    image.scaleType = ImageView.ScaleType.CENTER_CROP
-                    binding.layoutSuggestionPhotos.addView(image, 100, 100)
+                    val bindingSelectedGalleryPhotoItem =
+                        SelectedGalleryPhotoItemBinding.inflate(
+                            inflater,
+                            binding.layoutSuggestionPhotosAdd,
+                            false
+                        )
+
+                    bindingSelectedGalleryPhotoItem.imageViewSelectedPhotoFromGallery.setImageURI(item.uri)-
+                    bindingSelectedGalleryPhotoItem.checkboxDeleteSelectedPhoto.apply {
+                        bindingSelectedGalleryPhotoItem.checkboxDeleteSelectedPhoto.visibility = View.VISIBLE
+                        buttonDrawable = getStateListDrawable(getFillDrawable, getOutlineDrawable)
+                    }
+                    binding.layoutSuggestionPhotosAdd.addView(bindingSelectedGalleryPhotoItem.root)
+
                 }
             }?.show()
         }

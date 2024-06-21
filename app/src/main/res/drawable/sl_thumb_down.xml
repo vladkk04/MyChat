@@ -5,4 +5,5 @@
 
     <item android:drawable="@drawable/ic_thumb_down_filled"
         android:state_checked="true"/>
+
 </selector>

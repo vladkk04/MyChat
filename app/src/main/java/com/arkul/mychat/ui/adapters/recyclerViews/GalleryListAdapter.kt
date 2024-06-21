@@ -71,7 +71,6 @@ class GalleryListAdapter() : RecyclerView.Adapter<GalleryListAdapter.ViewHolder>
     override fun getItemCount(): Int = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.d("debug", "onBindViewHolder: $position")
         holder.bind(list[position])
     }
 

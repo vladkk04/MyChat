@@ -5,7 +5,6 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
-        style="@style/Widget.Material3.BottomSheet"
         android:id="@+id/layout_suggestion_create"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -74,7 +73,7 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <ImageView
+        <!--<ImageView
             android:id="@+id/image_view_button_select_photo_from_gallery"
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -85,29 +84,33 @@
             android:background="@drawable/square_dashed"
             android:layout_below="@id/textFieldDescription"
             app:srcCompat="@drawable/ic_add_photo_alternate"
-            app:tint="@color/color_primary_night" />
+            app:tint="@color/color_primary_night" />-->
 
         <HorizontalScrollView
             android:id="@+id/scroll_view_suggestions_photos"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginVertical="20dp"
-            android:visibility="gone"
+            android:visibility="visible"
+            android:fillViewport="true"
             android:layout_below="@id/textFieldDescription">
 
             <LinearLayout
-                android:id="@+id/layout_suggestion_photos"
+                android:id="@+id/layout_suggestion_photos_add"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginHorizontal="10dp"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/us"/>
-
+                    android:id="@+id/image_view_button_select_photo_from_gallery"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_below="@id/textFieldDescription"
+                    android:layout_gravity="center"
+                    android:background="@drawable/square_dashed"
+                    android:scaleType="center"
+                    app:srcCompat="@drawable/ic_add_photo_alternate"
+                    app:tint="@color/color_primary_night" />
 
             </LinearLayout>
 
@@ -117,7 +120,7 @@
             android:id="@+id/checkbox_anonymous"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/image_view_button_select_photo_from_gallery"
+            android:layout_below="@id/scroll_view_suggestions_photos"
             android:layout_marginBottom="50dp"
             android:layout_marginTop="15dp"
             android:text="Anonymous"/>
@@ -138,7 +141,7 @@
             android:id="@+id/max_selectable_photo_from_gallery_suggestion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/image_view_button_select_photo_from_gallery"
+            android:layout_below="@+id/scroll_view_suggestions_photos"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
             android:text="max: 20"
