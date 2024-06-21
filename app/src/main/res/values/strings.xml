@@ -44,8 +44,7 @@
     <string name="resend_confirmation_text_with_timer">Resend confirmation email: %1$d</string>
 
 
-    <string name="waiting_verify_email_text">We\'ve sent a confirmation to the email address you provided. Please confirm.
-    </string>
+    <string name="waiting_verify_email_text">We\'ve sent a confirmation to the email address you provided. Please confirm.</string>
     <string name="send_restore_password_text">Send</string>
     <string name="restore_password_text">To reset your password, please enter your email address below. We\'ll send you a link to reset your password.</string>
 
@@ -58,5 +57,6 @@
     <string name="ok">OK</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    
 
 </resources>

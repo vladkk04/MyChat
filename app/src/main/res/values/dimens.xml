@@ -10,8 +10,6 @@
     <dimen name="margin_bottom_layout">60dp</dimen>
     <dimen name="margin_horizontal_layout">20dp</dimen>
 
-
-
     <dimen name="text_size_register_or_continue">12sp</dimen>
     <dimen name="margin_register_or_continue">10dp</dimen>
 

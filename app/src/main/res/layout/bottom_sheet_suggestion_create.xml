@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:paddingHorizontal="20dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <com.google.android.material.bottomsheet.BottomSheetDragHandleView
@@ -25,7 +26,6 @@
             android:layout_below="@id/drag_handle_suggestion_create"
             android:textAlignment="center"
             android:text="Create a suggestion"
-            android:layout_marginHorizontal="20dp"
             android:textSize="32sp" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -35,7 +35,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/title_suggestion_create"
             android:layout_marginVertical="20dp"
-            android:layout_marginHorizontal="20dp"
             app:endIconMode="clear_text"
             app:errorEnabled="true"
             app:counterEnabled="true"
@@ -57,7 +56,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/textFieldTitle"
-            android:layout_marginHorizontal="20dp"
             app:endIconMode="clear_text"
             app:errorEnabled="true"
             app:counterEnabled="true"
@@ -76,14 +74,29 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <ImageView
+            android:id="@+id/image_view_button_select_photo_from_gallery"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:scaleType="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/square_dashed"
+            android:layout_below="@id/textFieldDescription"
+            app:srcCompat="@drawable/ic_add_photo_alternate"
+            app:tint="@color/color_primary_night" />
+
         <HorizontalScrollView
-            android:id="@+id/scroll_view_suggestions_images"
+            android:id="@+id/scroll_view_suggestions_photos"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginVertical="20dp"
+            android:visibility="gone"
             android:layout_below="@id/textFieldDescription">
 
             <LinearLayout
+                android:id="@+id/layout_suggestion_photos"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="10dp"
@@ -91,38 +104,10 @@
 
                 <ImageView
                     android:layout_width="100dp"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitXY"
-                    android:layout_marginHorizontal="10dp"
-                    android:background="@drawable/square_dashed"
-                    app:srcCompat="@drawable/ic_add_photo_alternate"
-                    app:tint="@color/color_primary_night" />
-
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
-                    android:layout_marginHorizontal="10dp"
-                    android:background="@drawable/square_dashed"
-                    app:srcCompat="@drawable/us" />
+                    android:src="@drawable/us"/>
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitXY"
-                    android:layout_marginHorizontal="10dp"
-                    android:background="@drawable/square_dashed"
-                    app:srcCompat="@drawable/ic_add_photo_alternate"
-                    app:tint="@color/color_primary_night" />
-
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitXY"
-                    android:layout_marginHorizontal="10dp"
-                    android:background="@drawable/square_dashed"
-                    app:srcCompat="@drawable/ic_add_photo_alternate"
-                    app:tint="@color/color_primary_night" />
 
             </LinearLayout>
 
@@ -132,9 +117,9 @@
             android:id="@+id/checkbox_anonymous"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/scroll_view_suggestions_images"
-            android:layout_marginStart="20dp"
+            android:layout_below="@id/image_view_button_select_photo_from_gallery"
             android:layout_marginBottom="50dp"
+            android:layout_marginTop="15dp"
             android:text="Anonymous"/>
 
         <Button
@@ -148,6 +133,16 @@
             android:tooltipText="You will be able to see this suggestion to everyone"
             app:iconTint="@color/color_primary_container_night"
             app:icon="@drawable/ic_info" />
+
+        <TextView
+            android:id="@+id/max_selectable_photo_from_gallery_suggestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image_view_button_select_photo_from_gallery"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:text="max: 20"
+            android:textSize="13sp" />
 
         <FrameLayout
             android:layout_width="match_parent"

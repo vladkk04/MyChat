@@ -2,13 +2,9 @@ package com.arkul.mychat.utilities.dialogs
 
 import android.content.Context
 import android.graphics.Typeface
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.StateListDrawable
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
-import android.widget.FrameLayout
 import android.widget.RadioButton
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.view.size
