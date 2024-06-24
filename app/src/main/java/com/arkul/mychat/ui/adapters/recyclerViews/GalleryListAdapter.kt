@@ -40,16 +40,19 @@ class GalleryListAdapter() : RecyclerView.Adapter<GalleryListAdapter.ViewHolder>
                 .load(model.uri)
                 .into(imageView)
 
-            imageView.setOnClickListener {
-                if (counter.visibility == View.VISIBLE) {
+            counter.visibility = if (model in selectedPhotos) View.VISIBLE else View.INVISIBLE
+
+            itemView.setOnClickListener {
+
+                if (model in selectedPhotos) {
                     selectPhotoCounter--
                     selectedPhotos.remove(model)
-                    counter.visibility = View.INVISIBLE
                 } else {
+                    if(selectPhotoCounter == 10) return@setOnClickListener
                     selectPhotoCounter++
                     selectedPhotos.add(model)
-                    counter.visibility = View.VISIBLE
                 }
+                counter.visibility = if (model in selectedPhotos) View.VISIBLE else View.INVISIBLE
                 counter.text = selectPhotoCounter.toString()
                 listener?.onItemClick(selectedPhotos)
             }

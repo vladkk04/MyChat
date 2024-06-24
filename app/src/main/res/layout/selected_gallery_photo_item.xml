@@ -6,6 +6,7 @@
     android:layout_marginStart="20dp">
 
     <CheckBox
+        style="@style/checkBox"
         android:id="@+id/checkbox_delete_selected_photo"
         android:layout_width="32dp"
         android:layout_height="32dp"
@@ -13,8 +14,8 @@
         android:gravity="center"
         android:elevation="1dp"
         android:layout_margin="6dp"
-        android:visibility="invisible"
-        android:button="@null" />
+        android:visibility="visible"
+        android:button="@drawable/ic_delete" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/image_view_selected_photo_from_gallery"

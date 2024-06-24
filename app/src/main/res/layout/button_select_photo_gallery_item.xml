@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/button_select_photo_from_gallery_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/image_view_button_select_photo_from_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@id/textFieldDescription"
+        android:background="@drawable/square_dashed"
+        android:scaleType="center"
+        app:srcCompat="@drawable/ic_add_photo_alternate"
+        app:tint="@color/color_primary_night" />
+
+</FrameLayout>
