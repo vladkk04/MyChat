@@ -1,9 +1,6 @@
 package com.arkul.mychat.ui.adapters.recyclerViews
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
-import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +15,8 @@ class SelectedPhotosGalleryListAdapter : RecyclerView.Adapter<RecyclerView.ViewH
 
     private val asyncListDiffer = AsyncListDiffer(this, SelectedPhotosGalleryListDifferCallbacks())
     private var onItemAddSelectPhotoView: OnItemButtonAddSelectPhotoView? = null
+
+    private var onButtonChange: OnItemButtonChangeSizeAddSelectPhotoView? = null
 
     var addButtonSelectPhotoView = false
         set(value) {
@@ -35,10 +34,13 @@ class SelectedPhotosGalleryListAdapter : RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     fun setList(list: List<PhotoGallery>) {
-        asyncListDiffer.submitList(if (addButtonSelectPhotoView) listOf(null) + list else list)
+        asyncListDiffer.submitList(listOf(null) + list) {
+            onButtonChange?.onChange()
+        }
     }
 
-    inner class ViewHolderSelectedPhotoGallery(val binding: SelectedGalleryPhotoItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolderSelectedPhotoGallery(val binding: SelectedGalleryPhotoItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(item: PhotoGallery?) {
             val imageView = binding.imageViewSelectedPhotoFromGallery
             val deleteButton = binding.checkboxDeleteSelectedPhoto
@@ -52,32 +54,41 @@ class SelectedPhotosGalleryListAdapter : RecyclerView.Adapter<RecyclerView.ViewH
             deleteButton.setOnClickListener {
                 val newList = asyncListDiffer.currentList.toMutableList()
                 newList.removeAt(adapterPosition)
-                setList(newList)
-            }
-
-            imageView.setOnClickListener {
-                deleteButton.visibility =
-                    if (item in asyncListDiffer.currentList) View.VISIBLE else View.INVISIBLE
+                asyncListDiffer.submitList(newList) {
+                    onButtonChange?.onChange()
+                }
             }
         }
     }
 
 
-    inner class ViewHolderButtonSelectPhotoGallery(val binding: ButtonSelectPhotoGalleryItemBinding) :
+    inner class ViewHolderButtonSelectPhotoGallery(private val binding: ButtonSelectPhotoGalleryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        //val item = asyncListDiffer.currentList[adapterPosition]
-        fun bind() {
-            Log.d("debug", "hello")
-            if (adapterPosition == 0) {
-                Log.d("debug", "nigga")
-
-                //binding.buttonSelectPhotoFromGalleryLayout.layoutParams.width = 200
+        init {
+            if (onButtonChange == null) {
+                onButtonChange = object : OnItemButtonChangeSizeAddSelectPhotoView {
+                    override fun onChange() {
+                        adjustLayoutParams()
+                    }
+                }
             }
+        }
 
+        fun bind() {
             binding.imageViewButtonSelectPhotoFromGallery.setOnClickListener {
                 onItemAddSelectPhotoView?.onClick()
             }
+            adjustLayoutParams()
+        }
+
+        private fun adjustLayoutParams() {
+            val params = itemView.layoutParams
+            params.height = ViewGroup.LayoutParams.WRAP_CONTENT
+            params.width =
+                if (asyncListDiffer.currentList.size != 1) 100.toDp(binding.root.context)
+                else ViewGroup.LayoutParams.MATCH_PARENT
+            itemView.layoutParams = params
         }
     }
 
@@ -124,5 +135,9 @@ class SelectedPhotosGalleryListAdapter : RecyclerView.Adapter<RecyclerView.ViewH
 
     fun interface OnItemButtonAddSelectPhotoView {
         fun onClick()
+    }
+
+    internal interface OnItemButtonChangeSizeAddSelectPhotoView {
+        fun onChange()
     }
 }

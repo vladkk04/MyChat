@@ -90,7 +90,8 @@
             android:id="@+id/recyclerView_suggestions_photos"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_marginVertical="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
             android:visibility="visible"
             android:layout_below="@id/textFieldDescription"/>
 
