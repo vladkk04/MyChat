@@ -20,9 +20,11 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.arkul.mychat.databinding.ActivityMainBinding
 import com.arkul.mychat.data.network.connectivity.NetworkConnectivityObserver
 import com.arkul.mychat.ui.screens.initial.InitialFragmentDirections
+import com.arkul.mychat.utilities.permission.PermissionViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

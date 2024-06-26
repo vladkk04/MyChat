@@ -1,24 +1,16 @@
 package com.arkul.mychat.ui.screens.createProfile.customizeAvatar
 
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.arkul.mychat.R
@@ -34,7 +26,6 @@ import com.arkul.mychat.utilities.openAppSettings
 import com.arkul.mychat.utilities.permission.AndroidPermissions
 import com.arkul.mychat.utilities.permission.AppPermissionDialogs
 import com.arkul.mychat.utilities.permission.PermissionViewModel
-import com.arkul.mychat.utilities.permission.permissionViewModel
 import com.madrapps.pikolo.listeners.SimpleColorSelectionListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -50,7 +41,7 @@ class CustomizeAvatarFragment : Fragment() {
 
     private val sharedViewModel: SharedProfileViewModel by viewModels(ownerProducer = { requireParentFragment() })
 
-    private val permissionViewModel: PermissionViewModel by permissionViewModel()
+    private val permissionViewModel: PermissionViewModel by viewModels()
 
     private val cameraPreview: CameraPreview by lazy { CameraPreview(this) }
 
@@ -100,17 +91,16 @@ class CustomizeAvatarFragment : Fragment() {
             launch {
                 observePermissionDialog().collectLatest {
                     it.forEach { permission ->
-                        permissionDialog(
-                            permission = AppPermissionDialogs.CAMERA,
-                            !shouldShowRequestPermissionRationale(AndroidPermissions.LOCATION.permission),
+                       /* permissionDialog(
+                            permissionDialog = AppPermissionDialogs.CAMERA,
+                            !shouldShowRequestPermissionRationale(permission),
                             onDismissClick = { permissionViewModel.dismissDialog() },
                             onOkClick = {
-                                permissionViewModel.launchMultiplyPermission(
+                                permissionViewModel.launchSinglePermission(
                                     AndroidPermissions.LOCATION
                                 )
                             },
-                            onGoToAppSettingsClick = ::openAppSettings
-                        )
+                        )*/
                     }
                 }
             }

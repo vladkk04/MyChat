@@ -1,5 +1,6 @@
 package com.arkul.mychat.utilities.permission
 
+import android.util.Log
 import androidx.activity.result.ActivityResultRegistry
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModel
@@ -16,7 +17,7 @@ class PermissionViewModel @AssistedInject constructor(
     @Assisted private val activityResultRegistry: ActivityResultRegistry
 ) : ViewModel() {
 
-    private val _visiblePermissionDialogQueue = MutableStateFlow(emptyList<String>())
+    private val _visiblePermissionDialogQueue = MutableStateFlow(emptyList<AndroidPermissions>())
     val dialogQueue get() = _visiblePermissionDialogQueue.asStateFlow()
 
     fun dismissDialog() {
@@ -28,18 +29,18 @@ class PermissionViewModel @AssistedInject constructor(
             "SINGLE_LAUNCH_PERMISSION",
             ActivityResultContracts.RequestPermission()
         ) { isGranted ->
-            onPermissionResult(androidPermissions.permission, isGranted)
+            onPermissionResult(androidPermissions, isGranted)
         }.launch(androidPermissions.permission)
     }
 
-    fun launchMultiplyPermission(vararg androidPermissions: AndroidPermissions) {
+    fun launchMultiplyPermission(androidPermissions: Array<AndroidPermissions>) {
         activityResultRegistry.register(
             "MULTIPLY_LAUNCH_PERMISSIONS",
             ActivityResultContracts.RequestMultiplePermissions()
         ) { perms ->
             androidPermissions.forEach { permission ->
                 onPermissionResult(
-                    permission = permission.permission,
+                    permission = permission,
                     isGranted = if (perms.keys.contains(permission.permission)) {
                         perms[permission.permission] == true
                     } else true
@@ -49,7 +50,7 @@ class PermissionViewModel @AssistedInject constructor(
     }
 
     private fun onPermissionResult(
-        permission: String,
+        permission: AndroidPermissions,
         isGranted: Boolean
     ) {
         if (!isGranted && !_visiblePermissionDialogQueue.value.contains(permission)) {
