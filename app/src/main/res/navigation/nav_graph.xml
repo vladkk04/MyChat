@@ -92,12 +92,17 @@
 
     <navigation
         android:id="@+id/main_graph"
-        app:startDestination="@id/chatsFragment">
+        app:startDestination="@id/chatFragment">
         <fragment
             android:id="@+id/chatsFragment"
             android:name="com.arkul.mychat.ui.screens.main.ChatsFragment"
             android:label="fragment_correspondences"
             tools:layout="@layout/fragment_chats" />
+        <fragment
+            android:id="@+id/chatFragment"
+            android:name="com.arkul.mychat.ui.screens.main.ChatFragment"
+            android:label="fragment_chat"
+            tools:layout="@layout/fragment_chat" />
         <fragment
             android:id="@+id/suggestionsFragment"
             android:name="com.arkul.mychat.ui.screens.main.SuggestionsFragment"

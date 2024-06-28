@@ -57,6 +57,8 @@
     <string name="ok">OK</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    
+    <string name="media_limit_photos_access_text">You\'ve given access to a select number of photos</string>
+    <string name="manage_text">Manage</string>
+
 
 </resources>

@@ -19,6 +19,7 @@ import com.arkul.mychat.ui.screens.createProfile.SharedProfileViewModel
 import com.arkul.mychat.ui.screens.createProfile.customizeAvatar.CustomizeAvatarViewModel
 import com.arkul.mychat.ui.screens.createProfile.initBasicInfoProfile.BasicInfoProfileViewModel
 import com.arkul.mychat.utilities.constants.Constants
+import com.arkul.mychat.utilities.constants.UCropConstants
 import com.arkul.mychat.utilities.image.ImageCropActivityResultContract
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -87,7 +88,7 @@ class ProfilePreviewFragment : Fragment() {
     }
 
     private fun setupImageCropActivity() {
-        imageCropActivity = ImageCropActivityResultContract(this, viewModel.uCropSettings)
+        imageCropActivity = ImageCropActivityResultContract(this, UCropConstants.WALLPAPER_SETTINGS)
     }
 
     private fun setupEditWallpaperOnClickListener() {
@@ -113,44 +114,50 @@ class ProfilePreviewFragment : Fragment() {
         }
     }
 
-    private suspend fun observeBasicInfoProfile() = basicInfoProfileViewModel.stateTextLayout.collectLatest {
-        binding.textViewFullName.text = it.firstName.plus(" ").plus(it.lastName)
-        binding.textViewUsername.text = Constants.USERNAME_TAG.plus(it.username)
-        binding.textViewBirthday.text = it.birthday
-        binding.textViewAboutMe.text = it.aboutMe
-    }
+    private suspend fun observeBasicInfoProfile() =
+        basicInfoProfileViewModel.stateTextLayout.collectLatest {
+            binding.textViewFullName.text = it.firstName.plus(" ").plus(it.lastName)
+            binding.textViewUsername.text = Constants.USERNAME_TAG.plus(it.username)
+            binding.textViewBirthday.text = it.birthday
+            binding.textViewAboutMe.text = it.aboutMe
+        }
 
     private suspend fun observeAvatarMode() =
         customizeAvatarViewModel.selectAvatarMode.collectLatest {
             when (it) {
                 SelectAvatarModeEvents.Default -> {
                     binding.imageViewAvatar.post {
-                        binding.imageViewAvatar.setContentPadding(60, 60, 60 , 40)
+                        binding.imageViewAvatar.setContentPadding(60, 60, 60, 40)
                     }.let { result ->
-                        if(result) observeAvatarDefault()
+                        if (result) observeAvatarDefault()
                     }
-
                 }
 
                 null -> return@collectLatest
 
                 else -> {
                     binding.imageViewAvatar.post {
-                        binding.imageViewAvatar.setContentPadding(0, 0, 0 , 0)
+                        binding.imageViewAvatar.setContentPadding(0, 0, 0, 0)
                     }.let { result ->
-                        if(result) observeCurrentAvatarBitmap()
+                        if (result) observeCurrentAvatarBitmap()
                     }
                 }
             }
         }
 
-    private suspend fun observeBackgroundColor() = customizeAvatarViewModel.backgroundColor.collectLatest { binding.imageViewAvatar.setBackgroundColor(it) }
+    private suspend fun observeBackgroundColor() =
+        customizeAvatarViewModel.backgroundColor.collectLatest {
+            binding.imageViewAvatar.setBackgroundColor(it)
+        }
 
-    private suspend fun observeCroppedWallpaper() = viewModel.croppedWallpaperBitmap.collectLatest { binding.wallpaperImage.setImageBitmap(it) }
+    private suspend fun observeCroppedWallpaper() =
+        viewModel.croppedWallpaperBitmap.collectLatest { binding.wallpaperImage.setImageBitmap(it) }
 
-    private suspend fun observeAvatarDefault() = customizeAvatarViewModel.currentAvatarDefault.collectLatest { setAvatarDrawable(it) }
+    private suspend fun observeAvatarDefault() =
+        customizeAvatarViewModel.currentAvatarDefault.collectLatest { setAvatarDrawable(it) }
 
-    private suspend fun observeCurrentAvatarBitmap() = customizeAvatarViewModel.currentAvatarBitmap.collectLatest { setAvatarBitmap(it) }
+    private suspend fun observeCurrentAvatarBitmap() =
+        customizeAvatarViewModel.currentAvatarBitmap.collectLatest { setAvatarBitmap(it) }
 
     override fun onResume() {
         super.onResume()

@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.Cursor
 import android.net.Uri
 import android.provider.MediaStore
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -15,6 +16,7 @@ import com.arkul.mychat.data.models.PhotoGallery
 import com.arkul.mychat.databinding.SuggestionGalleryAlertDialogBinding
 import com.arkul.mychat.ui.adapters.recyclerViews.GalleryListAdapter
 import com.arkul.mychat.utilities.constants.Constants
+import com.arkul.mychat.utilities.openAppSettings
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
@@ -45,13 +47,19 @@ private fun getPhotosFromGallery(context: Context): ArrayList<PhotoGallery> {
 
 
 fun Fragment.createSuggestionGalleryDialog(
+    isMediaLimitAccess: Boolean = false,
     onAddClickListener: ((ArrayList<PhotoGallery>) -> Unit)
 ): AlertDialog? {
-    if (isShowingDialog) {
-        return null
-    }
+    if (isShowingDialog) { return null }
 
     val binding = SuggestionGalleryAlertDialogBinding.inflate(layoutInflater)
+
+    binding.mediaLimitAccess.root.visibility =
+        if (isMediaLimitAccess) View.VISIBLE else View.INVISIBLE
+
+    binding.mediaLimitAccess.buttonMediaLimitAccess.setOnClickListener {
+        openAppSettings()
+    }
 
     val recyclerView = binding.recycleViewGalleryAlertDialog
 
@@ -70,11 +78,11 @@ fun Fragment.createSuggestionGalleryDialog(
     }
 
     val dialog = MaterialAlertDialogBuilder(requireContext())
+        .setTitle("Select Photos")
         .setPositiveButton("Add") { _, _ ->
             onAddClickListener.invoke(galleryAdapter.selectedPhotos)
         }
         .setNeutralButton("Cancel") { view, _ -> view.dismiss() }
-        .setTitle("Select Photos")
         .setView(binding.root)
         .create()
 

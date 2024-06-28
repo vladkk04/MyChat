@@ -38,6 +38,15 @@
 
     </style>
 
+
+    <style name="CustomShapeAppearanceOverlay.Material3.Corner.Top" parent="ShapeAppearanceOverlay.Material3.Corner.Top">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">30dp</item>
+        <item name="cornerSizeTopLeft">30dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
     <style name="AlertDialogTheme" parent="ThemeOverlay.Material3.MaterialAlertDialog">
         <item name="alertDialogStyle">@style/MyAlertDialogStyle</item>
         <item name="buttonBarPositiveButtonStyle">@style/MyBarButtonStyle</item>
@@ -127,6 +136,15 @@
         <item name="hintTextColor">@color/color_on_surface_variant_night</item>
         <item name="android:background">@null</item>
         <item name="android:theme">@style/ThemeOverlay.Material3.TextInputEditText.Cursor.Color</item>
+    </style>
+
+    <style name="Widget.TextInputLayout.BottomSentBar" parent="Widget.Material3.TextInputLayout.FilledBox">
+        <item name="colorPrimary">@color/color_primary_container_night</item>
+    </style>
+
+    <style name="ShapeAppearance.App.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50dp</item>
     </style>
 
     <style name="ThemeOverlay.Material3.TextInputEditText.Cursor.Color" parent="">

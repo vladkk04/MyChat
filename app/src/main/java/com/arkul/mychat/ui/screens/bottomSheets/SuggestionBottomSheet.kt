@@ -62,22 +62,28 @@ class SuggestionBottomSheet : BottomSheetDialogFragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             observePermissionDialog()
         }
+
         setupButtonOnClickListeners()
         setupAdapterGallery()
         setupRecycleView()
+        setupBottomSheet()
+        setupTextInputFilters()
 
         binding.maxSelectablePhotoFromGallerySuggestion.text =
             "max: ${Constants.MAX_SELECTABLE_PHOTOS_FROM_GALLERY_SUGGESTION_STRING}"
 
+        return binding.root
+    }
+
+    private fun setupTextInputFilters() {
         binding.textInputEditTextDesctiptionSuggestion.filters =
             getFilter(InputFilterType.IS_WHITE_SPACE)
+    }
 
+    private fun setupBottomSheet() {
         val standardBottomSheet = binding.layoutSuggestionCreate
         val standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-
-        return binding.root
-
     }
 
     private fun setupAdapterGallery() {
@@ -85,8 +91,7 @@ class SuggestionBottomSheet : BottomSheetDialogFragment() {
         adapter.addButtonSelectPhotoView = true
         adapter.setOnItemAddSelectPhotoView {
             permissionViewModel.launchMultiplyPermission(AndroidPermissions.getMediaPermission())
-
-            createSuggestionGalleryDialog {
+            createSuggestionGalleryDialog(true) {
                 adapter.setList(it)
             }?.show()
         }

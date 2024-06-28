@@ -34,26 +34,40 @@
                 android:scaleType="centerCrop" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_transform_image_wallpaper"
                 style="?attr/materialIconButtonStyle"
+                android:id="@+id/button_change_image_wallpaper"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|end"
                 android:visibility="invisible"
-                app:icon="@drawable/ic_crop"
+                app:icon="@drawable/ic_edit"
                 app:iconTint="@color/color_edit_image_button_icon_tint_night" />
 
         </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
+            style="?attr/materialIconButtonStyle"
+            android:id="@+id/button_change_image_avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            android:visibility="invisible"
+            app:icon="@drawable/ic_edit"
+            app:iconTint="@color/color_edit_image_button_icon_tint_night"
+            app:layout_constraintBottom_toBottomOf="@+id/image_view_avatar"
+            app:layout_constraintEnd_toEndOf="@+id/image_view_avatar"
+            app:layout_constraintStart_toStartOf="@+id/image_view_avatar"
+            app:layout_constraintTop_toTopOf="@+id/image_view_avatar" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/image_view_avatar"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:elevation="0dp"
+            android:elevation="-1dp"
             android:padding="1dp"
             android:scaleType="centerCrop"
             android:cropToPadding="true"
-            android:src="@drawable/avatar_default_1"
+            android:src="@drawable/us"
             app:layout_constraintBottom_toBottomOf="@+id/image_view_wallpaper"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.1"
@@ -61,10 +75,7 @@
             app:layout_constraintTop_toBottomOf="@+id/image_view_wallpaper"
             app:shapeAppearanceOverlay="@style/ShapeAppearance.ImageView.Rounded"
             app:strokeColor="@color/color_avatar_stroke_night"
-            app:strokeWidth="2dp">
-
-
-        </com.google.android.material.imageview.ShapeableImageView>
+            app:strokeWidth="2dp"/>
 
         <TextView
             android:id="@+id/text_view_username"

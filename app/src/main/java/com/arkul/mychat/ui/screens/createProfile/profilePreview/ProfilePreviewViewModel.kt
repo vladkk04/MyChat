@@ -9,13 +9,6 @@ import kotlinx.coroutines.flow.asStateFlow
 
 class ProfilePreviewViewModel: ViewModel() {
 
-    val uCropSettings = UCrop.Options().apply {
-        this.withAspectRatio(2f, 1f)
-        this.setCompressionFormat(Bitmap.CompressFormat.JPEG)
-        this.withMaxResultSize(2000, 1000)
-        this.setCompressionQuality(80)
-    }
-
     private val _originalWallpaperUri = MutableStateFlow<Uri?>(null)
     val originalWallpaperUri = _originalWallpaperUri.asStateFlow()
 
