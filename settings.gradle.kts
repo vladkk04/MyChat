@@ -33,6 +33,7 @@ dependencyResolutionManagement {
         create("classPathsLibs") {
             val navigationVersion = "2.7.7"
             val googleServicesVersion = "4.4.1"
+
             library("google.gms", "com.google.gms", "google-services").version(googleServicesVersion)
             library("androidx-navigation", "androidx.navigation", "navigation-safe-args-gradle-plugin").version(navigationVersion)
         }
@@ -57,7 +58,8 @@ dependencyResolutionManagement {
             val dataStoreVersion = "1.0.0"
             val dataStorePreferencesVersion = "1.0.0"
 
-            val cameraXVersion = "1.4.0-alpha05"
+            val cameraXVersion = "1.4.0-beta02"
+            val emojiIOSVersion = "0.21.0"
 
             library("androidx.camera.core", "androidx.camera", "camera-core").version(cameraXVersion)
             library("androidx.camera.camera2", "androidx.camera", "camera-camera2").version(cameraXVersion)
@@ -107,6 +109,9 @@ dependencyResolutionManagement {
             library("android-material", "com.google.android.material", "material").version(googleAndroidMaterialVersion)
             library("androidx-fragment-ktx", "androidx.fragment", "fragment-ktx").version(fragmentKtxVersion)
             library("androidx-activity-ktx", "androidx.activity", "activity-ktx").version(activityKtxVersion)
+
+            //Emoji
+            library("com.vanniktech", "com.vanniktech", "emoji-ios").version(emojiIOSVersion)
         }
 
         create("testLibs") {

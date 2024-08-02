@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/report"
+        android:icon="@drawable/ic_error"
+        android:title="Report"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/thumb_up_item"
+        android:title="Thumb Up"
+        android:icon="@drawable/ic_thumb_up_outlined"
+        app:actionLayout="@layout/custom_suggestion_thumb_up_checkbox"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/thumb_down_item"
+        android:title="Thumb Down"
+        android:icon="@drawable/ic_thumb_down_outlined"
+        app:actionLayout="@layout/custom_suggestion_thumb_down_checkbox"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/author"
+        android:title="Author"
+        app:showAsAction="always"/>
+
+</menu>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <CheckBox
+        style="@style/checkBox"
+        android:id="@+id/checkBox_thumb_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableBottom="@drawable/sl_thumb_down"
+        android:button="@null"
+        android:paddingBottom="8dp"
+        android:textAlignment="center"
+        android:textSize="8sp" />
+</FrameLayout>

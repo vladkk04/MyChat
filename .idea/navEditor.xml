@@ -13,8 +13,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="688" />
-                            <option name="y" value="63" />
+                            <option name="x" value="860" />
+                            <option name="y" value="-31" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -34,8 +34,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="470" />
-                            <option name="y" value="461" />
+                            <option name="x" value="501" />
+                            <option name="y" value="548" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -92,26 +92,65 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="chatsFragment">
+                            <entry key="allSuggestionsFragment">
                               <value>
                                 <LayoutPositions>
                                   <option name="myPosition">
                                     <Point>
-                                      <option name="x" value="12" />
-                                      <option name="y" value="12" />
+                                      <option name="x" value="264" />
+                                      <option name="y" value="8" />
                                     </Point>
+                                  </option>
+                                  <option name="myPositions">
+                                    <map>
+                                      <entry key="action_suggestionsFragment_to_suggestionFragment">
+                                        <value>
+                                          <LayoutPositions />
+                                        </value>
+                                      </entry>
+                                    </map>
                                   </option>
                                 </LayoutPositions>
                               </value>
                             </entry>
-                            <entry key="chatsFragment2">
+                            <entry key="chatFragment">
                               <value>
                                 <LayoutPositions>
                                   <option name="myPosition">
                                     <Point>
-                                      <option name="x" value="-203" />
-                                      <option name="y" value="-57" />
+                                      <option name="x" value="-467" />
+                                      <option name="y" value="18" />
                                     </Point>
+                                  </option>
+                                  <option name="myPositions">
+                                    <map>
+                                      <entry key="action_chatFragment_to_inboxChatsFragment">
+                                        <value>
+                                          <LayoutPositions />
+                                        </value>
+                                      </entry>
+                                    </map>
+                                  </option>
+                                </LayoutPositions>
+                              </value>
+                            </entry>
+                            <entry key="inboxChatsFragment">
+                              <value>
+                                <LayoutPositions>
+                                  <option name="myPosition">
+                                    <Point>
+                                      <option name="x" value="-111" />
+                                      <option name="y" value="5" />
+                                    </Point>
+                                  </option>
+                                  <option name="myPositions">
+                                    <map>
+                                      <entry key="action_inboxChatsFragment_to_chatFragment">
+                                        <value>
+                                          <LayoutPositions />
+                                        </value>
+                                      </entry>
+                                    </map>
                                   </option>
                                 </LayoutPositions>
                               </value>
@@ -121,21 +160,40 @@
                                 <LayoutPositions>
                                   <option name="myPosition">
                                     <Point>
-                                      <option name="x" value="12" />
-                                      <option name="y" value="368" />
+                                      <option name="x" value="608" />
+                                      <option name="y" value="-3" />
                                     </Point>
                                   </option>
                                 </LayoutPositions>
                               </value>
                             </entry>
-                            <entry key="suggestionsFragment">
+                            <entry key="suggestionFragment">
                               <value>
                                 <LayoutPositions>
                                   <option name="myPosition">
                                     <Point>
-                                      <option name="x" value="230" />
-                                      <option name="y" value="12" />
+                                      <option name="x" value="433" />
+                                      <option name="y" value="363" />
                                     </Point>
+                                  </option>
+                                  <option name="myPositions">
+                                    <map>
+                                      <entry key="action_suggestionFragment_to_allSuggestionsFragment">
+                                        <value>
+                                          <LayoutPositions />
+                                        </value>
+                                      </entry>
+                                      <entry key="action_suggestionFragment_to_inboxChatsFragment">
+                                        <value>
+                                          <LayoutPositions />
+                                        </value>
+                                      </entry>
+                                      <entry key="action_suggestionFragment_to_profileFragment">
+                                        <value>
+                                          <LayoutPositions />
+                                        </value>
+                                      </entry>
+                                    </map>
                                   </option>
                                 </LayoutPositions>
                               </value>
@@ -150,8 +208,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="688" />
-                            <option name="y" value="419" />
+                            <option name="x" value="699" />
+                            <option name="y" value="922" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -171,8 +229,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="470" />
-                            <option name="y" value="63" />
+                            <option name="x" value="431" />
+                            <option name="y" value="-103" />
                           </Point>
                         </option>
                         <option name="myPositions">

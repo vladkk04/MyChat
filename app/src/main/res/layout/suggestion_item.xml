@@ -25,26 +25,25 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="7dp"
                 android:layout_marginTop="5dp"
-                android:layout_toStartOf="@+id/button_share"
+                android:layout_toStartOf="@+id/button_report"
                 android:text="Add that cat's and dog's name will been good for enought time"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <CheckBox
+            <!--<CheckBox
                 android:id="@+id/button_share"
                 style="@style/checkBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:button="@drawable/ic_share" />
+                android:button="@drawable/ic_share" />-->
 
             <CheckBox
                 style="@style/checkBox"
                 android:id="@+id/button_report"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/button_share"
                 android:layout_alignParentEnd="true"
                 android:button="@drawable/ic_error" />
 
@@ -84,8 +83,8 @@
                     android:textSize="8sp" />
 
                 <CheckBox
-                    android:id="@+id/button_forward"
                     style="@style/checkBox"
+                    android:id="@+id/button_forward_suggestion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -94,7 +93,7 @@
             </LinearLayout>
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/image_view_avatar"
+                android:id="@+id/image_view_author"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_alignParentEnd="true"
@@ -103,7 +102,6 @@
                 android:layout_marginBottom="10dp"
                 android:background="@color/color_background_night"
                 android:scaleType="centerCrop"
-                android:src="@drawable/us"
                 app:shapeAppearanceOverlay="@style/ShapeAppearance.ImageView.Suggestion.Rounded" />
 
         </RelativeLayout>

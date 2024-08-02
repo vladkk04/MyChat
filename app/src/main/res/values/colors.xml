@@ -32,11 +32,20 @@
     <color name="custom_outlined_text_field_outline_color">@color/color_outline_night</color>
     <!-- Image Edit Icon Buttons Color Night -->
     <color name="color_edit_image_button_icon_tint_night">#EEEEEE</color>
+    <!-- Settings Profile Icon Buttons Color Night -->
+    <color name="color_settings_profile_button_icon_tint_night">#EEEEEE</color>
     <!-- Take Photo Icon Button Color Night -->
     <color name="color_take_photo_button_icon_tint_night">#EEEEEE</color>"
     <!-- Avatar Color Night -->
     <color name="color_avatar_stroke_night">#EEEEEE</color>
     <!--- Thumb Suggestion Color Night -->
-    <color name="color_thumb_suggestion_night">#EEEEEE</color>"
+    <color name="color_thumb_suggestion_night">#EEEEEE</color>
+
+    <!--- Bottom Sheet Colors Night -->
+    <color name="color_background_tint_bottom_sheet_night">#949494</color>
+
+
+    <!-- Suggestion Colors Night -->
+    <color name="color_suggestion_description_night">#949494</color>
 
 </resources>

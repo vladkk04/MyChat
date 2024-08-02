@@ -1,7 +1,6 @@
 package com.arkul.mychat.ui.screens.auth.register
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.arkul.mychat.data.models.AuthInputLayoutEvents
-import com.arkul.mychat.data.models.RegisterTextLayoutState
-import com.arkul.mychat.data.models.RegisterUiState
+import com.arkul.mychat.data.models.inputLayouts.inputLayoutsEvents.AuthInputLayoutEvents
+import com.arkul.mychat.data.models.inputLayouts.inputLayoutsState.RegisterInputLayoutState
+import com.arkul.mychat.data.models.uiStates.RegisterUiState
 import com.arkul.mychat.data.network.firebase.auth.GitHubAuthUiClient
 import com.arkul.mychat.data.network.firebase.auth.GoogleAuthUiClient
 import com.arkul.mychat.databinding.FragmentRegisterBinding
@@ -23,6 +22,7 @@ import com.arkul.mychat.utilities.progressBar.showProgressBar
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.textfield.TextInputLayout.END_ICON_NONE
 import com.google.android.material.textfield.TextInputLayout.END_ICON_PASSWORD_TOGGLE
+import com.vanniktech.ui.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -63,7 +63,7 @@ class RegisterFragment : BaseFragment<RegisterViewModel>() {
     }
 
     private suspend fun observeUITextLayoutState() =
-        viewModel.stateTextLayout.collectLatest { updateTextLayoutsUI(it) }
+        viewModel.stateInputLayout.collectLatest { updateTextLayoutsUI(it) }
 
     private suspend fun observeUIState() =
         viewModel.uiState.collectLatest { updateUI(it) }
@@ -73,7 +73,7 @@ class RegisterFragment : BaseFragment<RegisterViewModel>() {
         showToast(state.errorMessage)
     }
 
-    private fun updateTextLayoutsUI(state: RegisterTextLayoutState) {
+    private fun updateTextLayoutsUI(state: RegisterInputLayoutState) {
         binding.inputLayoutEmail.error = state.errorEmail
         binding.inputLayoutPassword.apply {
             this.error = state.errorPassword
@@ -109,7 +109,8 @@ class RegisterFragment : BaseFragment<RegisterViewModel>() {
         binding.buttonRegister.setOnClickListener {
             if(viewModel.uiState.value.isLoading) return@setOnClickListener
             viewModel.signUpWithEmail()
-            hideKeyboardFrom(binding.inputTextPassword.rootView)
+            requireActivity().hideKeyboard(binding.inputTextEmail.rootView)
+            //hideKeyboardFrom(binding.inputTextPassword.rootView)
         }
         binding.buttonGoogle.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {

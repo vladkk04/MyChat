@@ -1,6 +1,6 @@
 package com.arkul.mychat.data.network.firebase.services
 
-import com.arkul.mychat.data.models.AuthEmailResult
+import com.arkul.mychat.data.models.auth.AuthEmailResult
 
 interface EmailService {
     val accountService: AccountService

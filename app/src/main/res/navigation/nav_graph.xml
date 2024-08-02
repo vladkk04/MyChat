@@ -92,27 +92,57 @@
 
     <navigation
         android:id="@+id/main_graph"
-        app:startDestination="@id/chatFragment">
+        app:startDestination="@id/inboxChatsFragment">
         <fragment
-            android:id="@+id/chatsFragment"
-            android:name="com.arkul.mychat.ui.screens.main.ChatsFragment"
+            android:id="@+id/inboxChatsFragment"
+            android:name="com.arkul.mychat.ui.screens.main.inboxChats.InboxChatsFragment"
             android:label="fragment_correspondences"
-            tools:layout="@layout/fragment_chats" />
+            tools:layout="@layout/fragment_inbox_chats" >
+            <action
+                android:id="@+id/action_inboxChatsFragment_to_chatFragment"
+                app:destination="@id/chatFragment" />
+        </fragment>
         <fragment
             android:id="@+id/chatFragment"
-            android:name="com.arkul.mychat.ui.screens.main.ChatFragment"
+            android:name="com.arkul.mychat.ui.screens.main.chat.ChatFragment"
             android:label="fragment_chat"
-            tools:layout="@layout/fragment_chat" />
+            tools:layout="@layout/fragment_chat" >
+            <action
+                android:id="@+id/action_chatFragment_to_inboxChatsFragment"
+                app:destination="@id/inboxChatsFragment" />
+        </fragment>
         <fragment
-            android:id="@+id/suggestionsFragment"
-            android:name="com.arkul.mychat.ui.screens.main.SuggestionsFragment"
-            android:label="fragment_suggestions"
-            tools:layout="@layout/fragment_suggestions" />
+            android:id="@+id/allSuggestionsFragment"
+            android:name="com.arkul.mychat.ui.screens.main.suggestions.AllSuggestionsFragment"
+            android:label="fragment_all_suggestions"
+            tools:layout="@layout/fragment_all_suggestions">
+            <action
+                android:id="@+id/action_suggestionsFragment_to_suggestionFragment"
+                app:destination="@id/suggestionFragment" />
+        </fragment>
         <fragment
             android:id="@+id/profileFragment"
-            android:name="com.arkul.mychat.ui.screens.main.ProfileFragment"
+            android:name="com.arkul.mychat.ui.screens.main.profile.ProfileFragment"
             android:label="fragment_profile"
             tools:layout="@layout/fragment_profile" />
+        <fragment
+            android:id="@+id/suggestionFragment"
+            android:name="com.arkul.mychat.ui.screens.main.suggestions.SuggestionFragment"
+            android:label="fragment_suggestion"
+            tools:layout="@layout/fragment_suggestion" >
+            <argument
+                android:name="suggestion"
+                app:argType="com.arkul.mychat.data.models.Suggestion" />
+            <action
+                android:id="@+id/action_suggestionFragment_to_inboxChatsFragment"
+                app:destination="@id/inboxChatsFragment" />
+            <action
+                android:id="@+id/action_suggestionFragment_to_allSuggestionsFragment"
+                app:destination="@id/allSuggestionsFragment" />
+            <action
+                android:id="@+id/action_suggestionFragment_to_profileFragment"
+                app:destination="@id/profileFragment" />
+        </fragment>
     </navigation>
 
 </navigation>

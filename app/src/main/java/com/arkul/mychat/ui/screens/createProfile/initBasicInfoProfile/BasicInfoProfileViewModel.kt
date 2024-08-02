@@ -1,9 +1,9 @@
 package com.arkul.mychat.ui.screens.createProfile.initBasicInfoProfile
 
 import androidx.lifecycle.ViewModel
-import com.arkul.mychat.data.models.BasicInfoProfileInputLayoutEvents
-import com.arkul.mychat.data.models.BasicInfoProfileInputLayoutState
-import com.arkul.mychat.utilities.validator.FieldValidate
+import com.arkul.mychat.data.models.inputLayouts.inputLayoutsEvents.BasicInfoProfileInputLayoutEvents
+import com.arkul.mychat.data.models.inputLayouts.inputLayoutsState.BasicInfoProfileInputLayoutState
+import com.arkul.mychat.utilities.validator.EmptyFieldValidate
 import com.arkul.mychat.utilities.validator.models.ValidationResult
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -58,9 +58,9 @@ class BasicInfoProfileViewModel : ViewModel() {
     }
 
     fun isValidatedInputs(): Boolean {
-        val firstNameValidateResult = FieldValidate(_stateTextLayout.value.firstName).validate()
-        val lastNameValidateResult = FieldValidate(_stateTextLayout.value.lastName).validate()
-        val userNameValidateResult = FieldValidate(_stateTextLayout.value.username).validate()
+        val firstNameValidateResult = EmptyFieldValidate(_stateTextLayout.value.firstName).validate()
+        val lastNameValidateResult = EmptyFieldValidate(_stateTextLayout.value.lastName).validate()
+        val userNameValidateResult = EmptyFieldValidate(_stateTextLayout.value.username).validate()
 
         return !ValidationResult.isValidate(
             firstNameValidateResult,

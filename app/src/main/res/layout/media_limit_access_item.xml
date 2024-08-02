@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView android:id="@+id/media_limit_access_card"
+<com.google.android.material.card.MaterialCardView
+    android:id="@+id/media_limit_access_card"
     xmlns:android="http://schemas.android.com/apk/res/android"
     style="?attr/materialCardViewFilledStyle"
     android:layout_width="match_parent"

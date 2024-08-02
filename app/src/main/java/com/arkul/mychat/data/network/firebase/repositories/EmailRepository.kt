@@ -1,6 +1,6 @@
 package com.arkul.mychat.data.network.firebase.repositories
 
-import com.arkul.mychat.data.models.AuthEmailResult
+import com.arkul.mychat.data.models.auth.AuthEmailResult
 import com.arkul.mychat.data.network.firebase.services.AccountService
 import com.arkul.mychat.data.network.firebase.services.EmailService
 import kotlinx.coroutines.tasks.await

@@ -1,9 +1,9 @@
 package com.arkul.mychat.ui.screens.auth.register
 
 import androidx.lifecycle.viewModelScope
-import com.arkul.mychat.data.models.AuthInputLayoutEvents
-import com.arkul.mychat.data.models.RegisterTextLayoutState
-import com.arkul.mychat.data.models.RegisterUiState
+import com.arkul.mychat.data.models.inputLayouts.inputLayoutsEvents.AuthInputLayoutEvents
+import com.arkul.mychat.data.models.inputLayouts.inputLayoutsState.RegisterInputLayoutState
+import com.arkul.mychat.data.models.uiStates.RegisterUiState
 import com.arkul.mychat.data.models.auth.AuthCredentialProviderResult
 import com.arkul.mychat.data.models.auth.AuthCredentialNotProviderResult
 import com.arkul.mychat.data.network.firebase.services.CredentialService
@@ -31,8 +31,8 @@ class RegisterViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(RegisterUiState())
     val uiState get() = _uiState.asStateFlow()
 
-    private val _stateTextLayout = MutableStateFlow(RegisterTextLayoutState())
-    val stateTextLayout get() = _stateTextLayout.asStateFlow()
+    private val _stateInputLayout = MutableStateFlow(RegisterInputLayoutState())
+    val stateInputLayout get() = _stateInputLayout.asStateFlow()
 
     private fun updateIsLoading(isLoading: Boolean) {
         _uiState.update {
@@ -57,8 +57,8 @@ class RegisterViewModel @Inject constructor(
         updateIsLoading(true)
 
         emailService.createUserWithEmailAndPassword(
-            _stateTextLayout.value.email,
-            _stateTextLayout.value.password
+            _stateInputLayout.value.email,
+            _stateInputLayout.value.password
         ).let { result ->
             if (result.isSuccess) {
                 navigateToVerifyEmail()
@@ -84,9 +84,9 @@ class RegisterViewModel @Inject constructor(
 
     fun onEvent(event: AuthInputLayoutEvents) {
         when (event) {
-            is AuthInputLayoutEvents.EmailChanged -> _stateTextLayout.update { it.copy(email = event.email) }
-            is AuthInputLayoutEvents.PasswordChanged -> _stateTextLayout.update { it.copy(password = event.password) }
-            is AuthInputLayoutEvents.PasswordRepeatedChanged -> _stateTextLayout.update {
+            is AuthInputLayoutEvents.EmailChanged -> _stateInputLayout.update { it.copy(email = event.email) }
+            is AuthInputLayoutEvents.PasswordChanged -> _stateInputLayout.update { it.copy(password = event.password) }
+            is AuthInputLayoutEvents.PasswordRepeatedChanged -> _stateInputLayout.update {
                 it.copy(
                     passwordRepeated = event.passwordRepeated
                 )
@@ -103,11 +103,11 @@ class RegisterViewModel @Inject constructor(
     }
 
     private fun isValidatedInputs(): Boolean {
-        val emailValidate = EmailValidate(_stateTextLayout.value.email).validate()
-        val passwordValidate = PasswordValidate(_stateTextLayout.value.password).validate()
+        val emailValidate = EmailValidate(_stateInputLayout.value.email).validate()
+        val passwordValidate = PasswordValidate(_stateInputLayout.value.password).validate()
         val passwordRepeatedValidate = PasswordRepeatedValidate(
-            _stateTextLayout.value.password,
-            _stateTextLayout.value.passwordRepeated
+            _stateInputLayout.value.password,
+            _stateInputLayout.value.passwordRepeated
         ).validate()
 
         return !ValidationResult.isValidate(
@@ -115,7 +115,7 @@ class RegisterViewModel @Inject constructor(
             passwordValidate,
             passwordRepeatedValidate
         ).apply {
-            _stateTextLayout.update { state ->
+            _stateInputLayout.update { state ->
                 state.copy(
                     errorEmail = if (this) emailValidate.errorMessage else null,
                     errorPassword = if (this) passwordValidate.errorMessage else null,

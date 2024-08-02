@@ -30,12 +30,13 @@ enum class ReportCategory(val drawableFill: Int, val drawableOutline: Int) {
 }
 
 private fun createRadioButton(reportCategory: ReportCategory, context: Context): RadioButton {
-    val getFillDrawable = ContextCompat.getDrawable(context, reportCategory.drawableFill)
-    val getOutlineDrawable = ContextCompat.getDrawable(context, reportCategory.drawableOutline)
-
     return RadioButton(context).apply {
         text = reportCategory.name
-        buttonDrawable = getStateListDrawable(getFillDrawable, getOutlineDrawable)
+        buttonDrawable = getStateListDrawable(
+            context,
+            reportCategory.drawableFill,
+            reportCategory.drawableOutline
+        )
         layoutParams = MarginLayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT

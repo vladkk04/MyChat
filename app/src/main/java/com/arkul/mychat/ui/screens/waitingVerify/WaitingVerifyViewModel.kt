@@ -1,16 +1,13 @@
 package com.arkul.mychat.ui.screens.waitingVerify
 
-import android.util.Log
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import com.arkul.mychat.data.models.WaitingVerifyUiState
+import com.arkul.mychat.data.models.uiStates.WaitingVerifyUiState
 import com.arkul.mychat.ui.navigation.BaseViewModel
 import com.arkul.mychat.ui.navigation.models.NavigationEvent
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

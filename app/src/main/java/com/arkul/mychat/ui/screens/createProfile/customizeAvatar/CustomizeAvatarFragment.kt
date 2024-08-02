@@ -14,17 +14,15 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.arkul.mychat.R
-import com.arkul.mychat.data.models.SelectAvatarModeEvents
+import com.arkul.mychat.data.models.uiEvents.SelectAvatarModeEvents
 import com.arkul.mychat.databinding.FragmentCustomizeAvatarBinding
 import com.arkul.mychat.ui.adapters.viewPager2.SelectAvatarAdapter
 import com.arkul.mychat.ui.screens.createProfile.SharedProfileViewModel
-import com.arkul.mychat.utilities.BackgroundCardView
+import com.arkul.mychat.utilities.customizeAvatar.BackgroundCardView
 import com.arkul.mychat.utilities.cameraX.CameraPreview
-import com.arkul.mychat.utilities.dialogs.permissionDialog
+import com.arkul.mychat.utilities.constants.UCropConstants
 import com.arkul.mychat.utilities.image.ImageCropActivityResultContract
-import com.arkul.mychat.utilities.openAppSettings
 import com.arkul.mychat.utilities.permission.AndroidPermissions
-import com.arkul.mychat.utilities.permission.AppPermissionDialogs
 import com.arkul.mychat.utilities.permission.PermissionViewModel
 import com.madrapps.pikolo.listeners.SimpleColorSelectionListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -343,7 +341,7 @@ class CustomizeAvatarFragment : Fragment() {
     }
 
     private fun setupImageCropActivity() {
-        imageCropActivity = ImageCropActivityResultContract(this, viewModel.uCropSettings)
+        imageCropActivity = ImageCropActivityResultContract(this, UCropConstants.AVATAR_SETTINGS)
     }
 
     private fun setupViewPager() {

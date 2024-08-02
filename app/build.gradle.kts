@@ -81,8 +81,6 @@ dependencies {
     implementation(libs.androidx.credentials.services.auth)
     implementation(libs.android.libraries.identity)
 
-    implementation("androidx.palette:palette-ktx:1.0.0")
-
     //DataStore
     implementation(libs.androidx.datastore)
     implementation(libs.androidx.datastore.preferences)
@@ -96,6 +94,9 @@ dependencies {
 
     //uCrop
     implementation(libs.yalantis.ucrop)
+
+    //Emoji Picker
+    implementation(libs.com.vanniktech)
 
     //Glide
     implementation(libs.glide)

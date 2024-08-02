@@ -33,19 +33,28 @@ class PermissionViewModel @AssistedInject constructor(
         }.launch(androidPermissions.permission)
     }
 
-    fun launchMultiplyPermission(androidPermissions: Array<AndroidPermissions>) {
+    fun launchMultiplyPermission(
+        androidPermissions: Array<AndroidPermissions>,
+        onPermissionResult: ((AndroidPermissions, Boolean) -> Unit)? = null,
+        onPermissionCallback: (() -> Unit)? = null
+    ) {
         activityResultRegistry.register(
             "MULTIPLY_LAUNCH_PERMISSIONS",
             ActivityResultContracts.RequestMultiplePermissions()
         ) { perms ->
             androidPermissions.forEach { permission ->
+                val isGranted = if (permission.permission == "android.permission.READ_MEDIA_IMAGES") {
+                    perms.containsKey(permission.permission) || perms.containsKey("android.permission.READ_MEDIA_VISUAL_USER_SELECTED")
+                } else {
+                    perms[permission.permission] == true
+                }
                 onPermissionResult(
                     permission = permission,
-                    isGranted = if (perms.keys.contains(permission.permission)) {
-                        perms[permission.permission] == true
-                    } else true
+                    isGranted = isGranted
                 )
+                onPermissionResult?.invoke(permission, isGranted)
             }
+            onPermissionCallback?.invoke()
         }.launch(androidPermissions.map { it.permission }.toTypedArray())
     }
 

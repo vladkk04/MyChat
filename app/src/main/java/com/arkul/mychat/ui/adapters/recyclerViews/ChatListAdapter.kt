@@ -2,26 +2,16 @@ package com.arkul.mychat.ui.adapters.recyclerViews
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.RecyclerView
-import com.arkul.mychat.data.models.Message
-import com.arkul.mychat.data.models.Suggestion
-import com.arkul.mychat.databinding.MessageItemBinding
-import com.arkul.mychat.databinding.SuggestionItemBinding
+import com.arkul.mychat.databinding.IncomingMessageItemBinding
 
 class ChatListAdapter : RecyclerView.Adapter<ChatListAdapter.ViewHolder>() {
 
-    private val asyncListDiffer = AsyncListDiffer(this, ChatListDifferCallbacks())
 
-    fun saveData(list: List<Message>) {
-        asyncListDiffer.submitList(list)
-    }
-
-
-    inner class ViewHolder(private val binding: MessageItemBinding) :
+    inner class ViewHolder(private val binding: IncomingMessageItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(suggestion: Message) {
-            //binding.textViewTopic.text = suggestion.topic
+        fun bind() {
+
         }
     }
 
@@ -29,7 +19,7 @@ class ChatListAdapter : RecyclerView.Adapter<ChatListAdapter.ViewHolder>() {
         parent: ViewGroup,
         viewType: Int
     ): ChatListAdapter.ViewHolder = ViewHolder(
-        MessageItemBinding.inflate(
+        IncomingMessageItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -37,9 +27,8 @@ class ChatListAdapter : RecyclerView.Adapter<ChatListAdapter.ViewHolder>() {
     )
 
     override fun onBindViewHolder(holder: ChatListAdapter.ViewHolder, position: Int) {
-        holder.bind(asyncListDiffer.currentList[position])
     }
 
-    override fun getItemCount(): Int = asyncListDiffer.currentList.size
+    override fun getItemCount(): Int = 0
 
 }

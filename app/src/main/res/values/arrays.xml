@@ -17,4 +17,8 @@
         <item>@drawable/avatar_default_5</item>
     </integer-array>
 
+    <string-array name="media_type_items" >
+        <item>Image</item>
+        <item>Video</item>
+    </string-array>
 </resources>

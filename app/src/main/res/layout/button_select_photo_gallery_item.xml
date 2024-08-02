@@ -10,7 +10,6 @@
         android:id="@+id/image_view_button_select_photo_from_gallery"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_below="@id/textFieldDescription"
         android:background="@drawable/square_dashed"
         android:scaleType="center"
         app:srcCompat="@drawable/ic_add_photo_alternate"

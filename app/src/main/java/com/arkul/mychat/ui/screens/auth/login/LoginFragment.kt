@@ -1,7 +1,6 @@
 package com.arkul.mychat.ui.screens.auth.login
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.arkul.mychat.data.models.AuthInputLayoutEvents
-import com.arkul.mychat.data.models.LoginTextLayoutState
-import com.arkul.mychat.data.models.LoginUiState
+import com.arkul.mychat.data.models.inputLayouts.inputLayoutsEvents.AuthInputLayoutEvents
+import com.arkul.mychat.data.models.inputLayouts.inputLayoutsState.LoginInputLayoutState
+import com.arkul.mychat.data.models.uiStates.LoginUiState
 
 import com.arkul.mychat.data.network.firebase.auth.GitHubAuthUiClient
 import com.arkul.mychat.data.network.firebase.auth.GoogleAuthUiClient
@@ -22,6 +21,7 @@ import com.arkul.mychat.utilities.extensions.showToast
 import com.arkul.mychat.utilities.keyboard.hideKeyboardFrom
 import com.arkul.mychat.utilities.progressBar.showProgressBar
 import com.google.android.material.textfield.TextInputLayout
+import com.vanniktech.ui.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -50,6 +50,7 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
         viewLifecycleOwner.lifecycleScope.launch {
             observeUITextLayoutState()
         }
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 observeUIState()
@@ -74,7 +75,7 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
         showToast(state.errorMessage)
     }
 
-    private fun updateTextLayoutsUI(state: LoginTextLayoutState) {
+    private fun updateTextLayoutsUI(state: LoginInputLayoutState) {
         binding.inputLayoutEmail.error = state.errorEmail
         binding.inputLayoutPassword.apply {
             this.error = state.errorPassword
@@ -105,7 +106,8 @@ class LoginFragment : BaseFragment<LoginViewModel>() {
         binding.buttonLogin.setOnClickListener {
             if(viewModel.uiState.value.isLoading) return@setOnClickListener
             viewModel.signInWithEmail()
-            hideKeyboardFrom(binding.inputTextPassword.rootView)
+            requireActivity().hideKeyboard(binding.inputTextEmail.rootView)
+            //hideKeyboardFrom(binding.inputTextPassword.rootView)
         }
     }
 

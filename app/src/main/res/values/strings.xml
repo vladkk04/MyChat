@@ -28,8 +28,7 @@
     <string name="hint_birthday">Birthday</string>
     <string name="hint_about_me">About me</string>
     <string name="hint_type_date">DD/MM/YYYY</string>
-
-
+    
     <!-- Description -->
     <string name="description_github_auth">GitHub Auth\n</string>
     <string name="description_google_auth">Google Auth</string>
@@ -43,7 +42,6 @@
     <string name="resend_confirmation_text">Resend confirmation email</string>
     <string name="resend_confirmation_text_with_timer">Resend confirmation email: %1$d</string>
 
-
     <string name="waiting_verify_email_text">We\'ve sent a confirmation to the email address you provided. Please confirm.</string>
     <string name="send_restore_password_text">Send</string>
     <string name="restore_password_text">To reset your password, please enter your email address below. We\'ll send you a link to reset your password.</string>
@@ -55,10 +53,11 @@
     <string name="customize_wallpaper_text">YOUR PROFILE WILL LOOKS LIKE</string>
     <string name="fill_your_profile_text">FILL YOUR PROFILE</string>
     <string name="ok">OK</string>
+    
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="media_limit_photos_access_text">You\'ve given access to a select number of photos</string>
     <string name="manage_text">Manage</string>
 
-
+    <string name="user_anonymous_text">The user has decided to be anonymous</string>
 </resources>

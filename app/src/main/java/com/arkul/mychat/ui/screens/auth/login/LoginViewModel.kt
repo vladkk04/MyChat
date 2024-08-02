@@ -1,10 +1,9 @@
 package com.arkul.mychat.ui.screens.auth.login
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
-import com.arkul.mychat.data.models.AuthInputLayoutEvents
-import com.arkul.mychat.data.models.LoginTextLayoutState
-import com.arkul.mychat.data.models.LoginUiState
+import com.arkul.mychat.data.models.inputLayouts.inputLayoutsEvents.AuthInputLayoutEvents
+import com.arkul.mychat.data.models.inputLayouts.inputLayoutsState.LoginInputLayoutState
+import com.arkul.mychat.data.models.uiStates.LoginUiState
 import com.arkul.mychat.data.models.auth.AuthCredentialProviderResult
 import com.arkul.mychat.data.models.auth.AuthCredentialNotProviderResult
 import com.arkul.mychat.data.network.firebase.services.CredentialService
@@ -30,7 +29,7 @@ class LoginViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(LoginUiState())
     val uiState get() = _uiState.asStateFlow()
 
-    private val _stateTextLayout = MutableStateFlow(LoginTextLayoutState())
+    private val _stateTextLayout = MutableStateFlow(LoginInputLayoutState())
     val stateTextLayout get() = _stateTextLayout.asStateFlow()
 
     private fun updateIsLoading(isLoading: Boolean) {

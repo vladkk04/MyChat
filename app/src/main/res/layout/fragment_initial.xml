@@ -23,7 +23,7 @@
         app:tabMode="fixed" />
 
     <include
-        layout="@layout/progress_indicator_circular"
+        layout="@layout/progress_indicator_linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="visible"/>

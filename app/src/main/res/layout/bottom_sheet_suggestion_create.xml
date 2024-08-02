@@ -29,7 +29,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/DefaultCustomTextInputLayout"
-            android:id="@+id/textFieldTitle"
+            android:id="@+id/text_input_topic_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/title_suggestion_create"
@@ -43,6 +43,7 @@
             android:hint="Title">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/text_input_topic_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"/>
@@ -51,10 +52,11 @@
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/DefaultCustomTextInputLayout"
-            android:id="@+id/textFieldDescription"
+            android:id="@+id/text_input_description_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textFieldTitle"
+            android:layout_below="@id/text_input_topic_layout"
+            android:layout_marginBottom="20dp"
             app:endIconMode="clear_text"
             app:errorEnabled="true"
             app:counterEnabled="true"
@@ -64,45 +66,29 @@
             android:hint="Description">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEditTextDesctiptionSuggestion"
+                android:id="@+id/text_input_description_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxHeight="150dp"
-                android:maxLines="5"
+                android:maxLength="200"
+                android:maxLines="4"
                 android:inputType="textMultiLine" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!--<ImageView
-            android:id="@+id/image_view_button_select_photo_from_gallery"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:scaleType="center"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/square_dashed"
-            android:layout_below="@id/textFieldDescription"
-            app:srcCompat="@drawable/ic_add_photo_alternate"
-            app:tint="@color/color_primary_night" />-->
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_suggestions_photos"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
+            android:layout_height="wrap_content"
             android:visibility="visible"
-            android:layout_below="@id/textFieldDescription"/>
+            android:layout_below="@id/text_input_description_layout"/>
 
         <CheckBox
             android:id="@+id/checkbox_anonymous"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/recyclerView_suggestions_photos"
-            android:layout_marginBottom="50dp"
-            android:layout_marginTop="15dp"
-            android:text="Anonymous"/>
+            android:layout_below="@+id/max_selectable_photo_from_gallery_suggestion"
+            android:text="Anonymous" />
 
         <Button
             android:id="@+id/button_tooltip_anonymous"
@@ -133,7 +119,7 @@
             android:layout_alignParentBottom="true">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_login"
+                android:id="@+id/button_create_suggestion"
                 android:layout_gravity="bottom|center"
                 android:layout_width="175dp"
                 android:layout_height="wrap_content"

@@ -7,7 +7,6 @@ import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.fragment.app.Fragment
 import com.arkul.mychat.R
@@ -17,8 +16,8 @@ import java.io.File
 typealias CropResultCallback = (Bitmap) -> Unit
 
 class ImageCropActivityResultContract(
-    private val fragment: Fragment,
-    private val ucropOptions: UCrop.Options
+    fragment: Fragment,
+    private var uCropOptions: UCrop.Options = UCrop.Options()
 ) {
     private val contextFragment = fragment.requireContext()
     private var cropImageResultCallback: CropResultCallback? = null
@@ -26,7 +25,7 @@ class ImageCropActivityResultContract(
 
     private val cropActivityResultContract = object : ActivityResultContract<Uri, Uri?>() {
         override fun createIntent(context: Context, input: Uri): Intent {
-            val option = ucropOptions.apply {
+            val option = uCropOptions.apply {
                 this.setToolbarColor(
                     contextFragment.resources.getColor(
                         R.color.color_primary_container_night, null
@@ -74,6 +73,11 @@ class ImageCropActivityResultContract(
             cropImageResultCallback?.invoke(bitmap)
         }
     }
+
+    fun setUCropOptions(options: UCrop.Options) {
+        uCropOptions = options
+    }
+
     fun startCropActivity(input: Uri?, nameOfFile: String, callback: CropResultCallback) {
         fileName = nameOfFile
         cropImageResultCallback = callback

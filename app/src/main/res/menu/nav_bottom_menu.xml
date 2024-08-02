@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/chatsFragment"
+        android:id="@+id/inboxChatsFragment"
         android:icon="@drawable/ic_chat"
         android:enabled="true"
         android:title="Chats" />
 
     <item
-        android:id="@+id/suggestionsFragment"
+        android:id="@+id/allSuggestionsFragment"
         android:icon="@drawable/ic_awesome"
         android:enabled="true"
         android:title="Suggestion" />

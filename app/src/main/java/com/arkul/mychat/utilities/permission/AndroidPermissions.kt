@@ -3,6 +3,7 @@ package com.arkul.mychat.utilities.permission
 import android.Manifest
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
 
 enum class AndroidPermissions(val permission: String) {
     CAMERA(Manifest.permission.CAMERA),
@@ -18,7 +19,7 @@ enum class AndroidPermissions(val permission: String) {
     READ_MEDIA_VISUAL_USER_SELECTED(Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED);
 
     companion object {
-        fun getMediaPermission(): Array<AndroidPermissions> {
+        fun getMediaImagesPermission(): Array<AndroidPermissions> {
             return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
                 arrayOf(READ_MEDIA_VISUAL_USER_SELECTED, READ_MEDIA_IMAGES)
             } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {

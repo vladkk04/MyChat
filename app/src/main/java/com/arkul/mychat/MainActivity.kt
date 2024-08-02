@@ -1,30 +1,20 @@
 package com.arkul.mychat
 
-import android.app.TaskStackBuilder
 import android.os.Bundle
-import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
-import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.whenCreated
+import androidx.appcompat.widget.PopupMenu
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
-import androidx.navigation.ui.NavigationUiSaveStateControl
-import androidx.navigation.ui.setupActionBarWithNavController
-import com.arkul.mychat.databinding.ActivityMainBinding
 import com.arkul.mychat.data.network.connectivity.NetworkConnectivityObserver
-import com.arkul.mychat.ui.screens.initial.InitialFragmentDirections
-import com.arkul.mychat.utilities.permission.PermissionViewModel
+import com.arkul.mychat.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
-import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -35,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private val mainViewModel: MainViewModel by viewModels()
     private val connectivityObserver by lazy { NetworkConnectivityObserver(applicationContext) }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
@@ -42,7 +33,9 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
         navController = navHostFragment.navController
 
+
         setupWithNavController(binding.bottomNavigation, navController)
+        setupBottomNavigationBarBadge()
 
 
         /*lifecycleScope.launch {
@@ -70,7 +63,29 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        return super.onCreateOptionsMenu(menu)
+    }
 
+    private fun setupBottomNavigationBarBadge() {
+        binding.bottomNavigation.getOrCreateBadge(R.id.inboxChatsFragment).apply {
+            isVisible = true
+            number = 123
+            maxNumber = 99
+        }
+    }
+
+    fun bottomNavigationSwitchTo(id: Int) {
+        binding.bottomNavigation.selectedItemId = id
+    }
+
+    fun hideBottomNavigationBar() {
+        binding.bottomNavigation.visibility = View.GONE
+    }
+
+    fun showBottomNavigationBar() {
+        binding.bottomNavigation.visibility = View.VISIBLE
+    }
 
     override fun onDestroy() {
         super.onDestroy()

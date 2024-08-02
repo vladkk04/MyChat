@@ -3,7 +3,6 @@ package com.arkul.mychat.ui.screens.createProfile.profilePreview
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.arkul.mychat.data.models.SelectAvatarModeEvents
+import com.arkul.mychat.data.models.uiEvents.SelectAvatarModeEvents
 import com.arkul.mychat.databinding.FragmentProfilePreviewBinding
 import com.arkul.mychat.ui.screens.createProfile.CreateProfileViewModel
 import com.arkul.mychat.ui.screens.createProfile.SharedProfileViewModel

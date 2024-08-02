@@ -3,7 +3,7 @@ package com.arkul.mychat.utilities.dialogs
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.arkul.mychat.R
-import com.arkul.mychat.utilities.openAppSettings
+import com.arkul.mychat.utilities.app.openAppSettings
 import com.arkul.mychat.utilities.permission.AppPermissionDialogs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -31,7 +31,7 @@ fun Fragment.permissionDialog(
         .setNegativeButton(if(isPermanentlyDeclined) "Not now" else null) { dialog, _ ->
             dialog.dismiss()
         }
-        .setPositiveButton(if(isPermanentlyDeclined) "Grant permissionDialog" else "OK") { _, _ ->
+        .setPositiveButton(if(isPermanentlyDeclined) "Go to settings" else "OK") { _, _ ->
             if (isPermanentlyDeclined) {
                 onGoToAppSettingsClick()
             } else {
